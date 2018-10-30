@@ -62,6 +62,9 @@ Route::get('/admin/','Admin\IndexController@index');
 // master 路由
 
 
+// 后台用户管理
+Route::resource('admin/user','Admin\UserController');
+
 
 
 
