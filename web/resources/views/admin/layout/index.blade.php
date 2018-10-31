@@ -105,17 +105,36 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-<!-- content 开始 -->
-        <div id="page-wrapper">
-            
-        @section('content')
-
-        @show
-            
-        </div>
         
-<!-- content 结束 -->
-    </div>
+<!-- containt 开始 -->
+        <div id="containt">
+            
+            <!-- success 开始 -->
+            @if (session('status'))
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    {{ session('status') }}
+                </div>
+            @endif
+            <!-- success 结束 -->
+
+            <!-- error 开始 -->
+            @if (session('status'))
+                <div class="alert alert-warning alert-dismissabler">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    {{ session('status') }}
+                </div>
+            @endif
+            <!-- error 结束 -->
+
+            @section('content')
+
+            @show
+                
+        </div>
+     </div>   
+<!-- containt 结束 -->
+    
     <!-- /#wrapper -->
 
     <!-- jQuery -->
