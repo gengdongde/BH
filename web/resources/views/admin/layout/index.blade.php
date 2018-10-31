@@ -98,43 +98,55 @@
                             <!-- /.nav-second-level -->
                         </li>
 
-                        
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-        
-<!-- containt 开始 -->
-       
-            
-            <!-- success 开始 -->
-            @if (session('status'))
-                <div class="alert alert-success alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    {{ session('status') }}
-                </div>
-            @endif
-            <!-- success 结束 -->
 
-            <!-- error 开始 -->
-            @if (session('status'))
-                <div class="alert alert-warning alert-dismissabler">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    {{ session('status') }}
-                </div>
-            @endif
-            <!-- error 结束 -->
 
-            @section('content')
 
-            @show
-                
-        
-     </div>   
-<!-- containt 结束 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- /#wrapper -->
 
     <!-- jQuery -->
