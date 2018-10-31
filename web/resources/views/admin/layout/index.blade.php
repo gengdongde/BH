@@ -83,14 +83,14 @@
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>用户管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/admin/user/create">用户添加</a>
-                                </li>
+                                
+
+                                
                                 <li>
                                     <a href="/admin/user">用户列表</a>
                                 </li>
                                 <li>
-                                    <a href="">回收站</a>
+                                    <a href="/admin/user/soft">黑名单</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

@@ -61,7 +61,12 @@ Route::resource('/admin/adminuser', 'Admin\AdminUserController');
 
 
 // master 路由
-
+// 后台用户回收站
+Route::get('admin/user/soft','Admin\UserController@soft');
+// 回收站恢复数据
+Route::get('admin/user/{id}/restore','Admin\UserController@restore');
+// 永久删除数据
+Route::get('admin/user/{id}/remove','Admin\UserController@remove');
 
 // 后台用户管理
 Route::resource('admin/user','Admin\UserController');

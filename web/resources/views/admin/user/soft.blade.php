@@ -11,64 +11,44 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                            	<div class="row">
-                            		<form action="/admin/user" method="get">
-                            			<div class="col-sm-6 col-md-offset-9">
-	                            			<div id="dataTables-example_filter" class="dataTables_filter">
-	                            				<label>用户名:<input type="text" name="uname" value="{{ $request or '' }}" class="form-control input-sm" placeholder="关键字" aria-controls="dataTables-example"></label>
-	                            				<button class="btn bnt-success">查询</button>
-	                            			</div>
-	                            		</div>
-                            		</form>                       
-                            	</div>
-                            	<div class="row btn btn-info" style="margin:5px;">
-                            		
-                            			<a href="/admin/user/create">添加用户</a>
-                          
-                            	</div>
+                            	
                             	<div class="row">
                             		<div class="col-sm-12">
                             			<table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
 			                                <thead>
 			                                    <tr role="row">
 			                                    	<td>Id</td>
-			                                    	<td>用户名</td>
+			                                    	
 			                                    	<td>手机号</td>
 			                                    	<td>邮箱</td>
-			                                    	<td>注册时间</td>
+			                                    	<td>删除时间</td>
 			                                    	<td>用户详情</td>
 			                                    	<td>操作</td>
 			                                    </tr>
 			                                </thead>
-			                                <tbody>
+			                               <tbody>
 			                                @foreach($users as $k=>$v)      
 				                                <tr class="gradeA odd" role="row">
 				                                	<td>{{ $v->id }}</td>
-				                                	<td>{{ $v->userinfo()->find($v->id)->uname }}</td>
+				                                	
 				                                	<td>{{ $v->tel }}</td>
 				                                	<td>{{ $v->email }}</td>
-				                                	<td>{{ $v->created_at }}</td>
+				                                	<td>{{ $v->deleted_at }}</td>
 
 				                                	<td>
-				                                		<a href="/admin/user/{{ $v->id }}">详情</a>
+				                                		<a href="">详情</a>
 				                                	</td>
 				                                	<td>
-				                                		<a href="/admin/user/{{ $v->id }}/edit" class="btn btn-warning">修改</a>
-				                                		<form action="/admin/user/{{ $v->id }}" method="post" style="display: inline-block;">
-				                                			{{ csrf_field() }}
-				                                			{{ method_field('DELETE') }}
-				                                			<button class="btn btn-danger">加入黑名单</button>
-				                                		</form>
-				                                		<a href="/admin/user/{{ $v->id }}/remove" class="btn btn-warning">永久删除</a>
+				                                		<a href="/admin/user/{{ $v->id }}/restore" class="btn btn-warning">恢复</a>
+				                                		
+				                                		
 				                                	</td>
 			                                        
 				                                </tr>
 				                            @endforeach
 				                            </tbody>
 			                            </table>
-			                            <div class="text-center">
-			                            	{!! $users->appends(['uname'=>$request])->render() !!}
-			                            </div>
+			                            
 			                        </div>
 			                    </div>
 			                   
