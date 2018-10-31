@@ -107,7 +107,7 @@
         </nav>
         
 <!-- containt 开始 -->
-        <div id="containt">
+       
             
             <!-- success 开始 -->
             @if (session('status'))
@@ -131,7 +131,7 @@
 
             @show
                 
-        </div>
+        
      </div>   
 <!-- containt 结束 -->
     

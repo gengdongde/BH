@@ -11,13 +11,13 @@ class IndexController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //加载显示模板
-        return view('admin.index.index');
+        return view('admin.index.index',['title'=>'首页']);
         
         
     }
