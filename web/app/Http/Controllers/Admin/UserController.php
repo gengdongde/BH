@@ -79,7 +79,7 @@ class UserController extends Controller
         
         if($res1 && $res2){
             DB::commit();
-            return redirect('/admin/user')->with('seccess','添加成功');
+            return redirect('/admin/user')->with('success','添加成功');
         }else{
             DB::rollBack();
             return back()->with('error','添加失败');

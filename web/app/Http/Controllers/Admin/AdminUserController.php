@@ -18,7 +18,7 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        echo 111;
+        return view('admin.admin_user.index',['title'=>'管理员列表']);
     }
 
     /**

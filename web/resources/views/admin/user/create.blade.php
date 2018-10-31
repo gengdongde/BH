@@ -4,7 +4,8 @@
 	
 
 
-	<div id="page-wrapper">
+	
+
 		
 		@if (count($errors) > 0)
 	    <div class="alert alert-danger alert-dismissable">
@@ -21,9 +22,7 @@
 	    <div class="row">
 	        <div class="col-lg-12">
 	            <div class="panel panel-default">
-	                <div class="panel-heading">
-	                   {{$title or ''}}
-	                </div>
+	                
 	                <div class="panel-body">
 	                    <div class="row">
 	                        <div class="col-lg-6">
