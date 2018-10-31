@@ -105,7 +105,7 @@
                                     <a href="/admin/adminuser/create">添加管理员</a>
                                 </li>
                                 <li>
-                                    <a href="/admin/user">管理员列表</a>
+                                    <a href="/admin/adminuser/">管理员列表</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -120,13 +120,19 @@
         </nav>
 <!-- content 开始 -->
         
-       <div id="page-wrapper">
+       <div id="page-wrapper" >
             <div class="row">
                 <div class="col-lg-12">
                 <h1 class="page-header">{{$title}}</h1>
                 </div>
         <!-- /.col-lg-12 -->
             </div>
+        @if (session('success'))
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <span class="alert-link">{{ session('success') }}</span>.
+        </div>
+         @endif 
         @if (session('error'))
         <div class="alert alert-danger alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
