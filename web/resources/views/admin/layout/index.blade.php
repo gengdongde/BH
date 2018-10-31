@@ -74,7 +74,7 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-
+            <!-- 侧边栏  -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -96,6 +96,19 @@
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
+                        </li>                        
+<!-- <p class="fa fa-user"> fa-user </p> -->
+                        <li>
+                            <a href="#"><i class="fa fa-users fa-fw"></i>管理员管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/admin/adminuser/create">添加管理员</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/user">管理员列表</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
 
                         
@@ -106,13 +119,25 @@
             <!-- /.navbar-static-side -->
         </nav>
 <!-- content 开始 -->
-        <div id="page-wrapper">
-            
+        
+       <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                <h1 class="page-header">{{$title}}</h1>
+                </div>
+        <!-- /.col-lg-12 -->
+            </div>
+        @if (session('error'))
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <span class="alert-link">{{ session('error') }}</span>.
+        </div>
+         @endif     
         @section('content')
 
         @show
             
-        </div>
+    
         
 <!-- content 结束 -->
     </div>

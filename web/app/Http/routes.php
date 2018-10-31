@@ -18,7 +18,8 @@ Route::get('/', function () {
 
 // 后台首页
 Route::get('/admin/','Admin\IndexController@index');
-
+//管理员管理
+Route::resource('/admin/adminuser', 'Admin\AdminUserController');
 
 
 
