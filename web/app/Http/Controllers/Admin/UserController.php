@@ -95,8 +95,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        // 获取指定用户信息
+        $user = User::find($id);
+        // dd($user);
+        // exit;
         //加载用户详情模板
-        return view('admin.user.show',['title'=>'用户详情']);
+        return view('admin.user.show',['title'=>'用户详情','user'=>$user,'id'=>$id]);
 
     }
 

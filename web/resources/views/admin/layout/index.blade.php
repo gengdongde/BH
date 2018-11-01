@@ -151,7 +151,16 @@
 
 <!-- gengdongde 150之后 -->
 
-
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>友情链接管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/admin/link">友情链接</a>
+                            </li>
+                            
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
 
 
 

@@ -66,9 +66,20 @@ Route::get('admin/user/soft','Admin\UserController@soft');
 Route::get('admin/user/{id}/restore','Admin\UserController@restore');
 // 永久删除数据
 Route::get('admin/user/{id}/remove','Admin\UserController@remove');
-
+// 用户提问问题
+Route::resource('admin/problem','Admin\ProblemController');
+// 后台用户关注用户
+Route::resource('admin/concern','Admin\UserConcernController');
+// 后台用户屏蔽用户
+Route::resource('admin/shield','Admin\UserShieldController');
 // 后台用户管理
 Route::resource('admin/user','Admin\UserController');
+
+
+// 友情链接发布
+Route::get('admin/link/btn','Admin\LinkController@btn');
+// 后台友情链接
+Route::resource('admin/link','Admin\LinkController');
 
 
 
