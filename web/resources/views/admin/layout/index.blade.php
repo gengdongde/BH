@@ -89,9 +89,13 @@
                                 <li>
                                     <a href="/admin/user">用户列表</a>
                                 </li>
+
                                 <li>
                                     <a href="/admin/user/soft">黑名单</a>
                                 </li>
+
+
+
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -101,12 +105,21 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i>管理员管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/admin/adminuser/">管理员列表</a>
+                                    <a href="/admin/adminuser">管理员列表</a>
                                 </li>
                                 <li>
                                     <a href="/admin/adminuser/create">添加管理员</a>
                                 </li>
 
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>                       
+                        <li>
+                            <a href="#"><i class="fa  fa-comment fa-fw"></i>话题管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/admin/topic">话题列表</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

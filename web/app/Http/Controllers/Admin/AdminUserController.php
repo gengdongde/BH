@@ -36,8 +36,6 @@ class AdminUserController extends Controller
      */
     public function create()
     {
-        
-
         return view('admin.admin_user.admin_user',['title'=>'添加管理员']);
     }
 
@@ -75,6 +73,7 @@ class AdminUserController extends Controller
             
             //入库
             $res = AdminUser::insert($req);
+            //判断跳转
             if($res){
                 return redirect('/admin/adminuser')->with('success','添加成功!!!');
             }else{
@@ -88,14 +87,23 @@ class AdminUserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 点击修改状态status
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int需要修改的管理员id  $id
+     * @return true 跳管理员列表  false 跳管理员列表
      */
-    public function search($id)
+    public function is_status($id)
     {
-        //
+
+        //查询记录
+        $is_st = AdminUser::where('id',$id)->value('status');
+       $is_st = ($is_st == 1) ? 2 : 1;
+        $res = AdminUser::where('id',$id)->update(['status'=>$is_st]);
+        if($res){
+            return back()->with('success','修改成功!!!');
+        }else{
+            return back()->with('error','修改失败!!!');
+        }
     }
 
     /**
@@ -108,7 +116,6 @@ class AdminUserController extends Controller
     {
         //获取数据
         $data =  AdminUser::find($id);
-        // dd($data);
         return view('admin.admin_user.edit',['title'=>'修改管理员信息','data'=>$data]);
     }
 
