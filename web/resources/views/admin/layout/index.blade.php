@@ -101,11 +101,12 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i>管理员管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/admin/adminuser/create">添加管理员</a>
-                                </li>
-                                <li>
                                     <a href="/admin/adminuser/">管理员列表</a>
                                 </li>
+                                <li>
+                                    <a href="/admin/adminuser/create">添加管理员</a>
+                                </li>
+
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -216,7 +217,7 @@
         <!-- /.col-lg-12 -->
             </div>
         @if (session('success'))
-        <div class="alert alert-danger alert-dismissable">
+        <div class="alert alert-success alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <span class="alert-link">{{ session('success') }}</span>.
         </div>
