@@ -41,7 +41,7 @@
 				                                <tr class="gradeA odd" role="row">
 				                                	<td>{{ $v->id }}</td>
 				                                	<td>{{ $v->name }}</td>
-				                                	<td>@if($v->status == '1')<p class="text-danger">未启用.</p>@elseif($v->status == '2')<p class="text-muted">已启用.</p>@endif</td>
+				                                	<td>@if($v->status == '1')<a class="text-danger" title="启用?" href="/admin/adminuser/stus/{{ $v->id }}">未启用.</a>@elseif($v->status == '2')<a class="text-muted" title="禁用?" href="/admin/adminuser/stus/{{ $v->id }}">已启用.</a>@endif</td>
 				                                	<td>{{ $v->created_at }}</td>
 				                                	<td>{{ $v->updated_at }}</td>
 				                                	<td>
@@ -49,7 +49,7 @@
 				                                		<form action="/admin/adminuser/{{$v->id}}" method="post" style="display:inline-block;">
 				                                			{{ csrf_field() }}
 				                                			{{ method_field('DELETE') }}
-				                                			<button type="submit" class="btn btn-outline btn-danger">删除</button>
+				                                			<button type="submit" onclick="if(window.confirm('你确定需要删除')){return true;}else{return false;}" class="btn btn-outline btn-danger">删除</button>
 				                                			
 				                                		</form>
 				                                		
