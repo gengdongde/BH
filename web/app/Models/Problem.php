@@ -10,31 +10,6 @@ class Problem extends Model
     public $table = 'problem';
     public $primaryKey = 'id';
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * 获取拥有此问题的话题分类
      */
@@ -43,13 +18,8 @@ class Problem extends Model
         return $this->belongsTo('App\ModelsTopic','tid');
     }
 
-    /**
-     * 获取此问题的用户信息
-     */
-    public function problemuser()
-    {
-    	
-=======
+    
+
     
     /**
      * 关联 Reply 一对多
@@ -59,7 +29,7 @@ class Problem extends Model
     public function reply()
     {
         return $this->hasMany('App\Models\Reply','pid','id');
->>>>>>> origin/LeeJung
+       
     }
 
 }

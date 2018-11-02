@@ -22,7 +22,7 @@ class User extends Model
     {
     	return $this->hasOne('App\Models\UserDetail','uid');
     }
-<<<<<<< HEAD
+
    
    /**
     * 建立用户表与话题分类表的多对多关系
@@ -32,15 +32,9 @@ class User extends Model
         return $this->belongsToMany('App\Models\Topic','user_topic','uid','tid');
     }
 
-    /**
-     * 建立用户表与提问问题表的一对多关系
-     */
-    public function userproblem()
-    {
-        
-    }
-=======
     
 
->>>>>>> origin/LeeJung
+    
+
+
 }
