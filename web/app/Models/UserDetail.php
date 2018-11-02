@@ -19,5 +19,16 @@ class UserDetail extends Model
     {
     	return $this->belongsTo('App\Models\User','uid');
     }
+
+    /**
+     *问题回答表关联 一对多
+     *
+     * @return 关联对象
+     */
+    public function reply()
+    {
+        return $this->hasMany('App\Models\Reply','uid','uid');
+    }
+   
     
 }

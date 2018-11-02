@@ -22,6 +22,7 @@ class User extends Model
     {
     	return $this->hasOne('App\Models\UserDetail','uid');
     }
+<<<<<<< HEAD
    
    /**
     * 建立用户表与话题分类表的多对多关系
@@ -38,4 +39,8 @@ class User extends Model
     {
         
     }
+=======
+    
+
+>>>>>>> origin/LeeJung
 }

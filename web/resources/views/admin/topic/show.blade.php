@@ -5,6 +5,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="/admin/topic/top_edit/{{$data->id}}" class="btn btn-outline btn-warning">修改</a>
+                            <a href="/admin/topic" class="btn btn-outline btn-primary">返回</a>
                         </div>
 
                         <!-- /.panel-heading -->

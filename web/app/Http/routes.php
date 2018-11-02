@@ -21,11 +21,17 @@ Route::get('/admin/','Admin\IndexController@index');
 //管理员管理
 Route::get('/admin/adminuser/stus/{id}','Admin\AdminUserController@is_status');
 Route::resource('/admin/adminuser','Admin\AdminUserController');
+//权限管理
+Route::resource('/admin/access','Admin\AccessController');
+//角色管理
+Route::resource('/admin/role','Admin\RoleController');
 //话题管理
 Route::get('/admin/topic/is_to','Admin\TopicController@is_to');
 Route::get('/admin/topic/top_edit/{id}','Admin\TopicController@top_edit');
 Route::post('/admin/topic/top_update/{id}','Admin\TopicController@top_update');
 Route::resource('/admin/topic','Admin\TopicController');
+//问题回答管理
+Route::resource('/admin/reply','Admin\ReplyController');
 
 
 

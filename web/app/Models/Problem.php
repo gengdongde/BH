@@ -10,6 +10,7 @@ class Problem extends Model
     public $table = 'problem';
     public $primaryKey = 'id';
 
+<<<<<<< HEAD
 
 
 
@@ -48,6 +49,17 @@ class Problem extends Model
     public function problemuser()
     {
     	
+=======
+    
+    /**
+     * 关联 Reply 一对多
+     *
+     * @return 关联对象
+     */
+    public function reply()
+    {
+        return $this->hasMany('App\Models\Reply','pid','id');
+>>>>>>> origin/LeeJung
     }
 
 }
