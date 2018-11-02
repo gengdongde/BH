@@ -109,6 +109,12 @@
                                 </li>
                                 <li>
                                     <a href="/admin/adminuser/create">添加管理员</a>
+                                </li>                                
+                                <li>
+                                    <a href="/admin/access">权限管理</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/role">角色管理</a>
                                 </li>
 
                             </ul>
@@ -119,6 +125,18 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/admin/topic">话题列表</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>                        
+                        <li>
+                            <a href="#"><i class="fa fa-comments-o"></i>问题回答管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/admin/reply">问题回答列表</a>
+                                </li>                                
+                                <li>
+                                    <a href="/admin/reply">被举报列表</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
