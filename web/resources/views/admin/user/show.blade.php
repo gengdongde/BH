@@ -1,24 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title></title>
-</head>
-<body>
-	
-	<div class="containter">
-		<h1 class="text-info text-center">{{ $title or '' }}</h1>
-		<table class="table table-condensed bg-info">
+@extends('admin.layout.index')
+@section('content')
+	<div class="container" style="width:300px;">
+		
+		<table class="table bg-info">
 			<tr>
 				<th>封面</th>
 				<td>
-					<img src="..." alt="..." class="img-thumbnail">
+					<img src="{{ $user->userinfo()->find($id)->cover }}" alt="" class="img-thumbnail" style="width:100px;">
 				</td>
 			</tr>
 			<tr>
 				<th>头像</th>
 				<td>
-					<img src="..." alt="..." class="img-thumbnail">
+					<img src="{{ $user->userinfo()->find($id)->face }}" alt="" class="img-thumbnail" style="width:100px;">
 				</td>
 			</tr>
 			<tr>
@@ -26,9 +20,9 @@
 				<td>
 					<p class="text-primary text-center">
 						
-						@if ( $user->userinfo()->find($id)->sex == 0 )
+						@if( $user->userinfo()->find($id)->sex == 0 )
 						女
-						@else if ( $user->userinfo()->find($id)->sex == 1 )
+						@elseif( $user->userinfo()->find($id)->sex == 1 )
 						男
 						@endif
 						
@@ -52,6 +46,9 @@
 				</td>
 			</tr>
 		</table>
+		<div class="btn btn-success pull-right">
+			<a href="JavaScript:history.go(-1)">返回上一页</a>
+		</div>
 	</div>
-</body>
-</html>
+
+@endsection

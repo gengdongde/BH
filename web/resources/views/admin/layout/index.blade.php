@@ -174,7 +174,16 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>话题提问<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/admin/problem">问题列表</a>
+                            </li>
+                            
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
 
 
 
@@ -234,7 +243,7 @@
        <div id="page-wrapper" >
             <div class="row">
                 <div class="col-lg-12">
-                <h1 class="page-header">{{$title}}</h1>
+                <h1 class="page-header text-info text-center">{{$title,''}}</h1>
                 </div>
         <!-- /.col-lg-12 -->
             </div>

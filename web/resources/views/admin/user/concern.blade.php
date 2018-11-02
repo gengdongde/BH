@@ -1,25 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title></title>
-</head>
-<body>
+@extends('admin.layout.index')
+@section('content')
 	
-	<div class="containter">
-		<h1 class="text-info text-center">{{ $title or '' }}</h1>
+	<div class="container">
+		
 		<table class="table table-condensed bg-info table-striped">
 			<tr>
-				<td>手机号</td>
+				<td>ID</td>
 				<td>用户名</td>
+				<td>手机号</td>
+				<td>邮箱</td>
+				<td>性别</td>
+				<td>地址</td>
+				<td>头像</td>
 			</tr>
 			@foreach($users as $k=>$v)
 			<tr>
-				<td>{{ $v->tel }}</td>
+				<td>{{ $v->id }}</td>
 				<td>{{ $v->userinfo()->find($v->id)->uname }}</td>
+				<td>{{ $v->tel }}</td>
+				<td>{{ $v->email }}</td>
+				<td>
+					@if($v->userinfo()->find($v->id)->sex == 0)
+					女
+					@elseif($v->userinfo()->find($v->id)->sex == 1)
+					男
+					@endif
+				</td>
+				<td>{{ $v->userinfo()->find($v->id)->addr }}</td>
+				<td>
+					<img src="{{ $v->userinfo()->find($v->id)->face }}" style="width:150px;">
+				</td>
 			</tr>
 			@endforeach
 		</table>
+		<div class="btn btn-success pull-right">
+			<a href="JavaScript:history.go(-1)">返回上一页</a>
+		</div>
 	</div>
-</body>
-</html>
+@endsection

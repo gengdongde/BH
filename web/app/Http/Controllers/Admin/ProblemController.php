@@ -17,7 +17,10 @@ class ProblemController extends Controller
      */
     public function index()
     {
-        //
+        // 获取数据
+        $data = Problem::all();
+        //加载模板
+        return view('admin.problem.index',['title'=>'提问问题表','data'=>$data]);
     }
 
     /**
@@ -49,8 +52,10 @@ class ProblemController extends Controller
      */
     public function show($id)
     {
+
         // 获取数据
         $data = Problem::where('uid',$id)->get();
+       
         // 加载模板
         return view('admin/user/problem',['title'=>'提问问题','data'=>$data]);
     }
@@ -86,6 +91,13 @@ class ProblemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 删除信息
+        $res = Problem::destroy($id);
+        // 判断
+        if($res){
+            return redirect('/admin/user')->with('success','删除成功');
+        }else{
+            return back()->with('error','删除失败');
+        }
     }
 }

@@ -12,6 +12,7 @@ use Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\EditUserRequest;
 use DB;
+use App\Models\Topic;
 
 class UserController extends Controller
 {
@@ -97,8 +98,7 @@ class UserController extends Controller
     {
         // 获取指定用户信息
         $user = User::find($id);
-        // dd($user);
-        // exit;
+        
         //加载用户详情模板
         return view('admin.user.show',['title'=>'用户详情','user'=>$user,'id'=>$id]);
 
@@ -152,14 +152,71 @@ class UserController extends Controller
 
         $user->tel = $request->input('tel');
         $user->email = $request->input('email');
-       
         $res1 = $user->save();
 
 
         
-        $res2 = UserDetail::where('uid',$id)
-                ->update(['uname'=>$request->input('uname'),'sex'=>$request->input('sex')]);
+        // $userinfo = UserDetail::where('uid',$id)->get();
+
+        // $userinfo->uname = $request->input('uname');
+        // $userinfo->sex = $request->input('sex');
+        // $userinfo->signature = $request->input('signature');
+        // $userinfo->addr = $request->input('addr');
+        // 接收上传头像
+        $face = $request->file('face');
+        if ( $face->isValid() ) { 
+            // 获取上传文件后缀
+            $ext = $face->getClientOriginalExtension();
+            // 拼接文件名
+            $file_name = date('YmdHis',time()).mt_rand(1000,9999).'.'.$ext;
+            $dir_path = 'uploads/'.date('Ymd',time());
+            $res = $face->move($dir_path,$file_name);
+            if ($res) {
+                $face_path = '/'.$dir_path.'/'.$file_name;
+                
+            } else {
+                return back()->with('error','头像上传失败');
+            }
+            
+        } else {
+            return back()->with('error','头像上传失败');
+        }
+        // 接收上传封面
+        $cover = $request->file('cover');
+        if ( $cover->isValid() ) { 
+            // 获取上传文件后缀
+            $ext = $cover->getClientOriginalExtension();
+            // 拼接文件名
+            $file_name = date('YmdHis',time()).mt_rand(1000,9999).'.'.$ext;
+            $dir_path = 'uploads/'.date('Ymd',time());
+            $res = $cover->move($dir_path,$file_name);
+            if ($res) {
+                $cover_path = '/'.$dir_path.'/'.$file_name;
+                
+            } else {
+                return back()->with('error','封面上传失败');
+            }
+            
+        } else {
+            return back()->with('error','封面上传失败');
+        }
+
         
+        $res2 = UserDetail::where('uid',$id)
+            ->update([
+                'uname'=>$request->input('uname'),
+                'sex'=>$request->input('sex'),
+                'signature'=>$request->input('signature'),
+                'addr'=>$request->input('addr'),
+                'face'=>$face_path,
+                'cover'=>$cover_path
+            ]);
+        
+        
+        
+                
+       
+
         if($res1 && $res2){
             DB::commit();
             return redirect('/admin/user')->with('success','修改成功');
@@ -219,10 +276,10 @@ class UserController extends Controller
         // 开启事务
         DB::beginTransaction();
         //恢复软删除数据
-        $res1 = User::withTrashed()
+        $res1 = User::onlyTrashed()
                 ->where('id',$id)
                 ->restore();
-        $res2 = UserDetail::withTrashed()
+        $res2 = UserDetail::onlyTrashed()
                 ->where('uid',$id)
                 ->restore();
         if($res1 && $res2){
@@ -247,11 +304,19 @@ class UserController extends Controller
 
         
         // 开启事务
-        // DB::beginTransaction();
+        DB::beginTransaction();
         //获取软删除数据
-       $user = User::find($id);
-       $res1 = $user->forceDelete();
-       $res2 = $user->userinfo()->forceDelete();
+       $user = User::onlyTrashed()->where('id',$id)->get();
+       $userinfo = UserDetail::onlyTrashed()->where('uid',$id)->get();
+
+        foreach($user as $k=>$v){
+            $res1 = $v->forceDelete();
+        }
+
+        foreach($userinfo as $k=>$v){
+           
+            $res2 = $v->forceDelete();
+        }
        
        
         if($res1 && $res2){
@@ -259,9 +324,36 @@ class UserController extends Controller
             return back()->with('error','永久删除失败');
         }else{
             DB::commit();
-            return redirect('/admin/user')->with('success','永久删除成功'); 
+            return redirect('/admin/user/soft')->with('success','永久删除成功'); 
         }
         
     }
+
+
+    /**
+     * 显示用户关注话题
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function usertopic($id)
+    {
+        // 获取指定用户信息
+        $user = User::find($id);
+        $tids = [];
+        foreach ($user->usertopic as $v) {
+            $tids[] = $v->pivot->tid;
+        }
+        
+       
+        $tops = Topic::whereIn('id',$tids)->get();
+        
+        //加载用户详情模板
+        return view('admin.user.usertopic',['title'=>'用户关注话题','tops'=>$tops,'id'=>$id]);
+
+    }
+
+
+    
 
 }

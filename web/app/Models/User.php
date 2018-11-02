@@ -14,10 +14,28 @@ class User extends Model
     public $table = 'user';
     public $primaryKey = 'id';
 
-    // 建立用户表与用户详情一对一关系
+
+    /**
+     * 建立用户表与用户详情一对一关系
+     */ 
     public function userinfo()
     {
     	return $this->hasOne('App\Models\UserDetail','uid');
     }
    
+   /**
+    * 建立用户表与话题分类表的多对多关系
+    */
+    public function usertopic()
+    {
+        return $this->belongsToMany('App\Models\Topic','user_topic','uid','tid');
+    }
+
+    /**
+     * 建立用户表与提问问题表的一对多关系
+     */
+    public function userproblem()
+    {
+        
+    }
 }

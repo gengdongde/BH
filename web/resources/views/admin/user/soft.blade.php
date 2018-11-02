@@ -39,8 +39,8 @@
 				                                		<a href="">详情</a>
 				                                	</td>
 				                                	<td>
-				                                		<a href="/admin/user/{{ $v->id }}/restore" class="btn btn-warning">恢复</a>
-				                                		
+				                                		<a href="/admin/user/{{ $v->id }}/restore" onclick="if ( confirm ( '确认要恢复吗?' ) == true ) { return true; } else { return false; } " class="btn btn-warning">恢复</a>
+				                                		<a href="/admin/user/{{ $v->id }}/remove" onclick="if ( confirm ( '确认要永久删除吗?' ) == true ) { return true; } else { return false; } " class="btn btn-warning">删除</a>
 				                                		
 				                                	</td>
 			                                        

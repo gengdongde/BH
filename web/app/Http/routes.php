@@ -79,6 +79,8 @@ Route::resource('admin/problem','Admin\ProblemController');
 Route::resource('admin/concern','Admin\UserConcernController');
 // 后台用户屏蔽用户
 Route::resource('admin/shield','Admin\UserShieldController');
+// 后台用户关注话题
+Route::get('admin/user/{id}/usertopic','Admin\UserController@usertopic');
 // 后台用户管理
 Route::resource('admin/user','Admin\UserController');
 

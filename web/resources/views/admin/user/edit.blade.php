@@ -26,13 +26,13 @@
 	                <div class="panel-body">
 	                    <div class="row">
 	                        <div class="col-lg-6">
-	                            <form role="form" action="/admin/user/{{ $id }}" method="post">
+	                            <form role="form" action="/admin/user/{{ $id }}" method="post" enctype="multipart/form-data">
 	                            	{{ csrf_field() }}
 	                            	{{ method_field('PUT') }}
 
 	                            	 <div class="form-group">
 	                                    <label for="tel">手机号</label>
-	                                    <input class="form-control" id="tel" type="text" name="tel" value="{{ $user->tel }}">
+	                                    <input class="form-control" id="tel" type="text" name="tel" readonly value="{{ $user->tel }}">
 	                                </div>
 	                                <div class="form-group">
 	                                    <label for="uname">用户名</label>
@@ -43,7 +43,7 @@
 	                               
 	                                <div class="form-group">
 	                                    <label for="email">邮箱</label>
-	                                    <input class="form-control" id="email" type="text" name="email" value="{{ $user->email }}">
+	                                    <input class="form-control" id="email" type="text" name="email" readonly value="{{ $user->email }}">
 	                                </div>
 	                               
 	                                <div class="form-group">
@@ -60,9 +60,22 @@
 	                                    </div>
 	                                    
 	                                </div>
-	                                
-	                                
-	                               
+	                                 <div class="form-group">
+	                                    <label for="addr">地址</label>
+	                                    <input class="form-control" id="addr" type="text" name="addr" value="{{ $user->userinfo()->find($id)->addr or '' }}">
+	                                </div>
+	                                <div class="form-group">
+	                                    <label for="signature">一句话介绍自己</label>
+	                                    <input class="form-control" id="signature" type="text" name="signature" value="{{ $user->userinfo()->find($id)->signature or '' }}">
+	                                </div>
+	                               <div class="form-group">
+                                        <label for="face">头像</label>
+                                        <input type="file" id="face" class="form-control" name="face" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cover">封面</label>
+                                        <input type="file" id="cover" class="form-control" name="cover" value="">
+                                    </div>
 	                                <button type="submit" class="btn btn-success">提交</button>
 	                                <button type="reset" class="btn btn-default">重置</button>
 	                            </form>

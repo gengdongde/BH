@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title></title>
-</head>
-<body>
-	
-	<div class="containter">
-		<h1 class="text-info text-center">{{ $title or '' }}</h1>
+@extends('admin.layout.index')
+@section('content')
+	<div class="container">
+		
 		<table class="table table-condensed bg-info">
 			<tr>
 				<td>类型</td>
 				<td>问题</td>
 				<td>描述</td>
 				<td>点击量</td>
-				<td>举报</td>
+				<td>是否合法</td>
+				<td>发布时间</td>
 				<td>操作</td>	
 			</tr>
 			@foreach($data as $k=>$v)
@@ -23,11 +18,36 @@
 				<td>{{ $v->pname }}</td>
 				<td>{{ $v->describe }}</td>
 				<td>{{ $v->clicks }}</td>
-				<td>{{ $v->report }}</td>
-				<td><a href="">删除</a></td>
+				<td>
+					
+					@if($v->report == 0)
+					正常
+					@elseif($v->report == 1)
+					低质问题
+					@elseif($v->report == 2)
+					垃圾广告
+					@elseif($v->report == 3)
+					要害信息
+					@elseif($v->report == 4)
+					涉嫌侵权
+					@endif
+				</td>
+				<td>{{ $v->created_at }}</td>
+			
+				<td>
+					<form action="/admin/problem/{{$v->id}}" method="post" >
+						{{ csrf_field() }}
+						{{ method_field('DELETE') }}
+						<button class="btn btn-danger btn-sm">删除</button>
+					</form>
+				</td>
 			</tr>
 			@endforeach			
 		</table>
+		<div class="btn btn-success pull-right">
+			<a href="JavaScript:history.go(-1)">返回上一页</a>
+		</div>
 	</div>
-</body>
-</html>
+
+
+@endsection

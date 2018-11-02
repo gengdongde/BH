@@ -63,7 +63,7 @@ class UserShieldController extends Controller
         $users = User::whereIn('id',$sids)->get();
         
         //加载用户详情模板并传输数据
-        return view('admin.user.concern',['title'=>'屏蔽用户','users'=>$users]);
+        return view('admin.user.shield',['title'=>'屏蔽用户','users'=>$users]);
 
     }
 
