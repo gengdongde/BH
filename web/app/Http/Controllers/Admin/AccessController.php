@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Access;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
 
 class AccessController extends Controller
 {
@@ -19,7 +20,7 @@ class AccessController extends Controller
         //搜索条件
         $title = $request->input('title','');
 
-        $acs = Access::where('title','like','%'.$title.'%')->paginate(5);
+        $acs = Access::select('*',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->where('title','like','%'.$title.'%')->get();
         return view('admin.access.index',['title'=>'权限列表','acs'=>$acs,'request'=>$title]);
     }
 
@@ -30,7 +31,8 @@ class AccessController extends Controller
      */
     public function create()
     {
-        return view('admin.access.create',['title'=>'添加权限']);
+        $acs = Access::select('*',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->get();
+        return view('admin.access.create',['title'=>'添加权限','acs'=>$acs]);
     }
 
     /**
@@ -55,6 +57,16 @@ class AccessController extends Controller
                 $request->flashExcept('status');
                 //添加时间
                 $data['created_at'] = date('Y-m-d H:i:s',time());
+                $data['title'] = $data['title'];
+                if($data['id'] == '0'){
+                    $data['pid'] = '0';
+                    $data['path'] = '0';
+                }else{
+                    $pas = Access::where('id',$data['id'])->first();
+                     $data['pid'] = $data['id'];
+                    $data['path'] = $pas['path'].','.$pas['id'];
+                }
+                unset($data['id']);
                 $res = Access::insert($data);
                 //判断跳转
                 if($res){

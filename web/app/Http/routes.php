@@ -24,6 +24,7 @@ Route::resource('/admin/adminuser','Admin\AdminUserController');
 //权限管理
 Route::resource('/admin/access','Admin\AccessController');
 //角色管理
+Route::get('/admin/role/stus/{id}','Admin\RoleController@stus');
 Route::resource('/admin/role','Admin\RoleController');
 //话题管理
 Route::get('/admin/topic/is_to','Admin\TopicController@is_to');
