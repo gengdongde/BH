@@ -38,4 +38,15 @@ class Reply extends Model
     {
     	return $this->belongsTo('App\Models\UserDetail','uid','uid');
     }
+
+
+
+
+    /**
+     * 获取回答的所有评论
+     */
+    public function comment()
+    {
+        return $this->hasMany('App\Models\Comment','rid','id');
+    }
 }

@@ -14,7 +14,7 @@
 			</tr>
 			@foreach($data as $k=>$v)
 			<tr>
-				<td>{{ $v->tname }}</td>
+				<td>{{ $v->problemtopic()->find($v->tid)->tname }}</td>
 				<td>{{ $v->pname }}</td>
 				<td>{{ $v->describe }}</td>
 				<td>{{ $v->clicks }}</td>
@@ -35,11 +35,9 @@
 				<td>{{ $v->created_at }}</td>
 			
 				<td>
-					<form action="/admin/problem/{{$v->id}}" method="post" >
-						{{ csrf_field() }}
-						{{ method_field('DELETE') }}
-						<button class="btn btn-danger btn-sm">删除</button>
-					</form>
+					
+
+					<a href="/admin/problem/{{$v->id}}/delete" class="btn btn-danger btn-sm">删除</a>
 				</td>
 			</tr>
 			@endforeach			

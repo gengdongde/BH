@@ -16,7 +16,7 @@
                             			<div class="col-sm-6 col-md-offset-9">
 	                            			<div id="dataTables-example_filter" class="dataTables_filter">
 	                            				<label>用户名:<input type="text" name="uname" value="{{ $request or '' }}" class="form-control input-sm" placeholder="关键字" aria-controls="dataTables-example"></label>
-	                            				<button class="btn bnt-success">查询</button>
+	                            				<button class="btn btn-primary">查询</button>
 	                            			</div>
 	                            		</div>
                             		</form>                       

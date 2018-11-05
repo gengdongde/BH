@@ -3,23 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\Reply;
-use App\Models\Reply_content;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
+use App\Models\Reply;
 
-class ReplyController extends Controller
+
+class CommentController extends Controller
 {
     /**
-     * 问题回答列表
+     * Display a listing of the resource.
      *
-     * @return admin.reply.index 视图
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $rey = Reply::paginate(8);
         
-        return view('admin.reply.index',['title'=>'问题回答列表','rey'=>$rey]);
     }
 
     /**
@@ -44,15 +44,19 @@ class ReplyController extends Controller
     }
 
     /**
-     * 问题回答内容
+     * Display the specified resource.
      *
-     * @param  reply  $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $re_con = Reply_content::where('rid',$id)->first();
-        return view('admin.reply.show',['title'=>'问题回答内容','re_con'=>$re_con]);
+        // 获取评论
+        $data = Reply::find($id)->comment()->get();
+        
+       
+        // 加载模板
+        return view('admin.comment.show',['title'=>'评论列表','data'=>$data]);
     }
 
     /**
@@ -86,6 +90,15 @@ class ReplyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //删除
+        $res = Comment::destroy($id);
+        // 判断
+        if($res){
+           
+            return back()->with('success','删除成功');
+        }else{
+            
+            return back()->with('error','删除失败');
+        }
     }
 }
