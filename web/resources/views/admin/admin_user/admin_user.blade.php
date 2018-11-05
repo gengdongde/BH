@@ -29,6 +29,18 @@
 		                            <input class="form-control" name="upwd_confirmation" type="password">
 		                            
 		                        </div>
+                                <dir class="form-group">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">
+                                                选择角色
+                                            </div>
+                                            <div class="panel-body">
+                                                @foreach($role as $k => $v)
+                                                <p>{{ $v->roname }}:<input type="checkbox" value="{{$v->id}}" name="role_id[]"></p>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                </dir>
 								<div class="form-group">
                                     <label>是否启用:</label>
                                     <input type="checkbox" name="status" value="2" checked=""> 立即启用

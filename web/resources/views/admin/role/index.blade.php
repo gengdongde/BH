@@ -12,13 +12,13 @@
                         <div class="panel-body">
                             <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                                 <div class="col-sm-6">
-                                    <a href="/admin/access/create" class="btn btn-outline btn-success">添加权限</a>                     
+                                    <a href="/admin/role/create" class="btn btn-outline btn-success">添加角色</a>                     
                                 </div>
                                 <div class="row">
-                                    <form action="/admin/access" method="get">
+                                    <form action="/admin/role" method="get">
                                         <div class="col-sm-6">
                                             <div id="dataTables-example_filter" class="dataTables_filter">
-                                                <label>权限名:<input type="text" name="title" class="form-control input-sm" placeholder="关键字" aria-controls="dataTables-example"></label>
+                                                <label>角色名:<input type="text" name="roname" class="form-control input-sm" placeholder="关键字" aria-controls="dataTables-example"></label>
                                                 <button type="submit" class="btn bnt-success">查询</button>
                                                 
                                             </div>
@@ -33,8 +33,8 @@
                                             <thead>
                                                 <tr role="row">
                                                     <td>Id</td>
-                                                    <td>权限名称</td>
-                                                    <td>URL</td>
+                                                    <td>角色名称</td>
+                                                    <td>拥有权限</td>
                                                     <td>状态</td>
                                                     <td>创建时间</td>
                                                     <td>修改时间</td>
@@ -42,17 +42,21 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($acs as $k => $v)
+                                                @foreach($role as $k => $v)
                                                 <tr class="gradeA odd" role="row">
                                                     <td>{{$v->id}}</td>
-                                                    <td>{{str_repeat('|----',substr_count($v->path,',')).$v->title}}</td>
-                                                    <td>{{$v->urls}}</td>
-                                                    <td>@if($v->status == 1)未启用@else 已启用@endif</td>
+                                                    <td>{{$v->roname}}</td>
+                                                    <td>
+                                                        @foreach($v->access()->get() as $vv)
+                                                        {{$vv->title.'，'}}
+                                                        @endforeach
+                                                    </td>
+                                                    <td>@if($v->status == 1)<a class="text-danger" title="启用?" href="/admin/role/stus/{{ $v->id }}">未启用</a>@else<a class="text-muted" title="禁用?" href="/admin/role/stus/{{ $v->id }}">已启用.</a>@endif</td>
                                                     <td>{{$v->created_at}}</td>
                                                     <td>{{$v->updated_at}}</td>
                                                     <td>
-                                                        <a href="/admin/access/{{$v->id}}/edit" class="btn btn-outline btn-warning">修改</a>
-                                                        <form action="/admin/access/{{$v->id}}" method="post" style="display:inline-block;">
+                                                        <a href="/admin/role/{{$v->id}}/edit" class="btn btn-outline btn-warning">修改拥有权限</a>
+                                                        <form action="/admin/role/{{$v->id}}" method="post" style="display:inline-block;">
                                                             {{ csrf_field() }}
                                                             {{ method_field('DELETE') }}
                                                             <button type="submit" onclick="if(window.confirm('你确定需要删除')){return true;}else{return false;}" class="btn btn-outline btn-danger">删除</button>
@@ -63,7 +67,8 @@
                                         </table>
                                         <div>
                                             <!-- ->appends(['name'=>$request]) -->
-                                           
+                                           {!! $role->appends(['roname'=>$request])->render()
+                                           !!}
                                         </div>
                                     </div>
                                 </div>

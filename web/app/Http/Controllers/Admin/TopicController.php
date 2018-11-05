@@ -74,6 +74,8 @@ class TopicController extends Controller
         // 添加到topic
         $res = Topic::insertGetId($data);
         if(!$res){
+            //回滚事务
+            DB::rollBack();
             return back()->with('error','添加失败!!!');
         }
         

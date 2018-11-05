@@ -12,35 +12,37 @@
 	            <div class="panel-body">
 	                <div class="row">
 	                    <div class="col-lg-6">
-	                               <form role="form" action="/admin/access" method="post">
+	                               <form role="form" action="/admin/role" method="post">
                                         {{ csrf_field() }}
                                         <div class="form-group">
-                                            <label>权限名称</label>
-                                            <input class="form-control" name="title" value="{{ old('title') }}" type="text">
+                                            <label>角色名称</label>
+                                            <input class="form-control" name="roname" value="{{ old('roname') }}" type="text">
                                             
+                                        </div>               
+                                        @foreach($access as $v)
+                                            @if($v->path == '0')
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                {{$v->title}}<input type="checkbox" name="access_id[]" value="{{$v->id}}"><br>
+                                            </div>
+                                            <div class="panel-body">
+                                                @foreach($access as $vv)
+                                                 @if($vv->pid == $v->id)
+                                                    <p>
+                                                        {{$vv->title}}<input type="checkbox" name="access_id[]" value="{{$vv->id}}">
+                                                    </p>
+                                                 @endif
+                                                @endforeach 
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>选择权限层级</label>
-                                            <select name="id" class="form-control">
-                                                <option value="0">--顶级权限--</option>
-                                                @foreach($acs as $k => $v)
-                                                <option value="{{ $v->id }}">
-                                                    {{str_repeat('|----',substr_count($v->path,',')).$v->title}}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>                                         
-                                        <div class="form-group">
-                                            <label>URL</label>
-                                            <input class="form-control" name="urls" value="{{ old('urls') }}" type="text">
-                                            
-                                        </div>                              
+                                        @endif
+                                        @endforeach                              
                                         <div class="form-group">
                                             <label>状态</label>
                                             <input type="checkbox" name="status" value="2">
                                         </div>                              
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-outline btn-info">添加话题</button>
+                                            <button type="submit" class="btn btn-outline btn-info">添加角色</button>
                                         </div>
                                     </form>
                         </div>

@@ -29,7 +29,8 @@
 			                                <thead>
 			                                    <tr role="row">
 			                                    	<td>Id</td>
-			                                    	<td>管理员用户名</td>
+			                                    	<td>管理员</td>
+			                                    	<td>所属角色</td>
 			                                    	<td>管理员状态</td>
 			                                    	<td>添加时间</td>
 			                                    	<td>修改时间</td>
@@ -41,6 +42,11 @@
 				                                <tr class="gradeA odd" role="row">
 				                                	<td>{{ $v->id }}</td>
 				                                	<td>{{ $v->name }}</td>
+				                                	<td>
+				                                		@foreach($v->role()->get() as $vv)
+				                                		{{$vv->roname.','}}
+				                                		@endforeach
+				                                	</td>
 				                                	<td>@if($v->status == '1')<a class="text-danger" title="启用?" href="/admin/adminuser/stus/{{ $v->id }}">未启用.</a>@elseif($v->status == '2')<a class="text-muted" title="禁用?" href="/admin/adminuser/stus/{{ $v->id }}">已启用.</a>@endif</td>
 				                                	<td>{{ $v->created_at }}</td>
 				                                	<td>{{ $v->updated_at }}</td>

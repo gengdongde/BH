@@ -19,7 +19,25 @@
 		                            <label>管理员用户名</label>
 		                            <input class="form-control" name="name" value="{{$data->name}}" type="text">
 		                            
-		                        </div>		                        
+		                        </div>
+                                <div class="form-group">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            选择角色
+                                        </div>
+                                        <div class="panel-body">
+                                            @foreach($role as $k => $v)
+                                            <p>{{ $v->roname }}:<input type="checkbox" value="{{$v->id}}"
+                                            @foreach($role_id as $vv) 
+                                                @if($vv->role_id == $v->id)
+                                                checked
+                                                @endif
+                                            @endforeach
+                                                name="role_id[]"></p>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>		                        
 		                        <div class="form-group">
 		                            <label>管理员密码(旧)</label>
 		                            <input class="form-control" name="upwd1" type="password">

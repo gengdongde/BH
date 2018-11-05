@@ -10,6 +10,8 @@ use App\Models\AdminUser;
 use Hash;
 use Validator;
 use Crypt;
+use App\Models\Role;
+use DB;
 use Illuminate\Contracts\Encryption\DecryptException;
 class AdminUserController extends Controller
 {
@@ -36,7 +38,8 @@ class AdminUserController extends Controller
      */
     public function create()
     {
-        return view('admin.admin_user.admin_user',['title'=>'添加管理员']);
+        $role = Role::get();
+        return view('admin.admin_user.admin_user',['title'=>'添加管理员','role'=>$role]);
     }
 
     /**
@@ -49,7 +52,9 @@ class AdminUserController extends Controller
     {    //判断是否为表单提交
         if($request->isMethod('post'))
         {
-            $req = $request->except('_token','upwd_confirmation');
+            //开启事务
+            DB::beginTransaction();
+            $req = $request->except('_token','upwd_confirmation','role_id');
             //表单验证
              $this->validate($request, [
                 'name' => 'required|unique:admin_user,name',
@@ -72,12 +77,26 @@ class AdminUserController extends Controller
             $req['upwd'] = Hash::make($req['upwd']);
             
             //入库
-            $res = AdminUser::insert($req);
+            $uid = AdminUser::insertGetId($req);
             //判断跳转
-            if($res){
-                return redirect('/admin/adminuser')->with('success','添加成功!!!');
-            }else{
+            if(!$uid){
+                //回滚事务
+                 DB::rollBack();
                 return back()->with('error','添加失败!!!');
+            }
+            //处理adminuser_role数据
+            $role_id = $request->input('role_id');
+            foreach ($role_id as $k => $v) {
+                $da = DB::table('adminuser_role')->insert(['uid'=>$uid,'role_id'=>$v]);
+            }
+            if(!$da){
+                //回滚事务
+                 DB::rollBack();
+                return back()->with('error','添加失败!!!');
+            }else{
+                //提交事务
+                DB::commit();
+                return redirect('/admin/adminuser')->with('success','添加成功!!!');
             }
         }else{
             return back()->with('error','请正常访问!!!');
@@ -116,7 +135,11 @@ class AdminUserController extends Controller
     {
         //获取数据
         $data =  AdminUser::find($id);
-        return view('admin.admin_user.edit',['title'=>'修改管理员信息','data'=>$data]);
+        //获取access_id
+        $role_id = DB::table('adminuser_role')->where('uid',$id)->get();
+        //获取所有角色
+        $role = Role::get();
+        return view('admin.admin_user.edit',['title'=>'修改管理员信息','data'=>$data,'role_id'=>$role_id,'role'=>$role]);
     }
 
     /**
@@ -131,7 +154,21 @@ class AdminUserController extends Controller
         //判断是否正常访问
         if($request->isMethod('PUT'))
         {
-             $req = $request->except('_token','_method');
+                     //开启事务
+            DB::beginTransaction();
+            $req = $request->except('_token','_method','role_id');
+            //处理adminuser_role数据
+                //先删除 再重新添加
+            $role_id = $request->input('role_id');
+            @$resd = DB::table('adminuser_role')->where('uid',$id)->delete();
+            $da = true;
+            if($role_id != null)
+            {
+                foreach ($role_id as $k => $v) {
+                    $da = DB::table('adminuser_role')->insert(['uid'=>$id,'role_id'=>$v]);
+                }
+            }
+
              //判断是否需要修改密码
              if($req['upwd1'] != null)
              {  //判断密码，确认密码是否有填写
@@ -173,9 +210,13 @@ class AdminUserController extends Controller
                     'updated_at'=>date('Y-m-d H:i:s',time())
                 ]);
                     //判断跳转
-                if($res){
+                if(!$res){
+                    //提交事务
+                    DB::commit();
                     return redirect('/admin/adminuser')->with('success','修改成功!!!');
                 }else{
+                    //回滚事务
+                    DB::rollBack();
                     return back()->with('error','修改失败!!!');
                 }
                 }
@@ -196,8 +237,12 @@ class AdminUserController extends Controller
                 ]);
                 //判断跳转
                 if($res){
+                    //提交事务
+                    DB::commit();
                     return redirect('/admin/adminuser')->with('success','修改成功!!!');
                 }else{
+                    //回滚事务
+                    DB::rollBack();
                     return back()->with('error','修改失败!!!');
                 }
              }
