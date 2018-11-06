@@ -10,6 +10,10 @@ use DB;
 
 class AccessController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('login');
+    }
     /**
      * 权限列表
      *

@@ -21,6 +21,7 @@ class LoginMiddleware
             return redirect('/admin/login');
         }
         if(session('id') != '1'){
+            $urle = [];
         //判断权限  处理修改的权限
         $res = preg_match('/\/{1}\w+\/{1}(\d+)\/\w+/',$request->path(),$edit);
         if($res){
@@ -32,7 +33,7 @@ class LoginMiddleware
             }
                 $is_edit = in_array($request->path(),$urle);            
         }
-        // dd($request->method());
+        
             //处理 xxx/xxxx/id 的路由 delete 
             $dels = preg_match('/\w+\/{1}\w+\/{1}(\d+)/',$request->path(),$del);
             if($dels && $request->isMethod("DELETE")){

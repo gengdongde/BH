@@ -16,6 +16,10 @@ use App\Models\Topic;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('login');
+    }
     /**
      * Display a listing of the resource.
      * @param  \Illuminate\Http\Request  $request

@@ -12,6 +12,10 @@ use App\Models\Reply;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('login');
+    }
     /**
      * Display a listing of the resource.
      *

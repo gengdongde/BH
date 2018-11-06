@@ -10,6 +10,10 @@ use App\Http\Controllers\Controller;
 
 class ReplyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('login');
+    }
     /**
      * 问题回答列表
      *

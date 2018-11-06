@@ -39,10 +39,11 @@ class LoginController extends Controller
             'name.required' => '请填写管理员名称!!!',
             'name.exists' => '用户名错误!!!',
         ]);
-            $aupwd = AdminUser::where('name',$req['name'])->first();
-            
+        $aupwd = AdminUser::where('name',$req['name'])->first();
+        // dump(Hash::check($req['upwd'],$aupwd['upwd']));
+        // exit;
         if($aupwd['status'] == 2){
-            if(Hash::check($req['upwd'],$aupwd['upwd'])){
+            if(!Hash::check($req['upwd'],$aupwd['upwd'])){
                 $this->validate($request,[
                     'upwds' => 'required',],[
                     'upwds.required' => '忘记密码了，好好想一下吧.',

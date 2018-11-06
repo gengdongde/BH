@@ -54,6 +54,7 @@
                                                             {{ csrf_field() }}
                                                             {{ method_field('DELETE') }}
                                                             <button type="submit" onclick="if(window.confirm('你确定需要删除')){return true;}else{return false;}" class="btn btn-outline btn-danger">删除</button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                                 @endforeach

@@ -219,7 +219,7 @@ class AdminUserController extends Controller
                     'updated_at'=>date('Y-m-d H:i:s',time())
                 ]);
                     //判断跳转
-                if(!$res){
+                if($res){
                     //提交事务
                     DB::commit();
                     return redirect('/admin/adminuser')->with('success','修改成功!!!');

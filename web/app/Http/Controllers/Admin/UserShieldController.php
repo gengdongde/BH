@@ -11,6 +11,10 @@ use App\Models\User;
 
 class UserShieldController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('login');
+    }
     /**
      * Display a listing of the resource.
      *
