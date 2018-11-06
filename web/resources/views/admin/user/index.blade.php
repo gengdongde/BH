@@ -21,8 +21,8 @@
 	                            		</div>
                             		</form>                       
                             	</div>
-                            	<div class="row btn btn-info" style="margin:5px;">
-                            			<a href="/admin/user/create">添加用户</a>
+                            	<div style="margin-bottom: 10px; margin-left: 15px;">
+                            		<a href="/admin/user/create" class="row btn btn-info">添加用户</a>
                             	</div>
                             	<div class="row">
                             		<div class="col-sm-12">

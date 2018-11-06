@@ -35,16 +35,15 @@
                                                         
                                                     </td>
                                                     <td>       
-                                                        <a href="javascript:;" onclick="btn({{$v->id}},this)">
+                                                        <a href="javascript:;" onclick="btn( {{ $v->id }},this,{{$v->status}})">
                                                             @if($v->status == 1)
                                                             未发布
                                                             @elseif($v->status == 2 )
-                                                            发布
+                                                            已发布
                                                             @endif
                                                         </a>  
                                                     </td>
                                                     <td>
-                                                       
                                                         <form action="/admin/link/{{ $v->id }}" method="post" style="display: inline-block;">
                                                             {{ csrf_field() }}
                                                             {{ method_field('DELETE') }}
@@ -73,16 +72,26 @@
             <!-- /.row -->
         </div>
          <script src="/static/admin/vendor/jquery/jquery.min.js"></script>
+        
         <script type="text/javascript">
-            function btn(id,obj){
-                $.get('/admin/link/btn',{'status':2,'id':id},function(msg){
-                    if(msg == 'success'){
-                        return $(obj).text('发布');
+            // 发布友情链接 
+            function btn(id,obj,status){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.get('/admin/link/btn',{'id':id,'status':status},function(msg){
+                   
+                    if(msg){
+                        return $(obj).text("已发布");
                     }else{
-                        return $(obj).text('未发布');
+                        alert('操作失败');
                     }
                 },'html');
             }
+
+            
         </script>
 
 @endsection

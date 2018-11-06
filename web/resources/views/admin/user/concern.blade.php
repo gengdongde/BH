@@ -3,15 +3,15 @@
 	
 	<div class="container">
 		
-		<table class="table table-condensed bg-info table-striped">
+		<table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline">
 			<tr>
-				<td>ID</td>
-				<td>用户名</td>
-				<td>手机号</td>
-				<td>邮箱</td>
-				<td>性别</td>
-				<td>地址</td>
-				<td>头像</td>
+				<th>ID</th>
+				<th>用户名</th>
+				<th>手机号</th>
+				<th>邮箱</th>
+				<th>性别</th>
+				<th>地址</th>
+				<th>头像</th>
 			</tr>
 			@foreach($users as $k=>$v)
 			<tr>
@@ -33,8 +33,8 @@
 			</tr>
 			@endforeach
 		</table>
-		<div class="btn btn-success pull-right">
-			<a href="JavaScript:history.go(-1)">返回上一页</a>
+		<div>
+			<a href="JavaScript:history.go(-1)" class="btn btn-success pull-right">返回上一页</a>
 		</div>
 	</div>
 @endsection

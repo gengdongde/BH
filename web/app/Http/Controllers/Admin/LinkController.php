@@ -97,18 +97,24 @@ class LinkController extends Controller
      */
     public function btn(Request $request)
     {
+
         //获取提交数据
         $id = $request->input('id');
-        
         $link = Link::find($id);
-        $link->status = $request->input('status');
-        $res = $link->save();
-        if($res){
-            echo 'success';
-        }else{
+        
+        if($request->input('status') == 1){
+            $link->status = 2;
+            $res = $link->save();
+            if($res){
+                echo 'success';
+            }else{
+                echo 'error';
+            }
+            exit;
+        }else if($request->input('status') == 2){
             echo 'error';
-        }
-        exit;
+             exit;
+        }    
     }
 
     /**
@@ -157,10 +163,13 @@ class LinkController extends Controller
        
         // 删除
         $res = Link::destroy($id);
+        
+        // 判断
         if($res){
-            return redirect('/admin/link')->with('success','删除成功');
+            echo 'success';
         }else{
-            return back()->with('error','删除失败');
+            echo 'error';
         }
+        exit;
     }
 }

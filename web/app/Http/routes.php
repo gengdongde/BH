@@ -82,6 +82,8 @@ Route::get('admin/user/{id}/restore','Admin\UserController@restore');
 Route::get('admin/user/{id}/remove','Admin\UserController@remove');
 // 后台用户提问问题 用户列表
 Route::get('admin/problem/{id}/delete','Admin\ProblemController@delete');
+// 后台用户提问问题 被举报列表
+Route::get('admin/problem/report','Admin\ProblemController@report');
 // 后台用户关注用户
 Route::resource('admin/concern','Admin\UserConcernController');
 // 后台用户屏蔽用户
@@ -101,10 +103,25 @@ Route::get('admin/link/btn','Admin\LinkController@btn');
 // 后台友情链接
 Route::resource('admin/link','Admin\LinkController');
 
+// // 前台注册页面
+Route::get('home/logo','Home\LoginController@logo');
+// 前台注册页面验证手机号是否存在
+Route::get('home/logo/check','Home\LoginController@check');
+// 前台注册页面保存
+Route::post('home/logo/save','Home\LoginController@save');
+// 前台登录页面
+Route::get('home/login','Home\LoginController@login');
+// 前台登录页面验证手机号和密码
+Route::post('home/login/dologin','Home\LoginController@dologin');
 
+// 认证路由...
+// Route::get('auth/login', 'Auth\AuthController@getLogin');
+// Route::post('auth/login', 'Auth\AuthController@postLogin');
+// Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-
-
+// // 注册路由...
+// Route::get('auth/register', 'Auth\AuthController@getRegister');
+// Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 
 

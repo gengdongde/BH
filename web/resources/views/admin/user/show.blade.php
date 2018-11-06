@@ -1,22 +1,26 @@
 @extends('admin.layout.index')
 @section('content')
-	<div class="container" style="width:300px;">
+	<div class="container">
 		
-		<table class="table bg-info">
+		<table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline">
 			<tr>
-				<th>封面</th>
+				<td>用户ID</td>
+				<td>用户名</td>
+				<td>封面</td>
+				<td>头像</td>
+				<td>性别</td>
+				<td>一句好介绍</td>
+				<td>地址</td>
+			</tr>
+			<tr>
+				<td>{{$id}}</td>
+				<td>{{ $user->userinfo->find($id)->uname }}</td>
 				<td>
 					<img src="{{ $user->userinfo()->find($id)->cover }}" alt="" class="img-thumbnail" style="width:100px;">
 				</td>
-			</tr>
-			<tr>
-				<th>头像</th>
 				<td>
 					<img src="{{ $user->userinfo()->find($id)->face }}" alt="" class="img-thumbnail" style="width:100px;">
 				</td>
-			</tr>
-			<tr>
-				<th>性别</th>
 				<td>
 					<p class="text-primary text-center">
 						
@@ -28,17 +32,11 @@
 						
 					</p>
 				</td>
-			</tr>
-			<tr>
-				<th>一句好介绍</th>
 				<td>
 					<p class="text-primary text-center">
 						{{ $user->userinfo()->find($id)->signature }}
 					</p>
 				</td>
-			</tr>
-			<tr>
-				<th>地址</th>
 				<td>
 					<p class="text-primary text-center">
 						{{ $user->userinfo()->find($id)->addr }}
@@ -46,8 +44,8 @@
 				</td>
 			</tr>
 		</table>
-		<div class="btn btn-success pull-right">
-			<a href="JavaScript:history.go(-1)">返回上一页</a>
+		<div >
+			<a href="JavaScript:history.go(-1)" class="btn btn-success pull-right">返回上一页</a>
 		</div>
 	</div>
 

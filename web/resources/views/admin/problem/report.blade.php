@@ -1,7 +1,6 @@
 @extends('admin.layout.index')
 @section('content')
-
-  <!-- /.row -->
+ <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -22,16 +21,16 @@
                             	</div>
                             	
                             	<div class="row">
-                            		<div class="col-sm-12 table-responsive">
-                            			<table class="table table-striped table-bordered table-hover table-condensed">
+                            		<div class="col-sm-12">
+                            			<table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline">
 			                                <thead>
 			                                    <tr role="row" class="text-center">
 			                                    	<td>ID</td>
 			                                    	<td>分类</td>
 			                                    	<td>用户名</td>
 			                                    	<td>用户ID</td>
-			                                    	<td class="col-sm-2">问题</td>
-			                                    	<td class="col-sm-2">问题描述</td>
+			                                    	<td>问题</td>
+			                                    	<td>问题描述</td>
 			                                    	<td>点击量</td>
 			                                    	<td>是否合法</td>
 			                                    	<td>发布时间</td>
@@ -113,4 +112,5 @@
     			},'html');
     		}
     	</script>
+
 @endsection

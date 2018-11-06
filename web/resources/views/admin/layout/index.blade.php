@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>B乎</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/static/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    
     <!-- MetisMenu CSS -->
     <link href="/static/admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
@@ -189,7 +189,9 @@
                             <li>
                                 <a href="/admin/problem">问题列表</a>
                             </li>
-                            
+                            <li>
+                                <a href="/admin/problem/report">被举报列表</a>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
