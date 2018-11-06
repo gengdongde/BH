@@ -112,7 +112,7 @@ class AccessController extends Controller
         $req = $request->except('_token','_method');
             //表单验证
          $this->validate($request, [
-            'title' => 'required|unique:access,title',
+            'title' => 'required|unique:access,title,'.$id,
             'urls' => 'required',
             ],[
                 'title.required'=>'请填写权限名',

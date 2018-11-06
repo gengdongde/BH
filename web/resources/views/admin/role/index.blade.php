@@ -51,15 +51,19 @@
                                                         {{$vv->title.'，'}}
                                                         @endforeach
                                                     </td>
-                                                    <td>@if($v->status == 1)<a class="text-danger" title="启用?" href="/admin/role/stus/{{ $v->id }}">未启用</a>@else<a class="text-muted" title="禁用?" href="/admin/role/stus/{{ $v->id }}">已启用.</a>@endif</td>
+                                                    <td>@if($v->id != '1')
+                                                        @if($v->status == 1)<a class="text-danger" title="启用?" href="/admin/role/stus/{{ $v->id }}">未启用</a>@else<a class="text-muted" title="禁用?" href="/admin/role/stus/{{ $v->id }}">已启用.</a>@endif
+                                                        @endif
+                                                    </td>
                                                     <td>{{$v->created_at}}</td>
                                                     <td>{{$v->updated_at}}</td>
-                                                    <td>
+                                                    <td>@if($v->id != '1')
                                                         <a href="/admin/role/{{$v->id}}/edit" class="btn btn-outline btn-warning">修改拥有权限</a>
                                                         <form action="/admin/role/{{$v->id}}" method="post" style="display:inline-block;">
                                                             {{ csrf_field() }}
                                                             {{ method_field('DELETE') }}
                                                             <button type="submit" onclick="if(window.confirm('你确定需要删除')){return true;}else{return false;}" class="btn btn-outline btn-danger">删除</button>
+                                                            @endif
                                                     </td>
                                                 </tr>
                                                 @endforeach

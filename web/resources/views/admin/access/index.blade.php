@@ -35,7 +35,6 @@
                                                     <td>Id</td>
                                                     <td>权限名称</td>
                                                     <td>URL</td>
-                                                    <td>状态</td>
                                                     <td>创建时间</td>
                                                     <td>修改时间</td>
                                                     <td>操作</td>
@@ -47,7 +46,6 @@
                                                     <td>{{$v->id}}</td>
                                                     <td>{{str_repeat('|----',substr_count($v->path,',')).$v->title}}</td>
                                                     <td>{{$v->urls}}</td>
-                                                    <td>@if($v->status == 1)未启用@else 已启用@endif</td>
                                                     <td>{{$v->created_at}}</td>
                                                     <td>{{$v->updated_at}}</td>
                                                     <td>

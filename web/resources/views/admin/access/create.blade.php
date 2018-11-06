@@ -34,13 +34,9 @@
                                             <label>URL</label>
                                             <input class="form-control" name="urls" value="{{ old('urls') }}" type="text">
                                             
-                                        </div>                              
+                                        </div>                                        
                                         <div class="form-group">
-                                            <label>状态</label>
-                                            <input type="checkbox" name="status" value="2">
-                                        </div>                              
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-outline btn-info">添加话题</button>
+                                            <button type="submit" class="btn btn-outline btn-info">添加权限</button>
                                         </div>
                                     </form>
                         </div>

@@ -12,6 +12,10 @@ use DB;
 class TopicController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('login');
+    }
     /**
      * 话题列表
      *
