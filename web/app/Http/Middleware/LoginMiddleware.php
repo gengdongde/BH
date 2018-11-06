@@ -21,6 +21,7 @@ class LoginMiddleware
             return redirect('/admin/login');
         }
         if(session('id') != '1'){
+            $urle = [];
         //判断权限  处理修改的权限
         $res = preg_match('/\/{1}\w+\/{1}(\d+)\/\w+/',$request->path(),$edit);
         if($res){
@@ -48,7 +49,7 @@ class LoginMiddleware
             if($shq && $request->isMethod("GET")){
                 foreach (session('urls') as $k => $v) {
                 $vv = ltrim($v,'/');
-                    if(preg_match('/\w+\/{1}\w+\/{1}(\d+)/',$vv,$de)){
+                    if($sb = preg_match('/\w+\/{1}\w+\/{1}(\d+)/',$vv,$de)){
                         $urle[] = str_replace(3,$shqy[1],$vv);
                     }
                 }

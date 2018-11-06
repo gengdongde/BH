@@ -18,7 +18,6 @@ Route::get('/', function () {
 
 // 后台首页
 Route::get('/admin/','Admin\IndexController@index');
-Route::get('/admin/','Admin\IndexController@index');
 //后台登录
 Route::get('/admin/login','Admin\LoginController@login');
 Route::post('/admin/validateLogin','Admin\LoginController@validateLogin');

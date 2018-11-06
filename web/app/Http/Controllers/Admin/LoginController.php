@@ -40,9 +40,9 @@ class LoginController extends Controller
             'name.exists' => '用户名错误!!!',
         ]);
             $aupwd = AdminUser::where('name',$req['name'])->first();
-            
+            // dd(Hash::check($req['upwd'],$aupwd['upwd']));
         if($aupwd['status'] == 2){
-            if(Hash::check($req['upwd'],$aupwd['upwd'])){
+            if(!Hash::check($req['upwd'],$aupwd['upwd'])){
                 $this->validate($request,[
                     'upwds' => 'required',],[
                     'upwds.required' => '忘记密码了，好好想一下吧.',
@@ -87,6 +87,7 @@ class LoginController extends Controller
     {
         session('login.name',null);
         session('urls',null);
+        session('id',null);
         return redirect('/admin/login');
     }
 

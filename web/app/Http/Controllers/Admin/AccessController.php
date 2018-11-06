@@ -137,6 +137,7 @@ class AccessController extends Controller
      */
     public function destroy($id)
     {
+        
         //删除数据
         $res = Access::destroy($id);
         //判断跳转
