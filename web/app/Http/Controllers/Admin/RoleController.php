@@ -11,6 +11,11 @@ use DB;
 
 class RoleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('login');
+    }
     /**
      * 角色列表
      *

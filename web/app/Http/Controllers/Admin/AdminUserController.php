@@ -15,6 +15,11 @@ use DB;
 use Illuminate\Contracts\Encryption\DecryptException;
 class AdminUserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('login');
+    }
     /**
      * 管理员列表 展示管理员信息
      *
@@ -38,7 +43,7 @@ class AdminUserController extends Controller
      */
     public function create()
     {
-        $role = Role::get();
+        $role = Role::where('status','2')->get();
         return view('admin.admin_user.admin_user',['title'=>'添加管理员','role'=>$role]);
     }
 
@@ -85,10 +90,14 @@ class AdminUserController extends Controller
                 return back()->with('error','添加失败!!!');
             }
             //处理adminuser_role数据
-            $role_id = $request->input('role_id');
-            foreach ($role_id as $k => $v) {
-                $da = DB::table('adminuser_role')->insert(['uid'=>$uid,'role_id'=>$v]);
+            $da = true;
+            if($request->has('role_id')){
+                $role_id = $request->input('role_id');
+                foreach ($role_id as $k => $v) {
+                    $da = DB::table('adminuser_role')->insert(['uid'=>$uid,'role_id'=>$v]);
+                }
             }
+
             if(!$da){
                 //回滚事务
                  DB::rollBack();
@@ -138,7 +147,7 @@ class AdminUserController extends Controller
         //获取access_id
         $role_id = DB::table('adminuser_role')->where('uid',$id)->get();
         //获取所有角色
-        $role = Role::get();
+        $role = Role::where('status','2')->get();
         return view('admin.admin_user.edit',['title'=>'修改管理员信息','data'=>$data,'role_id'=>$role_id,'role'=>$role]);
     }
 
