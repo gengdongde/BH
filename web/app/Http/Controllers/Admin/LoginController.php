@@ -39,6 +39,7 @@ class LoginController extends Controller
             'name.required' => '请填写管理员名称!!!',
             'name.exists' => '用户名错误!!!',
         ]);
+
             $aupwd = AdminUser::where('name',$req['name'])->first();
             // dd(Hash::check($req['upwd'],$aupwd['upwd']));
         if($aupwd['status'] == 2){
@@ -62,6 +63,7 @@ class LoginController extends Controller
         $role = $aupwd->role()->get();
         //所有角色的权限
         $acs = [];
+        $id = 2;
         foreach ($role as $k => $v) {
             foreach ($v->access()->get() as $key => $value) {
                  $acs[] = $value->urls;

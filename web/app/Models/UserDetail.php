@@ -29,6 +29,38 @@ class UserDetail extends Model
     {
         return $this->hasMany('App\Models\Reply','uid','uid');
     }
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * 建立用户详情表与问题体温表一对多关联
+     */
+    public function problemuser()
+    {
+        return $this->hasMany('App\Models\Problem','uid');
+    }
    
     
 }

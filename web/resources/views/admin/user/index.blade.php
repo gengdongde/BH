@@ -16,13 +16,13 @@
                             			<div class="col-sm-6 col-md-offset-9">
 	                            			<div id="dataTables-example_filter" class="dataTables_filter">
 	                            				<label>用户名:<input type="text" name="uname" value="{{ $request or '' }}" class="form-control input-sm" placeholder="关键字" aria-controls="dataTables-example"></label>
-	                            				<button class="btn bnt-success">查询</button>
+	                            				<button class="btn btn-primary">查询</button>
 	                            			</div>
 	                            		</div>
                             		</form>                       
                             	</div>
-                            	<div class="row btn btn-info" style="margin:5px;">
-                            			<a href="/admin/user/create">添加用户</a>
+                            	<div style="margin-bottom: 10px; margin-left: 15px;">
+                            		<a href="/admin/user/create" class="row btn btn-info">添加用户</a>
                             	</div>
                             	<div class="row">
                             		<div class="col-sm-12">

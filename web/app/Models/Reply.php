@@ -3,13 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 class Reply extends Model
 {
     protected $table = 'reply';
     protected $primaryKey = 'id';
-
-
     /**
      * 关联 reply_content 一对一
      *
@@ -37,5 +34,16 @@ class Reply extends Model
     public function user_detail()
     {
     	return $this->belongsTo('App\Models\UserDetail','uid','uid');
+    }
+
+
+
+
+    /**
+     * 获取回答的所有评论
+     */
+    public function comment()
+    {
+        return $this->hasMany('App\Models\Comment','rid','id');
     }
 }

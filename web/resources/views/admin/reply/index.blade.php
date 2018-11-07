@@ -32,6 +32,8 @@
                                                     <td>问题名称</td>
                                                     <td>回答用户</td>
                                                     <td>点赞数量</td>
+                                                    <td>评论数量</td>
+                                                    <td>查看评论</td>
                                                     <td>编辑时间</td>
                                                     <td>修改时间</td>
                                                     <td>操作</td>
@@ -41,9 +43,13 @@
                                             @foreach($rey as $k => $v)     
                                                 <tr class="gradeA odd" role="row">
                                                     <td>{{$v->id}}</td>
-                                                    <td>{{$v->problem()->where('id',$v->pid)->first()->tname}}</td>
+                                                    <td>{{$v->problem()->where('id',$v->pid)->first()->pname}}</td>
                                                     <td>{{$v->user_detail()->where('uid',$v->uid)->first()->uname}}</td>
                                                     <td>{{$v->agree}}</td>
+                                                    <td>{{ $v->id }}</td>
+                                                    <td>
+                                                        <a href="/admin/comment/{{ $v->id }}" class="btn btn-info btn-sm">查看评论</a>
+                                                    </td>
                                                     <td>{{$v->created_at}}</td>
                                                     <td>{{$v->updated_at}}</td>
                                                     <td>

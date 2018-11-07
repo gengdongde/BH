@@ -41,7 +41,11 @@ Route::post('/admin/topic/top_update/{id}','Admin\TopicController@top_update');
 Route::resource('/admin/topic','Admin\TopicController');
 
 //问题回答管理
+Route::get('/admin/reply/report','Admin\ReplyController@report');
+Route::get('/admin/reply/hf/{id}','Admin\ReplyController@hf');
+Route::get('/admin/reply/delete/{id}','Admin\ReplyController@delete');
 Route::resource('/admin/reply','Admin\ReplyController');
+
 
 
 
@@ -89,8 +93,10 @@ Route::get('admin/user/soft','Admin\UserController@soft');
 Route::get('admin/user/{id}/restore','Admin\UserController@restore');
 // 永久删除数据
 Route::get('admin/user/{id}/remove','Admin\UserController@remove');
-// 用户提问问题
-Route::resource('admin/problem','Admin\ProblemController');
+// 后台用户提问问题 用户列表
+Route::get('admin/problem/{id}/delete','Admin\ProblemController@delete');
+// 后台用户提问问题 被举报列表
+Route::get('admin/problem/report','Admin\ProblemController@report');
 // 后台用户关注用户
 Route::resource('admin/concern','Admin\UserConcernController');
 // 后台用户屏蔽用户
@@ -100,16 +106,35 @@ Route::get('admin/user/{id}/usertopic','Admin\UserController@usertopic');
 // 后台用户管理
 Route::resource('admin/user','Admin\UserController');
 
+// 评论管理
+Route::resource('admin/comment','Admin\CommentController');
 
+// 后台提问问题管理
+Route::resource('admin/problem','Admin\ProblemController');
 // 友情链接发布
 Route::get('admin/link/btn','Admin\LinkController@btn');
 // 后台友情链接
 Route::resource('admin/link','Admin\LinkController');
 
+// // 前台注册页面
+Route::get('home/logo','Home\LoginController@logo');
+// 前台注册页面验证手机号是否存在
+Route::get('home/logo/check','Home\LoginController@check');
+// 前台注册页面保存
+Route::post('home/logo/save','Home\LoginController@save');
+// 前台登录页面
+Route::get('home/login','Home\LoginController@login');
+// 前台登录页面验证手机号和密码
+Route::post('home/login/dologin','Home\LoginController@dologin');
 
+// 认证路由...
+// Route::get('auth/login', 'Auth\AuthController@getLogin');
+// Route::post('auth/login', 'Auth\AuthController@postLogin');
+// Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-
-
+// // 注册路由...
+// Route::get('auth/register', 'Auth\AuthController@getRegister');
+// Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 
 

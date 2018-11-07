@@ -7,9 +7,14 @@ use App\Models\Reply;
 use App\Models\Reply_content;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
 
 class ReplyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('login');
+    }
     /**
      * 问题回答列表
      *
@@ -18,18 +23,33 @@ class ReplyController extends Controller
     public function index()
     {
         $rey = Reply::paginate(8);
-
+        
         return view('admin.reply.index',['title'=>'问题回答列表','rey'=>$rey]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 举报管理.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function report()
     {
-        //
+        $rey = Reply::where('report','!=','0')->paginate(8);
+        return view('admin.reply.report',['title'=>'回答举报管理','rey'=>$rey]);
+    }    
+    /**
+     * 举报管理.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function hf($id)
+    {
+        $res = Reply::where('id',$id)->update(['report'=>'0']);
+        if($res){
+            return redirect('/admin/reply/report')->with('sccess','已恢复');
+        }else{
+            return back()->with('error','恢复失败');
+        }
     }
 
     /**
@@ -79,13 +99,27 @@ class ReplyController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 永久删除被举报回答.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+         //开启事务
+            DB::beginTransaction();
+        //删除数据
+        $res = Reply::destroy($id);
+        $red = Reply_content::where('rid',$id)->delete();
+        //判断跳转
+        if($res && $red){
+            //提交事务
+                    DB::commit();
+            return redirect('/admin/reply/report')->with('success','删除成功!!!');
+        }else{
+            //回滚事务
+                    DB::rollBack();
+            return back()->with('error','删除失败!!!');
+        }
     }
 }

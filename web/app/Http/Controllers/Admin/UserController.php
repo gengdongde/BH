@@ -16,6 +16,10 @@ use App\Models\Topic;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('login');
+    }
     /**
      * Display a listing of the resource.
      * @param  \Illuminate\Http\Request  $request
@@ -340,17 +344,11 @@ class UserController extends Controller
     {
         // 获取指定用户信息
         $user = User::find($id);
-        $tids = [];
-        foreach ($user->usertopic as $v) {
-            $tids[] = $v->pivot->tid;
-        }
-        
-       
-        $tops = Topic::whereIn('id',$tids)->get();
-        
-        //加载用户详情模板
+       // 获取指定用户关注话题
+        $tops = $user->usertopic()->get();
+        // 加载用户详情模板
         return view('admin.user.usertopic',['title'=>'用户关注话题','tops'=>$tops,'id'=>$id]);
-
+   
     }
 
 

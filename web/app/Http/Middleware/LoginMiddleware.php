@@ -33,7 +33,7 @@ class LoginMiddleware
             }
                 $is_edit = in_array($request->path(),$urle);            
         }
-        // dd($request->method());
+        
             //处理 xxx/xxxx/id 的路由 delete 
             $dels = preg_match('/\w+\/{1}\w+\/{1}(\d+)/',$request->path(),$del);
             if($dels && $request->isMethod("DELETE")){

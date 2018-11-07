@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>B乎</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/static/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    
     <!-- MetisMenu CSS -->
     <link href="/static/admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
@@ -79,10 +79,10 @@
                     <ul class="nav" id="side-menu">
                         
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>首页</a>
+                            <a href="/admin"><i class="fa fa-desktop"></i>首页</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>用户管理<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-user"></i>用户管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 
 
@@ -137,7 +137,7 @@
                                     <a href="/admin/reply">问题回答列表</a>
                                 </li>                                
                                 <li>
-                                    <a href="/admin/reply">被举报列表</a>
+                                    <a href="/admin/reply/report">被举报列表</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -182,19 +182,23 @@
 
 
 <!-- gengdongde 150之后 -->
+                    
+
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>问题管理<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-question-circle"></i>问题管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="/admin/problem">问题列表</a>
                             </li>
-                            
+                            <li>
+                                <a href="/admin/problem/report">被举报列表</a>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>友情链接管理<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-chain"></i>友情链接管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="/admin/link">友情链接</a>

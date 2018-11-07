@@ -15,7 +15,7 @@ class Problem extends Model
      */
     public function problemtopic()
     {
-        return $this->belongsTo('App\ModelsTopic','tid');
+        return $this->belongsTo('App\Models\Topic','tid');
     }
 
     
@@ -30,6 +30,37 @@ class Problem extends Model
     {
         return $this->hasMany('App\Models\Reply','pid','id');
        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * 获取问题的用户信息
+     */
+    public function userdetail()
+    {
+        return $this->belongsTo('App\Models\userdetail','uid','uid');
     }
 
 }

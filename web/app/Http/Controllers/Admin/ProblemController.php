@@ -3,24 +3,72 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
+use App\Models\UserDetail;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Problem;
 
 class ProblemController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('login');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // 获取数据
-        $data = Problem::all();
+        // 获取查询用户名
+        $uname = $request->input('uname','');
+        // 查询用户信息
+        $users = UserDetail::where('uname','like','%'.$uname.'%')->get();
+        // 定义一个空数组,存放用户uid
+        $ids = [];
+        // 遍历
+        foreach($users as $k=>$v){
+            $ids[] = $v->uid;
+        }
+
+        // 获取查询问题名
+        $pname = $request->input('pname','');
+         $data = Problem::whereIn('uid',$ids)
+                        ->where('pname','like','%'.$pname.'%')
+                        ->where('report','=','0')
+                        ->paginate(5);
+        
         //加载模板
-        return view('admin.problem.index',['title'=>'提问问题表','data'=>$data]);
+        return view('admin.problem.index',['title'=>'问题列表','data'=>$data,'request'=>$request->all()]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function report(Request $request)
+    {
+        // 获取查询用户名
+        $uname = $request->input('uname','');
+        // 查询用户信息
+        $users = UserDetail::where('uname','like','%'.$uname.'%')->get();
+        // 定义一个空数组,存放用户uid
+        $ids = [];
+        // 遍历
+        foreach($users as $k=>$v){
+            $ids[] = $v->uid;
+        }
+
+        // 获取查询问题名
+        $pname = $request->input('pname','');
+         $data = Problem::whereIn('uid',$ids)
+                        ->where('pname','like','%'.$pname.'%')
+                        ->where('report','>','0')
+                        ->paginate(5);
+        // 加载模板
+        return view('admin.problem.report',['title'=>'被举报列表','data'=>$data,'request'=>$request->all()]);
     }
 
     /**
@@ -80,7 +128,7 @@ class ProblemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -90,6 +138,26 @@ class ProblemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+
+        // 删除信息
+        $res = Problem::destroy($id);
+        // 判断
+        if($res){
+            echo 'success';
+        }else{
+            echo 'error';
+        }
+        exit;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
     {
         // 删除信息
         $res = Problem::destroy($id);

@@ -90,10 +90,15 @@ class RoleController extends Controller
                  DB::rollBack();
                 return back()->with('error','添加失败!!!');
             }
-        //处理role_access数据
-            foreach ($access_id as $k => $v) {
-                $da = DB::table('role_access')->insert(['role_id'=>$role_id,'access_id'=>$v]);
+            $da = true;
+            // 判断
+            if(!empty($access_id)){
+                 //处理role_access数据
+                foreach ($access_id as $k => $v) {
+                    $da = DB::table('role_access')->insert(['role_id'=>$role_id,'access_id'=>$v]);
+                }
             }
+            
             if($da){
                 //提交事务
                 DB::commit();
