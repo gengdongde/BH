@@ -40,8 +40,7 @@ class LoginController extends Controller
             'name.exists' => '用户名错误!!!',
         ]);
         $aupwd = AdminUser::where('name',$req['name'])->first();
-        // dump(Hash::check($req['upwd'],$aupwd['upwd']));
-        // exit;
+       
         if($aupwd['status'] == 2){
             if(!Hash::check($req['upwd'],$aupwd['upwd'])){
                 $this->validate($request,[

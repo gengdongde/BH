@@ -8,8 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/static/home/css/logo.css">
 </head>
 <body>
-    <div class="dowebok">
-        @if (count($errors) > 0)
+    @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -18,7 +17,10 @@
                 </ul>
             </div>
         @endif
-        <div class="logo"></div>
+    <div class="dowebok">
+        <div style="padding:0px 35px;">
+            <div class="logo"></div>
+        </div>
         <form action="/home/logo/save" method="post">
             {{ csrf_field() }}
             <div class="form-item">

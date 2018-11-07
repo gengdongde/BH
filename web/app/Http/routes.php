@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 // 后台首页
 Route::get('/admin/','Admin\IndexController@index');
-Route::get('/admin/','Admin\IndexController@index');
+
 //后台登录
 Route::get('/admin/login','Admin\LoginController@login');
 Route::post('/admin/validateLogin','Admin\LoginController@validateLogin');
@@ -133,7 +133,8 @@ Route::post('home/login/dologin','Home\LoginController@dologin');
 // Route::get('auth/register', 'Auth\AuthController@getRegister');
 // Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-
+// 前台首页
+Route::resource('home/index','Home\IndexController');
 
 
 

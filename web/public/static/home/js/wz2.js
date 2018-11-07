@@ -1,0 +1,3 @@
+﻿document.writeln("<li ><em class=\'greyzht\'></em> &nbsp;<a target=\'_blank\' href=\'http://www.bthyhz.com/35pan/\' rel=\'nofollow\' class=\'red\'><b>35盘 永久免费 无广告 百G带宽 自助上传</b></a></li>");
+document.writeln("<li ><em class=\'greyzht\'></em> &nbsp;<a target=\'_blank\' href=\'http://www.wsisp.com/\' rel=\'nofollow\' class=\'red\'><b>为什么你的美国服务器抗攻击 访问速度还快？</b></a></li>");
+//document.writeln("<li ><em class=\'greyzht\'></em> &nbsp;<a target=\'_blank\' href=\'http://ciku.chinaz.com/\' rel=\'nofollow\' class=\'red\'><b>关键词挖掘分析服务----站长词库</b></a></li>");

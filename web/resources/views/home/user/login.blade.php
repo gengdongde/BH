@@ -9,8 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/static/home/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="dowebok"> 
-        @if (count($errors) > 0)
+    @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -19,7 +18,11 @@
                 </ul>
             </div>
         @endif
-        <div class="logo"></div>
+    <div class="dowebok"> 
+        <div style="padding:0px 35px;">
+            <div class="logo"></div>
+        </div>
+        
         <form action="/home/login/dologin" method="post">
             {{ csrf_field() }}
             <div class="form-item">
@@ -34,11 +37,10 @@
                 <span><a href="">手机验证码登录</a></span>
             </div>
             <div class="form-item"><button id="submit">登　录</button></div>
-            
         </form>
         <div class="reg-bar">
             <a class="reg" href="/home/logo">立即注册</a>
-            <a class="forget" href="javascript:">忘记密码</a>
+            <a class="forget" href="#">忘记密码</a>
         </div>
     </div>
 
