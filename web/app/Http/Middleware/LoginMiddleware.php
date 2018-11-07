@@ -49,7 +49,7 @@ class LoginMiddleware
             if($shq && $request->isMethod("GET")){
                 foreach (session('urls') as $k => $v) {
                 $vv = ltrim($v,'/');
-                    if(preg_match('/\w+\/{1}\w+\/{1}(\d+)/',$vv,$de)){
+                    if($sb = preg_match('/\w+\/{1}\w+\/{1}(\d+)/',$vv,$de)){
                         $urle[] = str_replace(3,$shqy[1],$vv);
                     }
                 }

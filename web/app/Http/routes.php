@@ -42,7 +42,11 @@ Route::post('/admin/topic/top_update/{id}','Admin\TopicController@top_update');
 Route::resource('/admin/topic','Admin\TopicController');
 
 //问题回答管理
+Route::get('/admin/reply/report','Admin\ReplyController@report');
+Route::get('/admin/reply/hf/{id}','Admin\ReplyController@hf');
+Route::get('/admin/reply/delete/{id}','Admin\ReplyController@delete');
 Route::resource('/admin/reply','Admin\ReplyController');
+
 
 
 

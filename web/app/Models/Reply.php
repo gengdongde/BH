@@ -3,13 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 class Reply extends Model
 {
     protected $table = 'reply';
     protected $primaryKey = 'id';
-
-
     /**
      * 关联 reply_content 一对一
      *
