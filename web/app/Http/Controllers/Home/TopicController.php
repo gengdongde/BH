@@ -54,13 +54,19 @@ class TopicController extends Controller
         return $topicy;
     }
     /**
-     * Show the form for creating a new resource.
-     *
+     * 话题详情页.
+     * @param topic id $id
+     * @param type 判断是简介或问答 hot=问答 
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function hot($id,$type)
     {
-        //
+
+        //获取话题详情
+
+        //获取讨论(问题-回答)
+
+        return view('home.topic.hot');
     }
 
     /**

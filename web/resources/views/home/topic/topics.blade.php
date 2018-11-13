@@ -62,7 +62,7 @@ body{
 								<!-- 文字区 -->
 								<div class="col-xs-10 col-md-10" style="">
 									<div class="row" style="padding: 17px;word-wrap: break-word;">
-										<a href="" style="color:#259;"><b>{{$v->tname}}</b></a>
+										<a href="/topic/{{$v->id}}/hot" style="color:#259;"><b>{{$v->tname}}</b></a>
 										<p style="width:239px;margin:3px;">{{$v->topic_details->content}}</p>
 										<a href="" style="position:absolute; right:15px; top:18px;color:#698ebf;"><span style="color:#ddd;" class="glyphicon glyphicon-plus" aria-hidden="true"></span>关注</a>
 									</div>

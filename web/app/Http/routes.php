@@ -202,5 +202,7 @@ Route::get('/explore','Home\ExploreController@explore');
 Route::get('/topic','Home\TopicController@topic');
 //话题广场页
 Route::get('/topics/{id?}','Home\TopicController@topics');
+//话题详情页
+Route::get('/topic/{id}/{type}','Home\TopicController@hot');
 //搜索页
 Route::get('/search','Home\SearchController@search');
