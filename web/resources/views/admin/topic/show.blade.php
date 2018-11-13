@@ -13,6 +13,8 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#home" data-toggle="tab">话题简介</a>
+                                </li>                                
+                                <li><a href="#img" data-toggle="tab">图片</a>
                                 </li>
                                 <li><a href="#profile" data-toggle="tab">类型</a>
                                 </li>
@@ -27,6 +29,10 @@
                                 <div class="tab-pane fade in active" id="home">
                                     <h4>话题简介</h4>
                                     <p>{{$data->content}}</p>
+                                </div>                                
+                                <div class="tab-pane fade" id="img">
+                                    <h4>话题图片</h4>
+                                    <p><img src="{{$data->timg}}"></p>
                                 </div>
                                 <div class="tab-pane fade" id="profile">
                                     <h4>类型</h4>

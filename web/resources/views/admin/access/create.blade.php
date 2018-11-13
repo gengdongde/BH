@@ -32,6 +32,9 @@
                                         </div>                                         
                                         <div class="form-group">
                                             <label>URL</label>
+                                            <p>格式:资源delete /xx/xx/1</p>
+                                            <p>格式:资源update /xx/xx/2</p>
+                                            <p>格式:资源其他 /xx/xx/3</p>
                                             <input class="form-control" name="urls" value="{{ old('urls') }}" type="text">
                                             
                                         </div>                                        

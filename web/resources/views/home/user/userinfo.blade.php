@@ -8,7 +8,7 @@
 				<div class="row" id="cover" style="height:240px;background: #ccc;">
 					<div class="col-xs-12 col-md-12 user_cover" style="padding:0px;">
 						{{ csrf_field() }}
-					    <img src="{{ $user['cover'] }}" alt="..." class="" onerror="this.src='/uploads/001.jpg'" height="240" width="100%" style="padding: 0px;">
+					    <img src="{{ $user->cover }}" alt="..." class="" onerror="this.src='/uploads/001.jpg'" height="240" width="100%" style="padding: 0px;">
 					    <button type="button" class="layui-btn layui-btn-warm" id="test1" onchange="verificationPicFile(this)" style="position: absolute;top:20px;right:0px;">
 							编辑背景图
 						</button>
@@ -23,7 +23,7 @@
 						//执行实例
 						var uploadInst = upload.render({
 						    elem: '#test1' //绑定元素
-						    ,url: "/home/user/cover_upload/{{ $user['uid'] }}" //上传接口
+						    ,url: "/home/user/cover_upload/{{ $user->uid }}" //上传接口
 						    ,method: 'post'
 						    ,field: 'cover'
 						    ,data: {'_token':$('input[name=_token]:eq(0)').val()}
@@ -73,7 +73,7 @@
 				<div class="row">
 					<!-- 头像 开始 -->
 					  <div class="col-xs-6 col-md-2" id="face">
-					    <img src="{{ $user['face'] }}" alt="..." class="" height="160" width="160" onerror="this.src='/uploads/1447135897105.png'" style="position: relative;top:-68px;border:4px solid #fff;border-radius: 4px;  z-index: 2;">
+					    <img src="{{ $user->face }}" alt="..." class="" height="160" width="160" onerror="this.src='/uploads/1447135897105.png'" style="position: relative;top:-68px;border:4px solid #fff;border-radius: 4px;  z-index: 2;">
 					    <button type="button" class="layui-btn layui-btn-warm" id="test2"  style="position: absolute;right:65px;z-index:1;">
 							编辑头像
 						</button>
@@ -86,7 +86,7 @@
 							//执行实例
 							var uploadInst = upload.render({
 							    elem: '#test2' //绑定元素
-							    ,url: "/home/user/face_upload/{{ $user['uid'] }}" //上传接口
+							    ,url: "/home/user/face_upload/{{ $user->uid }}" //上传接口
 							    ,method: 'post'
 							    ,field: 'face'
 							    ,data: {'_token':$('input[name=_token]:eq(0)').val()}
@@ -142,33 +142,33 @@
 					<div class="col-md-7">
 						<div class="row" style="heigth:40px;">
 							<div class="col-md-3">
-								<span><font style="font-size: 26px;font-weight:bold;line-height: 40px;">{{ $user['uname'] }}</font></span>
+								<span><font style="font-size: 26px;font-weight:bold;line-height: 40px;">{{ $user->uname }}</font></span>
 							</div>
 							<div class="col-md-4">
-								<span><font style="font-size: 16px;font-weight:bold;line-height: 40px;">{{ $user['signature'] }}</font></span>
+								<span><font style="font-size: 16px;font-weight:bold;line-height: 40px;">{{ $user->signature }}</font></span>
 								
 							</div>
 						</div>
 						<div class="row" style="height:40px;">
 							<div class="col-md-1">
 								<span class="btn-lg" style="line-height: 40px;">
-									@if($user['sex'] == 0)
+									@if($user->sex == 0)
 									<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-									@elseif($user['sex'] == 1)
+									@elseif($user->sex == 1)
 									<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
 									@endif
 								</span>
 							</div>
 							<div class="col-md-5">
 								<span>
-									<font style="font-size: 16px;font-weight:bold;line-height: 40px;">{{ $user['addr'] or '' }}</font>
+									<font style="font-size: 16px;font-weight:bold;line-height: 40px;">{{ $user->addr or '' }}</font>
 								</span>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div style="position: absolute;top:50px;right:10px;">
-							<a href="/home/user/{{ $user['uid'] or '' }}/edit" class="btn btn-primary">编辑个人资料</a>
+							<a href="/home/user/{{ $user->uid or '' }}/edit" class="btn btn-primary">编辑个人资料</a>
 						</div>
 					</div>
 				</div>
@@ -342,8 +342,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="jumbotron">
-							<h1>{{  $user['uname'] }}</h1>
-							<p>{{ $user['signature'] }}</p>
+							<h1>{{  $user->uname }}</h1>
+							<p>{{ $user->signature }}</p>
 							<p><a class="btn btn-primary btn-lg" href="#" role="button">关注我</a></p>
 						</div>
 					</div>

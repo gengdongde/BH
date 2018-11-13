@@ -2251,7 +2251,7 @@ font-family:;
 	/*background:#f9fafd;*/
 }
 .topicsImgTxtBar .imgTxtBar-b li a {
-	padding: 1px;
+	/*padding: 1px;*/
 	margin: 0px;
 	height:auto;
 }
@@ -3309,12 +3309,11 @@ filter:progid:DXImageTransform.Microsoft.gradient( GradientType = 0, startColors
 /****2015-5-11-标签扩展****/
 
 .aTabMain .imgTxtBar-b li{
-	position:relative; height:;
+	/*position:relative; height:;*/
 }
 .tagtime{
     position: absolute;
     /* bottom: 10px; */
-    width: 490px;
     left: 170px;
     top: 0px;
 }

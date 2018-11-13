@@ -21,9 +21,9 @@
 			<div class="col-xs-12 col-md-8" style="background: #fff; border-radius: 5px;">
 				<div class="aTabLayout YaHei">
 					<ul class="aTabNav clearfix">
-					  <li class="current"><a href="javascript:">推荐</a></li>
-					  <li class=""><a href="javascript:">关注</a></li>
-					  <li class=""><a href="javascript:">热榜</a></li>
+					  <li class="current"><a href="javascript:;">推荐</a></li>
+					  <li class=""><a href="javascript:;">关注</a></li>
+					  <li class=""><a href="javascript:;">热榜</a></li>
 					</ul>
 					
 					<div class="topicsImgTxtBar aTabMain">
@@ -38,7 +38,7 @@
 								<div class="row">
 									<div class="col-md-12" style="margin:5px 0px;">
 										<div class="con_text"><img class="f-fl" width="150" height="115" src="/uploads/1447135897105.png" alt=""></div>
-										<div class="con_text" style="width:596px; height:108px;"><p class="gray-8 SimSun">美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本..美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本</p></div>
+										<div class="con_text" style="width:595px; height:108px;"><p class="gray-8 SimSun">美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本..美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本美国网民在网上购买食品杂货，最喜欢去哪里？最近Retail Feedback Group做过一次调查，发现美国网民的第一选择是沃尔玛，然后是亚马逊，再然后是本</p></div>
 									</div>
 								  
 								</div>

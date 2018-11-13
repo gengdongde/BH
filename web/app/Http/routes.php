@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','Home\IndexController@index');
 
 
 // 后台首页
@@ -138,7 +136,7 @@ Route::post('home/login/dologin','Home\LoginController@dologin');
 // Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 // 前台首页
-Route::resource('home/index','Home\IndexController');
+Route::resource('/home/index','Home\IndexController');
 // 提问问题
 Route::resource('/home/problem','Home\ProblemController');
 
@@ -157,3 +155,60 @@ Route::resource('/home/user','Home\UserController');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##前台##
+//发现 页
+Route::get('/explore','Home\ExploreController@explore');
+//话题页
+Route::get('/topic','Home\TopicController@topic');
+//话题广场页
+Route::get('/topics/{id?}','Home\TopicController@topics');
+//话题详情页
+Route::get('/topic/{id}/{type}','Home\TopicController@hot');
+//搜索页
+Route::get('/search','Home\SearchController@search');

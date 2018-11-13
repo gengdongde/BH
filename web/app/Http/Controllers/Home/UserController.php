@@ -19,9 +19,9 @@ class UserController extends Controller
     public function index()
     {
         $uid = session('uid');
-        // $user = UserDetail::find($uid);
-        $user = DB::table('user_details')->where('uid','=',$uid)->first();
-       
+        $user = UserDetail::find($uid);
+        // $user = DB::table('user_details')->where('uid','=',$uid)->first();
+       // dd($user);
         // 加载模板
         return view('home.user.userinfo',['user'=>$user]);
     }
