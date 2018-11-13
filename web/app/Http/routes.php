@@ -139,9 +139,15 @@ Route::post('home/login/dologin','Home\LoginController@dologin');
 
 // 前台首页
 Route::resource('home/index','Home\IndexController');
+// 提问问题
+Route::resource('/home/problem','Home\ProblemController');
 
 
 
+// 前台用户中心
+Route::post('/home/user/cover_upload/{id}','Home\UserController@cover_upload');
+Route::post('/home/user/face_upload/{id}','Home\UserController@face_upload');
+Route::resource('/home/user','Home\UserController');
 
 
 

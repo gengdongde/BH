@@ -96,11 +96,11 @@ class LoginController extends Controller
         
         if(substr_count($name, '@')==0){
             $user = User::where('tel',$name)->get();
-            if($user){
+            if(empty($user)){
                 return back()->with('error','账号或密码错误');
             } 
         }
-        dump($user);
+        
         if(substr_count($name, '@')>0){
             $user = User::where('email',$name)->get();
             if(empty($user)){
@@ -110,12 +110,23 @@ class LoginController extends Controller
 
         foreach($user as $k=>$v){
             $upwd = $v->upwd;
+            if(!Hash::check($request->input('upwd'), $upwd)){
+                return back()->with('error','账号或密码错误');
+            }else{
+
+                // 用户信息保存到session
+                session(['uname'=>$v->userinfo()->find($v->id)->uname]);
+                session(['uid'=>$v->id]);
+                session(['tel'=>$v->tel]);
+                return redirect('/home/index');
+            }
+
+
+
         }
         
-        if(!Hash::check($request->input('upwd'), $upwd)){
-            return back()->with('error','账号或密码错误');
-        }
-        return redirect('/home/index');
+        
+        
     
     }
 

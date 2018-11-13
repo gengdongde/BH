@@ -12,15 +12,16 @@
                         </div>
                         <!-- .panel-heading -->
                         <div class="panel-body">
+
                             <div class="panel-group" id="accordion">
                                 @foreach($rey as $k =>$v)
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                    <div class="panel-heading" role="tab">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">所回答的问题:{{$v->problem()->where('id',$v->pid)->first()->pname}}</a>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $v->id }}" aria-expanded="false" class="collapsed">所回答的问题:{{$v->problem()->where('id',$v->pid)->first()->pname}}</a>
                                         </h4>
                                     </div>
-                                    <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                    <div id="collapse{{ $v->id }}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                                         <div class="panel-body">
                                             回答的内容:{{$v->reply_content->content}}
                                         </div>

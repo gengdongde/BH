@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="/static/home/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<link type="text/css" href="/static/home/css/base.css" rel="stylesheet" />
@@ -12,23 +13,22 @@
 	<script src="/static/home/js/picturefill.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/static/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="/static/home/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<!-- 	<script>
-		var _hmt = _hmt || [];
-		(function() {
-		  var hm = document.createElement("script");
-		  hm.src = "//hm.baidu.com/hm.js?aecc9715b0f5d5f7f34fba48a3c511d6";
-		  var s = document.getElementsByTagName("script")[0]; 
-		  s.parentNode.insertBefore(hm, s);
-		})();
-	</script> -->
+	
 	
 
 	<script type="text/javascript" src="/static/home/js/m.js"></script>
 	<script type="text/javascript" src="/static/home/js/scrolltext.js"></script>
-
+	
+	<link rel="stylesheet" type="text/css" href="/static/home/layui/css/layui.css">
+	<script src="/static/home/layui/layui.all.js"></script>
+	<script>
+		var layer = layui.layer
+  		,form = layui.form;
+	</script>
 	<style>
 		body{
-			height:2000px;
+			margin:0px;
+			padding:0px;
 			padding-top:60px;
 		}
 		#bgad {
@@ -81,7 +81,7 @@
 			box-shadow: 0px 1px 4px #888888;
 		}
 		.content .col-md-8 .clearfix{
-			margin-top: 5px;
+			/*margin-top: 5px;*/
 		}
 		.content .cebian{
 			box-shadow: 0px 1px 4px #888888;
@@ -116,14 +116,14 @@
 		        </div>
 		      </form>
 		      <ul class="nav navbar-nav">
-		      	<li><button class="btn btn-success" style="margin-top: 9px;">提问</button></li>
+		      	<li><button type="button" class="btn btn-info" style="margin-top: 10px;" data-toggle="modal" data-target="#myModal">提问</button></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="#"> <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> </a></li>
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> </a>
 		          <ul class="dropdown-menu">
-		            <li><a href="#">我的主页</a></li>
+		            <li><a href="/home/user">我的主页</a></li>
 		            <li><a href="#">设置</a></li>
 		            <li><a href="#">退出</a></li>
 		          </ul>

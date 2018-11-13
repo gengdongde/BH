@@ -18,7 +18,7 @@
             </div>
         @endif
     <div class="dowebok">
-        <div style="padding:0px 35px;">
+        <div>
             <div class="logo"></div>
         </div>
         <form action="/home/logo/save" method="post">
