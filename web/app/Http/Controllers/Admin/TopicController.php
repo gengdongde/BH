@@ -87,6 +87,26 @@ class TopicController extends Controller
         $to_d = $request->except('_token','tname','id');
         $to_d['tid'] = $res;
         $to_d['created_at'] = $data['created_at'];
+
+         // 接收上传文件
+        $file = $request->file('timg');
+        
+        // 判断文件是否有效
+        if ( $file->isValid() ) { 
+            // 获取上传文件后缀
+            $ext = $file->getClientOriginalExtension();
+            // 拼接文件名
+            $file_name = date('YmdHis',time()).mt_rand(1000,9999).'.'.$ext;
+            $dir_path = 'uploads/'.date('Ymd',time());
+            $res1 = $file->move($dir_path,$file_name);
+            if ($res1) {
+                $to_d['timg'] = '/'.$dir_path.'/'.$file_name;
+            } else {
+                return back()->with('error','LOGO上传失败');
+            }
+             }else {
+            return back()->with('error','文件无效');
+        }
         //入库
         $res = Topic_details::insert($to_d);
         if($res){

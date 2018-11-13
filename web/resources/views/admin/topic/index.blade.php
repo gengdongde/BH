@@ -67,7 +67,7 @@
         <h4 class="modal-title" id="myModalLabel">话题</h4>
       </div>
       <div class="modal-body">
-       <form role="form" action="/admin/topic" method="post">
+       <form role="form" action="/admin/topic" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <label>话题名称</label>
@@ -95,8 +95,12 @@
                 <textarea name="content" class="form-control" rows="3"></textarea>
             </div>
             <div class="form-group">
+                <label>话题图片</label>
+                <input name="timg" type="file" class="form-control" rows="3">
+            </div>
+            <div class="form-group">
                 <label>类型</label>
-                <input name="type" class="form-control" rows="3"></input>
+                <input name="type" type="text" class="form-control" rows="3">
             </div>                             
 
             <div class="form-group">

@@ -6,9 +6,9 @@
 			<div class="col-xs-12 col-md-8" style="background: #fff; border-radius: 5px;">
 				<div class="aTabLayout YaHei">
 					<ul class="aTabNav clearfix">
-					  <li class="current"><a href="javascript:">推荐</a></li>
-					  <li class=""><a href="javascript:">关注</a></li>
-					  <li class=""><a href="javascript:">热榜</a></li>
+					  <li class="current"><a href="javascript:;">推荐</a></li>
+					  <li class=""><a href="javascript:;">关注</a></li>
+					  <li class=""><a href="javascript:;">热榜</a></li>
 					</ul>
 					
 					<div class="topicsImgTxtBar aTabMain">

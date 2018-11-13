@@ -28,7 +28,7 @@
 
 	<style>
 		body{
-			height:2000px;
+			
 			padding-top:60px;
 		}
 		#bgad {
@@ -81,7 +81,7 @@
 			box-shadow: 0px 1px 4px #888888;
 		}
 		.content .col-md-8 .clearfix{
-			margin-top: 5px;
+			/*margin-top: 5px;*/
 		}
 		.content .cebian{
 			box-shadow: 0px 1px 4px #888888;
@@ -107,12 +107,12 @@
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
 		        <li><a href="#">首页</a></li>
-		        <li><a href="#">发现</a></li>
-		        <li><a href="#">话题</a></li> 
+		        <li><a href="/explore">发现</a></li>
+		        <li><a href="/topic">话题</a></li> 
 		      </ul>
-		      <form class="navbar-form navbar-left">
+		      <form class="navbar-form navbar-left" action="/search" method="GET">
 		        <div class="form-group">
-		          <input type="text" class="form-control" value="" placeholder="搜索">
+		          <input type="text" name="q" class="form-control" value="" placeholder="搜索">
 		        </div>
 		      </form>
 		      <ul class="nav navbar-nav">

@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','Home\IndexController@index');
 
 
 // 后台首页
@@ -151,3 +149,58 @@ Route::resource('home/index','Home\IndexController');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##前台##
+//发现 页
+Route::get('/explore','Home\ExploreController@explore');
+//话题页
+Route::get('/topic','Home\TopicController@topic');
+//话题广场页
+Route::get('/topics/{id?}','Home\TopicController@topics');
+//搜索页
+Route::get('/search','Home\SearchController@search');
