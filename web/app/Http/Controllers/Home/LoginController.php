@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserDetail;
 use Hash;
 
 class LoginController extends Controller
@@ -20,7 +21,7 @@ class LoginController extends Controller
     public function logo()
     {
         // 加载注册模板
-        return view('home.user.logo');
+        return view('home.login.register');
     }
 
     /**
@@ -31,8 +32,8 @@ class LoginController extends Controller
     public function check(Request $request)
     {
         $tel = $request->input('tel');
-        $user = User::where('tel',$tel)->get();
-        if($user){
+        $user = User::where('tel',$tel)->first();
+        if(!$user){
             echo 'success';
         }else{
             echo 'error';
@@ -51,22 +52,37 @@ class LoginController extends Controller
         // 验证
         $this->validate($request, [
             'tel' => 'required|unique:user|regex:/^[1]{1}[35789]{1}[0-9]{9}$/',
-            'upwd' => 'required|regex:/^[a-z0-9_]{6,18}$/',
+            
         ],[
             'tel.required'=>'手机号不能为空',
             'tel.unique'=>'手机号已存在',
             'tel.regex'=>'手机号格式错误',
-            'upwd.required'=>'密码不能为空',
-            'upwd.regex'=>'密码格式错误'
+            
         ]);
 
+
         // 获取数据
+         // 获取表单提交数据
+        $code = $request->input('code');
+        // 获取session中验证码
+        $phone_code = session('phone_code');
+      
+        if($code != $phone_code){
+            return back()->with('error','验证码错误');
+        }
+        
         $user = new User;
         $user->tel = $request->input('tel');
-        $user->upwd = Hash::make($request->input('upwd'));
-        $res = $user->save();
-        if($res){
-            return redirect('/home/login');
+        $res1 = $user->save();
+
+        $userinfo = new UserDetail;
+        $userinfo->uid = $user->id;
+        $res2 = $userinfo->save();
+       
+        
+        if($res1 && $res2){
+            session(['uid'=>$user->id]);
+            return redirect('/home/index');
         }else{
             return back()->with('error','注册失败');
         }
@@ -74,7 +90,7 @@ class LoginController extends Controller
 
 
     /**
-     * 验证登录信息
+     * 验证登录信息 密码登录
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -96,40 +112,98 @@ class LoginController extends Controller
         
         if(substr_count($name, '@')==0){
             $user = User::where('tel',$name)->get();
-            if(empty($user)){
-                return back()->with('error','账号或密码错误');
+
+            if(!$user->first()){
+                return redirect('/home/login')->with('error','账号或密码错误');
             } 
         }
-        
+       
         if(substr_count($name, '@')>0){
             $user = User::where('email',$name)->get();
-            if(empty($user)){
-                return back()->with('error','账号或密码错误');
+            if(!$user->first()){
+                return redirect('/home/login')->with('error','账号或密码错误');
             }
         }
-
+        
         foreach($user as $k=>$v){
             $upwd = $v->upwd;
             if(!Hash::check($request->input('upwd'), $upwd)){
-                return back()->with('error','账号或密码错误');
+                return redirect('/home/login')->with('error','账号或密码错误');
             }else{
 
                 // 用户信息保存到session
-                session(['uname'=>$v->userinfo()->find($v->id)->uname]);
+                
                 session(['uid'=>$v->id]);
-                session(['tel'=>$v->tel]);
+                
                 return redirect('/home/index');
             }
-
-
-
-        }
-        
-        
-        
-    
+        }      
     }
 
+
+    /**
+     * 验证码登录
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function dologin_code(Request $request)
+    {
+        // 获取表单提交数据
+        $tel = $request->input('tel');
+        $code = $request->input('code');
+        
+        // 获取session中验证码
+        $phone_code = session('phone_code');
+        if($code != $phone_code){
+            return back()->with('error','验证码错误');
+        }
+        $user = User::where('tel',$tel)->first();
+        if($user){
+            session(['uid'=>$user->id]);
+            return redirect('/home/index');
+        }else{
+            return back()->with('error','手机号未注册'); 
+        }
+       
+    }
+
+
+    /**
+     * 发送验证码
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function sendcode(Request $request)
+    {
+        
+        // 获取手机号
+        $mobile = $request->input('phone');
+        
+        // 获取随机数
+        $str_code = rand(1000,9999);
+        // 压入到session中
+        session(['phone_code'=>$str_code]);
+        // 验证码
+        $mobile_code = $str_code;
+        //短信接口地址
+       $target = "http://106.ihuyi.com/webservice/sms.php?method=Submit";
+       $target .= "&format=json&account=C03771182&password=96e543932285367549b62f24542585ca&mobile=".$mobile."&content=".rawurlencode("您的验证码是：".$mobile_code."。请不要把验证码泄露给其他人。");
+       //初始化
+        $curl = curl_init();
+        //设置抓取的url
+        curl_setopt($curl, CURLOPT_URL,$target);
+        //设置获取的信息以文件流的形式返回，而不是直接输出。
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        //执行命令
+        $data = curl_exec($curl);
+
+        //关闭URL请求
+        curl_close($curl);
+        echo $data;exit;
+        // return response()->json($data);
+    }
 
      /**
      * 显示登录页面
@@ -139,17 +213,21 @@ class LoginController extends Controller
     public function login()
     {
         //加载登录页面
-        return view('home.user.login');
+        return view('home.login.login');
     }
 
     /**
-     * Display a listing of the resource.
-     *
+     * 退出登录
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function logout()
     {
-        //
+        // 删除session中的uid
+       session(['uid'=>null]);
+       if(!session('uid')){
+            return redirect('/home/login');
+       }
     }
 
     /**

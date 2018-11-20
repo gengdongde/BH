@@ -46,7 +46,7 @@
                                                     <td>{{$v->problem()->where('id',$v->pid)->first()->pname}}</td>
                                                     <td>{{$v->user_detail()->where('uid',$v->uid)->first()->uname}}</td>
                                                     <td>{{$v->agree}}</td>
-                                                    <td>{{ $v->id }}</td>
+                                                    <td>{{ $v->com }}</td>
                                                     <td>
                                                         <a href="/admin/comment/{{ $v->id }}" class="btn btn-info btn-sm">查看评论</a>
                                                     </td>

@@ -9,7 +9,7 @@
 					<div class="col-xs-12 col-md-12 user_cover" style="padding:0px;">
 						{{ csrf_field() }}
 					    <img src="{{ $user->cover }}" alt="..." class="" onerror="this.src='/uploads/001.jpg'" height="240" width="100%" style="padding: 0px;">
-					    <button type="button" class="layui-btn layui-btn-warm" id="test1" onchange="verificationPicFile(this)" style="position: absolute;top:20px;right:0px;">
+					    <button type="button" class="layui-btn layui-btn-warm" id="test1" style="position: absolute;top:20px;right:0px;">
 							编辑背景图
 						</button>
 					</div>
@@ -23,7 +23,7 @@
 						//执行实例
 						var uploadInst = upload.render({
 						    elem: '#test1' //绑定元素
-						    ,url: "/home/user/cover_upload/{{ $user->uid }}" //上传接口
+						    ,url: "/home/user/cover_upload/{{ $uid }}" //上传接口
 						    ,method: 'post'
 						    ,field: 'cover'
 						    ,data: {'_token':$('input[name=_token]:eq(0)').val()}
@@ -86,7 +86,7 @@
 							//执行实例
 							var uploadInst = upload.render({
 							    elem: '#test2' //绑定元素
-							    ,url: "/home/user/face_upload/{{ $user->uid }}" //上传接口
+							    ,url: "/home/user/face_upload/{{ $uid }}" //上传接口
 							    ,method: 'post'
 							    ,field: 'face'
 							    ,data: {'_token':$('input[name=_token]:eq(0)').val()}
@@ -142,10 +142,10 @@
 					<div class="col-md-7">
 						<div class="row" style="heigth:40px;">
 							<div class="col-md-3">
-								<span><font style="font-size: 26px;font-weight:bold;line-height: 40px;">{{ $user->uname }}</font></span>
+								<span><font style="font-size: 26px;font-weight:bold;line-height: 40px;">{{ $user->uname or '' }}</font></span>
 							</div>
 							<div class="col-md-4">
-								<span><font style="font-size: 16px;font-weight:bold;line-height: 40px;">{{ $user->signature }}</font></span>
+								<span><font style="font-size: 16px;font-weight:bold;line-height: 40px;">{{ $user->signature or '' }}</font></span>
 								
 							</div>
 						</div>
@@ -168,7 +168,7 @@
 					</div>
 					<div class="col-md-3">
 						<div style="position: absolute;top:50px;right:10px;">
-							<a href="/home/user/{{ $user->uid or '' }}/edit" class="btn btn-primary">编辑个人资料</a>
+							<a href="/home/user/{{ $uid or '' }}/edit" class="btn btn-primary">编辑个人资料</a>
 						</div>
 					</div>
 				</div>
@@ -179,135 +179,130 @@
 			<div class="col-md-8" style="background: #fff;margin-top: 10px;">
 				<div class="aTabLayout YaHei">
 					<ul class="aTabNav clearfix">
-					  <li class="current"><a href="javascript:">动态</a></li>
-					  <li class=""><a href="javascript:">关注</a></li>
-					  <li class=""><a href="javascript:">热榜</a></li>
+					  <li class="current"><a href="javascript:">提问</a></li>
+					  <li class=""><a href="javascript:">回答</a></li>
+					  <li class=""><a href="javascript:">关注话题</a></li>
+					  <li class=""><a href="javascript:">关注的人</a></li>
 					</ul>
 					
 					<div class="topicsImgTxtBar aTabMain">
-						<!-- 推荐 开始 -->
+						<!-- 提问 开始 -->
 						<ul class="imgTxtBar clearfix imgTxtBar-b aTabActive" style="display: block;">
+							@foreach($user_pro as $k=>$v)
 							<li class="clearfix">
 								<div class="row">
 									<div class="col-md-2">
 										<span>发布了问题</span>
 									</div>
-									<div class="col-md-2 col-md-offset-8">
-										<span>1小时前</span>
+									
+								</div>
+								
+								<div class="row">
+									<div class="col-md-12">
+										<span><font style="font-size: 20px;font-weight: bold;">{{ $v->pname }}</font></span>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<span><font style="font-size: 20px;font-weight: bold;">美国人最爱的网上杂货店：沃尔玛超亚马逊成第一</font></span>
+										<span><font style="font-size: 10px;">　{{ $v->created_at }}　{{ $v->reply or '0' }}条回答</font></span>
 									</div>
 								</div>
-
 							</li>
-							<li class="clearfix">
-								<div class="row">
-									<div class="col-md-2">
-										<span>发布了问题</span>
-									</div>
-									<div class="col-md-2 col-md-offset-8">
-										<span>1小时前</span>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-12">
-										<span><font style="font-size: 20px;font-weight: bold;">美国人最爱的网上杂货店：沃尔玛超亚马逊成第一</font></span>
-									</div>
-								</div>
-
-							</li>
-							<li class="clearfix">
-								<div class="row">
-									<div class="col-md-2">
-										<span>发布了问题</span>
-									</div>
-									<div class="col-md-2 col-md-offset-8">
-										<span>1小时前</span>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-12">
-										<span><font style="font-size: 20px;font-weight: bold;">美国人最爱的网上杂货店：沃尔玛超亚马逊成第一</font></span>
-									</div>
-								</div>
-
-							</li>
-							
+							@endforeach
 						</ul>
-						<!-- 发布 结束 -->
-						<!-- 关注 开始 -->
+						<!-- 提问 结束 -->
+						<!-- 回答 开始 -->
 						<ul class="imgTxtBar clearfix imgTxtBar-b" style="display: none;">
+							@foreach($user_rep as $k=>$v)
 							<li class="clearfix">
 								<div class="row">
-									<div class="col-md-2">
-										<span>关注了话题</span>
+									<div class="col-md-8">
+										<span><font style="font-size: 20px;font-weight: bold;">{{ $v->problem($v->pid)->first()->pname }}</font></span>
 									</div>
-									<div class="col-md-2 col-md-offset-8">
-										<span>1小时前</span>
+								</div>
+								<div class="row">
+									<div class="col-md-1">
+										<img src="{{ $user->face }}" alt="..." class="" height="40" width="40" onerror="this.src='/uploads/1447135897105.png'" style="border:1px solid #fff;border-radius: 4px;">
+									</div>
+									<div class="col-md-11">
+										<div class="row">
+											<div class="col-md-12">
+												<span><font style="font-size: 16px;font-weight:bold;">{{ $user->uname or '' }}</font></span>
+											</div>
+											
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span><font style="font-size: 16px;">{{ $user->signature or '' }}</font></span>
+											</div>
+										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<span><font style="font-size: 20px;font-weight: bold;">大算法的撒个看发射点发多少……..</font></span>
-									</div>
-								</div>
-							</li>
-							
-							<li class="clearfix">
-								<div class="row">
-									<div class="col-md-2">
-										<span>关注了话题</span>
-									</div>
-									<div class="col-md-2 col-md-offset-8">
-										<span>1小时前</span>
+										<span><font style="font-size: 20px;">{{ $v->reply_content($v->id)->first()->content }}</font></span>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<span><font style="font-size: 20px;font-weight: bold;">大算法的撒个看发射点发多少……..</font></span>
+										<span><font style="font-size: 10px;">发布与　{{ $v->created_at }}</font></span>
 									</div>
 								</div>
 							</li>
-							<li class="clearfix">
-								<div class="row">
-									<div class="col-md-2">
-										<span>关注了话题</span>
-									</div>
-									<div class="col-md-2 col-md-offset-8">
-										<span>1小时前</span>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-12">
-										<span><font style="font-size: 20px;font-weight: bold;">大算法的撒个看发射点发多少……..</font></span>
-									</div>
-								</div>
-							</li>
+							@endforeach
 						</ul>
-						<!-- 关注 结束 -->
-						<!-- 热榜 开始 -->
+						<!-- 回答 结束 -->
+						<!-- 关注话题 开始 -->
 						<ul class="imgTxtBar clearfix imgTxtBar-b" style="display: none;">
+							@foreach($tops as $k=>$v)
 							<li class="clearfix">
 								<div class="row">
 									<div class="col-md-2">
-										<span>热榜</span>
+										<span><font style="font-size: 20px;font-weight: bold;">{{ $v->tname }}</font></span>
 									</div>
-									<div class="col-md-2 col-md-offset-8">
-										<span>1小时前</span>
-									</div>
+									
 								</div>
-								<div class="row">
-									<div class="col-md-12">
-										<span><font style="font-size: 20px;font-weight: bold;">大算法的撒个看发射点发多少……..</font></span>
-									</div>
-								</div>
+								
 							</li>
-							
+							@endforeach
 						</ul>
-						
+						<!-- 关注话题 结束 -->
+
+						<!-- 关注的人 开始 -->
+						<ul class="imgTxtBar clearfix imgTxtBar-b" style="display: none;">
+							@foreach($con as $k=>$v)
+							<li class="clearfix">
+								<div class="row">
+									<div class="col-md-1">
+										<img src="{{ $v->face }}" alt="..." class="" height="40" width="40" onerror="this.src='/uploads/1447135897105.png'" style="border:1px solid #fff;border-radius: 4px;">
+									</div>
+									<div class="col-md-8">
+										<div class="row">
+											<div class="col-md-12">
+												<span><font style="font-size: 16px;font-weight:bold;">{{ $v->uname or '' }}</font></span>
+											</div>
+											
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span><font style="font-size: 16px;">{{ $v->signature or '' }}</font></span>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<form action="/home/concern/{{ $v->id }}" method="post" style="display: inline-block;">
+											{{ csrf_field() }}
+											{{ method_field('DELETE') }}
+											<button class="btn btn-danger btn-sm">取消关注</button>
+										</form>
+										
+									</div>
+								</div>
+								
+							</li>
+							@endforeach
+						</ul>
+						<!-- 关注的人 结束 -->
 						
 					</div>
 				
@@ -323,8 +318,8 @@
 							<td>回答</td>
 						</tr>
 						<tr>
-							<td>12</td>
-							<td>122</td>
+							<td>{{ $pro_num }}</td>
+							<td>{{ $rep_num }}</td>
 						</tr>
 					</table>
 				</div>
@@ -332,22 +327,11 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="list-group">
-						  <a href="#" class="list-group-item"><span class="badge">14</span>我的收藏</a>
-						  <a href="#" class="list-group-item"><span class="badge">14</span>关注话题</a>
-						  <a href="#" class="list-group-item"><span class="badge">14</span>关注问题</a>
+						  <a href="#" class="list-group-item"><span class="badge">{{ $top_num }}</span>我关注的话题</a>
+						  <a href="#" class="list-group-item"><span class="badge">{{ $con_num }}</span>我关注的人</a>
+						  
 						</div>
 					</div>
-					
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="jumbotron">
-							<h1>{{  $user->uname }}</h1>
-							<p>{{ $user->signature }}</p>
-							<p><a class="btn btn-primary btn-lg" href="#" role="button">关注我</a></p>
-						</div>
-					</div>
-					
 				</div>
 			</div>
 			

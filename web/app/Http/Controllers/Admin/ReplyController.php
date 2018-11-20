@@ -23,6 +23,12 @@ class ReplyController extends Controller
     public function index()
     {
         $rey = Reply::paginate(8);
+
+        // 遍历
+        foreach($rey as $k=>$v){
+            $v->com = $v->comment($v->id)->select(DB::raw('count(*) as com',$v->id))->first()->com;
+            
+        }
         
         return view('admin.reply.index',['title'=>'问题回答列表','rey'=>$rey]);
     }
@@ -121,5 +127,18 @@ class ReplyController extends Controller
                     DB::rollBack();
             return back()->with('error','删除失败!!!');
         }
+    }
+
+
+    /**
+     * 问题管理 查看问题回答
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ck($id)
+    {
+        $rep = Reply::where('pid',$id)->paginate(8);
+        // 加载模板
+        return view('admin.problem.reply',['title'=>'该问题的所有回答','rep'=>$rep]);
     }
 }

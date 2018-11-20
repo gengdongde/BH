@@ -110,46 +110,77 @@ Route::resource('admin/comment','Admin\CommentController');
 
 // 后台提问问题管理
 Route::resource('admin/problem','Admin\ProblemController');
+// 后台问题被举报 恢复
+Route::get('admin/problem/hf/{id}/{pid}','Admin\ProblemController@hf');
+// 后台查看问题回答
+Route::get('/admin/reply/ck/{id}','Admin\ReplyController@ck');
+
 // 友情链接发布
 Route::get('admin/link/btn','Admin\LinkController@btn');
 // 后台友情链接
 Route::resource('admin/link','Admin\LinkController');
 
 // // 前台注册页面
-Route::get('home/logo','Home\LoginController@logo');
+Route::get('home/register','Home\LoginController@logo');
 // 前台注册页面验证手机号是否存在
-Route::get('home/logo/check','Home\LoginController@check');
+Route::get('home/register/check','Home\LoginController@check');
+// 前台注册 验证码
+Route::get('home/register/insert','Home\LoginController@insert');
 // 前台注册页面保存
-Route::post('home/logo/save','Home\LoginController@save');
+Route::post('home/register/save','Home\LoginController@save');
 // 前台登录页面
 Route::get('home/login','Home\LoginController@login');
 // 前台登录页面验证手机号和密码
 Route::post('home/login/dologin','Home\LoginController@dologin');
+// 前台登录 验证码登录
+Route::post('home/login/dologin_code','Home\LoginController@dologin_code');
+// 发送验证码
+Route::get('home/login/sendcode','Home\LoginController@sendcode');
+// 退出
+Route::get('/home/login/logout','Home\LoginController@logout');
 
-// 认证路由...
-// Route::get('auth/login', 'Auth\AuthController@getLogin');
-// Route::post('auth/login', 'Auth\AuthController@postLogin');
-// Route::get('auth/logout', 'Auth\AuthController@getLogout');
-
-// // 注册路由...
-// Route::get('auth/register', 'Auth\AuthController@getRegister');
-// Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 // 前台首页
 Route::resource('/home/index','Home\IndexController');
 // 提问问题
 Route::resource('/home/problem','Home\ProblemController');
 
+// 前台设置页面
+Route::get('/home/user/set','Home\UserController@set');
+// 设置页面 设置密码
+Route::post('/home/user/setpassword','Home\UserController@setpassword');
+
+// 前台绑定手机号 发送验证码
+Route::get('/home/user/sendcode','Home\UserController@sendcode');
+// 前台设置绑定手机号
+Route::post('/home/user/setphone','Home\UserController@setphone');
+
+// 前台设置绑定邮箱
+Route::post('/home/user/setemail','Home\UserController@setemail');
+
+// 前台设置 取消屏蔽
+Route::get('home/shield/delete/{id}','Home\ShieldController@delete');
 
 
-// 前台用户中心
+// 前台用户中心 修改封面
 Route::post('/home/user/cover_upload/{id}','Home\UserController@cover_upload');
+// 修改头像
 Route::post('/home/user/face_upload/{id}','Home\UserController@face_upload');
+// 用户中心
 Route::resource('/home/user','Home\UserController');
 
+// 点击关注用户
+Route::post('/home/concern/del_con','Home\UserConcernController@del_con');
+
+// 关注用户
+Route::resource('/home/concern','Home\UserConcernController');
 
 
+// 写回答
+Route::resource('/home/reply','Home\ReplyController');
 
+// 举报问题
+Route::resource('/home/problemreport','Home\ProblemReportController');
 
 
 

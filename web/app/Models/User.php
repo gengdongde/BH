@@ -29,7 +29,7 @@ class User extends Model
     */
     public function usertopic()
     {
-        return $this->belongsToMany('App\Models\Topic','user_topic','uid','tid');
+        return $this->belongsToMany('App\Models\Topic','user_topic','uid','tid')->withTimestamps();
     }
 
     
