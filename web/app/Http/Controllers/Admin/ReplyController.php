@@ -35,10 +35,11 @@ class ReplyController extends Controller
     public function report()
     {
         $rey = Reply::where('report','!=','0')->paginate(8);
+        // dd($rey);
         return view('admin.reply.report',['title'=>'回答举报管理','rey'=>$rey]);
     }    
     /**
-     * 举报管理.
+     * 已审查恢复回答.
      *
      * @return \Illuminate\Http\Response
      */

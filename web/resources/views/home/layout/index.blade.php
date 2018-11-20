@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="/static/home/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<link type="text/css" href="/static/home/css/base.css" rel="stylesheet" />
 	<link type="text/css" href="/static/home/css/common.css" rel="stylesheet" />
-	
+
 	<script src="/static/home/js/jquery-1.11.0.min.js" type="text/javascript"></script>
 	<script src="/static/home/js/common.js" type="text/javascript"></script>
 	<script src="/static/home/js/picturefill.min.js" type="text/javascript"></script>

@@ -14,6 +14,7 @@
                         <div class="panel-body">
 
                             <div class="panel-group" id="accordion">
+                                @if($rey != null)
                                 @foreach($rey as $k =>$v)
                                 <div class="panel panel-default">
                                     <div class="panel-heading" role="tab">
@@ -42,6 +43,7 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                @endif
                             </div>
                         </div>
                         <!-- .panel-body -->

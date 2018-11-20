@@ -205,10 +205,18 @@ Route::resource('/home/user','Home\UserController');
 //发现 页
 Route::get('/explore','Home\ExploreController@explore');
 //话题页
-Route::get('/topic','Home\TopicController@topic');
+Route::get('/topic/{id?}','Home\TopicController@topic');
+Route::get('/topicyt/{id?}/{type?}','Home\TopicController@topic');
 //话题广场页
 Route::get('/topics/{id?}','Home\TopicController@topics');
 //话题详情页
 Route::get('/topic/{id}/{type}','Home\TopicController@hot');
+//关注
+Route::post('/topic/utopic','Home\TopicController@utopic');
 //搜索页
 Route::get('/search','Home\SearchController@search');
+//问答赞同
+Route::post('/reply/replyagree','Home\ReplyController@replyagree');
+Route::get('/reply/cs','Home\ReplyController@cs');
+//评论
+Route::post('/comment/tcom','Home\CommentController@tcom');
