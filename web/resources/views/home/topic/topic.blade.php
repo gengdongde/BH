@@ -21,6 +21,11 @@ body{
 		color: #fff;
 		 text-decoration:none;
 	}
+	.gs{
+		background: #1e7bd0;
+		color: #fff;
+		
+	}
 	.list-inline li{
 		margin-bottom:10px;
 	}
@@ -55,6 +60,24 @@ body{
 		       margin: 39px 116px;
 		       margin-bottom:20px;
 	}
+	.pl{
+		    box-shadow: 0px 1px 4px #888888;
+		margin-top: 10px;
+		margin-left:30px;
+	}
+	.pl div{
+		border-bottom: 1px solid #eee;
+	}
+	.my{
+		height: 116px;
+    	line-height: 116px;
+    	text-align: center;
+    	color: #999;
+	}
+	.plnr div
+	{
+		border:0;
+	}
 </style>
 <div class="container" style="">
 	<!-- 主内容 -->
@@ -66,20 +89,17 @@ body{
 					<div class="panel panel-default" style="border: 0px solid; box-shadow: 0 1px 1px #fff;border-bottom:1px solid #eee;" >
 					  <div class="panel-heading" style="background-color: #fff; margin:5px;"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;已关注的话题动态<a style="float:right;color:#9999;">共关注 23 个话题</a></div>
 					  <div class="panel-body">
+					  	@if($utopic != null)
 						<ul class="list-inline">
-						  <li><a href="" class="topics">关注话题</a></li>
-						  <li><a href="" class="topics">关注话题</a></li>
-						  <li><a href="" class="topics">关注话题</a></li>
-						  <li><a href="" class="topics">关注话题</a></li>
-						  <li><a href="" class="topics">关注话题</a></li>
-						  <li><a href="" class="topics">关注话题</a></li>
-						  <li><a href="" class="topics">关注话题</a></li>
-						  <li><a href="" class="topics">关注话题</a></li>
-						  <li><a href="" class="topics">关注话题</a></li>
-						  <li><a href="" class="topics">关注话题</a></li>
-						  <li><a href="" class="topics">关注话题</a></li>
-						  <li><a href="" class="topics">关注话题</a></li>
+								@foreach($utopic as $k => $v)
+						  			<li><a href="/topic/{{$v->id}}" class="topics @if($id == $v->id) gs @endif">{{$v->tname}}</a></li>
+						  		@endforeach
 						</ul>
+						@else
+						<div>
+							<a href="/topics" class="btn btn-primary">您还没有关注话题进入话题广场-来这里发现更多有趣话题</a>
+						</div>
+						@endif
 					  </div>
 					</div>
 
@@ -92,49 +112,90 @@ body{
 					<div class="row">
 						<div class="col-xs-12 col-md-12" style="">
 							<div class="row" style="position: relative;">
+								@if($utopic != null)
 								<!-- 图片区 -->
 								<div class="col-xs-1 col-md-1" style="">
-									<img style="width:50px;height:50px;border-radius: 5px;margin-top: 25px;" class="f-fl"src="/uploads/1447135897105.png" alt="">
+									<img style="width:50px;height:50px;border-radius: 5px;margin-top: 25px;" class="f-fl"src="@foreach($utopic as $k => $v)@if($id == $v->id) {{$v->topic_details->timg}} @endif @endforeach" alt="">
 								</div>
 								<!-- 文字区 -->
 								<div class="col-xs-10 col-md-10" style="">
+									
 									<div class="row" style="padding: 17px;word-wrap: break-word;    margin-top: 18px;">
-										<a href="" style="color:#259;"><b>话题名称</b></a>
-										<a href="" style="float:right;color:#698ebf;">时间排序</a>
-										<a href="" style="float:right;color:#999;">热门排序|</a>
+										<a href="/topic/{{$id}}/hot" style="color:#259;"><b>
+											@foreach($utopic as $k => $v)  
+												@if($id == $v->id) {{$v->tname}} @endif 
+										@endforeach</b></a>
+										<a href="/topicyt/{{$id}}/created_at" style="float:right;color:#698ebf;">时间排序</a>
+										<a href="/topicyt/{{$id}}/" style="float:right;color:#698ebf;">热门排序|</a>
 									</div>
+									
 								</div>
+								@endif
 							</div>
 						</div>						
 					</div>
 				</div>
 			</div>			
 
-			<div class="row">
+			<div class="row" >
 				<div class="col-xs-12 col-md-11" >
-
+					@if($problem != null)
+					@foreach($problem as $k=>$v)
 					<div class="row">
 						<!-- 问题 -->
-						<div class="col-xs-12 col-md-12" style=""><b><a href="" style="color:blue;">从经济学角度看，双十一什么也不买，是种损失吗？</a></b></div>
+						<div class="col-xs-12 col-md-12" style="margin-top: 5px;"><b><a href="" style="color:blue;">{{$v->pname}}</a></b></div>
 						<!-- 回答 -->
+						@if($v->reply != null)
 						<div class="col-xs-12 col-md-12" style="margin-top:8px;">
 							<div class="row">
 								<div class="ol-xs-1 col-md-1" style="width: 5.333333%;">
-									<a class="agran">12</a>
+									<div class="agran{{$v->reply->id}}">
+									<a href="javascript:;" onclick="funagree({{$v->reply->id}},{{$v->reply->agree}})" class="agran">{{$v->reply->agree}}</a></div>
 								</div>
-								<div class="ol-xs-11 col-md-11 tops">
-									<p><b>安晓辉</b><span style="color:#999;">《程序员的成长课》作者，职业规划师，自…</p>
-										<P style="line-height: 21px;">谢邀。 正午肯拍，王凯肯演，都要烧高香了。其他事情，都是次要的了。 书粉可以继续不满，但听不听是剧方的事。影视化对作者是极其强烈的诱惑，书粉根本无力抵挡。 想想《笑傲江湖》的“东方姑娘”，酱油改主角，男人改女人，官配变小三，播出来以后照样能…<a href="" style="color:blue;">显示全部</a></P>
-										<p style="margin:5px 0px;">
-											<a href="javascript:;"><span class="glyphicon glyphicon-plus"></span>关注问题</a>  
-											<a href="#"><span class="glyphicon glyphicon-comment"></span> 1 条评论</a>  
-											<a href="#"><span class="glyphicon glyphicon-bookmark"></span> 收藏</a> 
+								<div class="ol-xs-11 col-md-11 tops" style="margin-left: 20px;">
+									<p><b>{{$v->reply->user->uname}}</b><span style="color:#999;">&nbsp;{{$v->reply->user->signature}}</span></p>
+										<p style="line-height: 21px;" class="con{{$v->reply->id}}">{{mb_substr($v->reply->reply_content['content'],0,120)}}<a href="javascript:;" style="color:blue;" onclick='contents("1","{{$v->reply->reply_content["content"]}}","{{mb_substr($v->reply->reply_content["content"],0,120)}}",{{$v->reply->id}})'>显示全部</a></p>
+										<p style="margin:5px 0px;" class="hotopic"> 
+											<a href="javascript:;" onclick="comments(this,{{$v->reply->id}});"><span class="glyphicon glyphicon-comment"></span>{{$v->reply->comment}}条评论</a>  
 											<a href="#">• 举报</a>
 										</p>
 								</div>
 							</div>
-						</div>						
+						</div>
+						<div class="col-xs-12 col-md-12 pl coms{{$v->reply->id}}" style="display:none;">
+							@if($v->reply->comment()->get()== '[]')
+							<div class="row">
+								<div class="col-xs-12 col-md-12 my">
+									还没有评论,来成为第一个吧。
+								</div>
+							</div>
+							@else
+							@foreach($v->reply->comment()->get() as $k=>$v)							
+							<div class="row">
+								<div class="col-xs-12 col-md-12 plnr">
+									<div class="" style="margin-top: 6px;"><img style="width:24px;height:24px;border-radius: 5px;" class="f-fl"src="{{$v->user_detail()->first()->face}}" alt="">{{$v->user_detail()->first()->uname}}</div>
+									<div style="margin:10px 0px;">{{$v->content}}</div>
+									<div class="" style="color:#999;"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>{{$v->cagree}}</div>
+								</div>
+							</div>
+							@endforeach
+							@endif
+							<div class="row mso{{$v->reply->id}}">
+								<div class="col-xs-12 col-md-12" style="height: 43px;line-height: 43px;background-color: #eee;">
+									评论（{{$v->reply->comment()->select('*',DB::raw('count(rid) as raid'))->value('raid')}}）
+								</div>
+							</div>														
+							<div class="row" >
+								<div class="col-xs-12 col-md-12" style="margin: 12px 1px;border:0;">
+									 <input type="text" class="form-control" id="comment" style="width:590px;display: initial;" placeholder="评论">
+									<input type="submit" onclick="tjcom({{$v->reply->id}});" class="btn btn-success" value="评论">
+								</div>
+							</div>
+						</div>
+						@endif						
 					</div>
+					@endforeach
+					@endif
 				</div>
 			</div>
 
@@ -144,7 +205,7 @@ body{
 		<div class="col-xs-6 col-md-4">
 			<div class="blkuang">
 				<a href="/topics" class="btn btn-primary">进入话题广场</a>
-				<a href="/topics" style="color:blue;margin: 0px 110px;">来这里发现更多有趣话题</a>
+				<a href="/topics" style="color:blue;margin: 0px 98px;">来这里发现更多有趣话题</a>
 			</div>
 		</div>
 
@@ -152,17 +213,70 @@ body{
 		<div class="col-xs-6 col-md-4" style="">
 			<div class="list-group" >
 			<div style="border-bottom: 1px solid #999;">
-		  <a href="#" class="list-group-item">
+		  <a href="/topic" class="list-group-item">
 		  	<span><b>其他人关注的话题</b></span>
 		  	<span style="float:right; color:blue;">换一换</span>
 		  </a>
 		  	</div>
-		  	
-		  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;border-radius:4px;" class="f-fl"src="/uploads/1447135897105.png" alt="">&nbsp;<span style="color:blue;position: absolute;top: 19px;"><b>热门话题</b></span></a><a style="    position: absolute;top: 58px;right: 28px;color:blue;"><span style="color:#ddd;" class="glyphicon glyphicon-plus ops" aria-hidden="true"></span>关注</a>
+		  	@foreach($topicgs as $k=>$v)
+		  <div ><a href="/topic/{{$v->id}}/hot"  class="list-group-item" style="width:296px;display: inline-block;"><img style="width:40px;height:40px;border-radius:4px;" class="f-fl"src="/uploads/1447135897105.png" alt="">&nbsp;<span style="color:blue;"><b>{{$v->tname}}</b></span></a><div class="ufi{{$v->id}}" style="display:inline;"><a href="javascript:;" onclick="utopic(this,'1',{{$v->id}})" style="color:blue;"><span style="color:#ddd;" class="glyphicon glyphicon-plus ops" aria-hidden="true"></span>关注</a></div>
 		  </div>
-		  	
+		  	@endforeach
 		</div>
 		</div>
 	</div>
 </div>
 @endsection
+<script type="text/javascript" src="/static/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	function utopic(obj,typ,tid){
+		$.post('/topic/utopic',{'_token':'{{csrf_token()}}','typ':typ,'tid':tid},function(msg){
+				$('.ufi'+tid).html("<a href='javascript:;' style='color:blue;'>已关注</a>");
+		},'html');
+	}
+
+	function funagree(rid,agree){
+		var agreej = agree+1;
+		$.post('/reply/replyagree',{'_token':'{{csrf_token()}}','rid':rid,'agree':agree},function(msg){
+			if(msg == '1'){
+				agreej = agree-1;
+				$('.agran'+rid).html('<a href="javascript:;" onclick="funagree('+rid+','+agreej+')" class="agran">'+(agree-1)+'</a>');
+			}else{
+				agreej = agree+1;
+				$('.agran'+rid).html('<a href="javascript:;" onclick="funagree('+rid+','+agreej+')" class="agran">'+(agree+1)+'</a>');
+			}
+		},'html');
+	}
+	function comments(obj,tid)
+	{
+		$('.coms'+tid).slideToggle();
+	}
+
+	function tjcom(rid)
+	{
+		var comtent = $('#comment').val();
+		if(comtent){
+			$.post('/comment/tcom',{'_token':'{{csrf_token()}}','rid':rid,'content':comtent},function(msg){
+				if(msg == '1'){
+					alert('评论失败请重新评论!!!');
+				}else{
+					$('.mso'+rid).before(msg);
+				}
+			},'html');
+		}else{
+			alert('请评论!!!');
+		}
+	}
+
+	function contents(type,con,com,rid)
+	{
+
+		if(type == '1'){
+			$('.con'+rid).empty();
+			$('.con'+rid).append(con+'<a href="javascript:;" style="color:blue;" onclick="contents(2,\''+con+'\',\''+com+'\','+rid+')">收起</a>');
+		}else{
+			$('.con'+rid).empty();
+			$('.con'+rid).append(com+'<a href="javascript:;" style="color:blue;" onclick="contents(1,\''+con+'\',\''+com+'\','+rid+')">查看全部</a>');
+		}
+	}
+</script>

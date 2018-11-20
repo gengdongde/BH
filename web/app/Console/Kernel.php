@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Inspire::class,
+        // Commands\RedisTopicConsole::class,
+        Commands\RedisReplyConsole::class,
     ];
 
     /**
@@ -26,5 +28,6 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('inspire')
                  ->hourly();
+        $schedule->command('redisreplyconsole')->everyMinute(); //每分钟执行一遍
     }
 }

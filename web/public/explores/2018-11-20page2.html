@@ -175,14 +175,12 @@
 		  <!-- Default panel contents -->
 		  <div class="panel-heading"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;编辑推荐<span style="float:right;"><a>更多推荐 »</a></span></div>
 		  <div class="panel-body">
-		    <p>{{$prof->problem()->first()->pname}}</p>
+		    <p>第二次</p>
 		  </div>
 		  <!-- List group -->
 		  <ul class="list-group">
-		  	@foreach($prodate as $v)
-		    <li class="list-group-item listbj" style="border-top: 1px solid #eee;"><a href="" style="color:blue;">{{$v->problem()->first()->pname}}</a><span style="float:right;color:#999999;">问答</span></li>
-		    @endforeach
-		  </ul>
+		  			    <li class="list-group-item listbj" style="border-top: 1px solid #eee;"><a href="" style="color:blue;">福利重头戏，也是孕育?</a><span style="float:right;color:#999999;">问答</span></li>
+		    		  </ul>
 		</div>
 
 		</div>	
@@ -191,35 +189,34 @@
 			<div class="col-xs-10 col-md-12" style="background: #fff; border-radius: 5px;">
 				<div class="aTabLayout YaHei">
 					<ul class="aTabNav clearfix" style="">
-					  <li @if($pagn == 1) class="current" @endif><a href="javascript:;">今日最热</a></li>
-					  <li @if($pagn == 2) class="current" @endif><a href="javascript:;">本月最热</a></li>
+					  <li ><a href="javascript:;">今日最热</a></li>
+					  <li  class="current" ><a href="javascript:;">本月最热</a></li>
 					</ul>
 					
 					<div class="topicsImgTxtBar aTabMain">
 						<!-- 推荐 开始 -->
-								<ul class="imgTxtBar clearfix imgTxtBar-b aTabActive" @if($pagn == 1) style="display: block;"@else style="display: none;" @endif>
-							@foreach($retent as $k => $v)
-							<li class="clearfix">
+								<ul class="imgTxtBar clearfix imgTxtBar-b aTabActive"  style="display: none;" >
+														<li class="clearfix">
 								<div class="row">
 									<div class="col-md-12">
 										<h3>
 										<button class="btn btn-primary" title="点赞量" type="button">
-										  <span class="badge"><div class="agran{{$v->id}}"><a href="javascript:;" onclick="funagree({{$v->id}},{{$v->agree}})" class="agran">{{$v->agree}}</a></div></span>
+										  <span class="badge"><div class="agran14"><a href="javascript:;" onclick="funagree(14,0)" class="agran">0</a></div></span>
 										</button>
-										{{$v->problem()->first()->pname}}</h3>
+										第二次</h3>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-12" style="margin:5px 0px;">
 										<div class="con_text"><img class="f-fl" width="150" height="115" src="/uploads/1447135897105.png" alt=""></div>
-										<div class="con_text" style="width:596px; height:108px;"><p class="gray-8 SimSun">{{$v->reply_content()->first()['content']}}</p></div>
+										<div class="con_text" style="width:596px; height:108px;"><p class="gray-8 SimSun">&lt;p&gt;&lt;img src=&quot;/ueditor/php/upload/image/20181120/1542703379.png&quot; title=&quot;1542703379.png&quot; alt=&quot;c.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(99, 107, 111); font-family: &quot;Helvetica Neue&quot;, NotoSansHans-Regular, AvenirNext-Regular, arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei&quot;, &quot;Hiragino Sans GB&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; font-variant-numeric: normal; font-variant-east-asian: normal; line-height: 30px; widows: 1; background-color: rgb(255, 255, 255);&quot;&gt;make:auth后没有生产auth中间件，而我将route::auth的路由加了一个prefx=&gt;admin，当我没有登录访问其它auth中间件的路由，都将跳转到/login下，&lt;/span&gt;&lt;br/&gt;&lt;span style=&quot;color: rgb(99, 107, 111); font-family: &quot;Helvetica Neue&quot;, NotoSansHans-Regular, AvenirNext-Regular, arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei&quot;, &quot;Hiragino Sans GB&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; font-variant-numeric: normal; font-variant-east-asian: normal; line-height: 30px; widows: 1; background-color: rgb(255, 255, 255);&quot;&gt;而我想实现得是自动跳转到/admin/login下，请大神指点。&lt;/span&gt;&lt;/p&gt;</p></div>
 									</div>
 								  
 								</div>
 								<div class="row">
 									<div class="col-md-12">
 										<div class="tagtime">
-											<span class="date">{{$v->created_at}}</span>
+											<span class="date">2018-11-20 16:43:20</span>
 											<span class="times">[<a href="http://www.chinaz.com/news/en/">外闻</a>]</span>
 											<span class="tags">
 												<a target="_blank" href="/tags/wangshangzahuodian.shtml">网上杂货店</a>
@@ -230,33 +227,31 @@
 									</div>
 								</div>
 							</li>
-							@endforeach
-
-							{!! $retent->render() !!}
+							
+							
 						</ul>
-						<ul class="imgTxtBar clearfix imgTxtBar-b" @if($pagn == 2) style="display: block;" @else style="display: none;" @endif>
-						@foreach($mtent as $k => $v)
-							<li class="clearfix">
+						<ul class="imgTxtBar clearfix imgTxtBar-b"  style="display: block;" >
+													<li class="clearfix">
 								<div class="row">
 									<div class="col-md-12">
 										<h3>
 										<button class="btn btn-primary" title="点赞量" type="button">
-										  <span class="badge">{{$v->agree}}</span>
+										  <span class="badge">0</span>
 										</button>
-										{{$v->problem()->first()->pname}}</h3>
+										第二次</h3>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-12" style="margin:5px 0px;">
 										<div class="con_text"><img class="f-fl" width="150" height="115" src="" alt=""></div>
-										<div class="con_text" style="width:596px; height:108px;"><p class="gray-8 SimSun">{{$v->reply_content()->first()['content']}}</p></div>
+										<div class="con_text" style="width:596px; height:108px;"><p class="gray-8 SimSun">&lt;p&gt;&lt;img src=&quot;/ueditor/php/upload/image/20181120/1542703379.png&quot; title=&quot;1542703379.png&quot; alt=&quot;c.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(99, 107, 111); font-family: &quot;Helvetica Neue&quot;, NotoSansHans-Regular, AvenirNext-Regular, arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei&quot;, &quot;Hiragino Sans GB&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; font-variant-numeric: normal; font-variant-east-asian: normal; line-height: 30px; widows: 1; background-color: rgb(255, 255, 255);&quot;&gt;make:auth后没有生产auth中间件，而我将route::auth的路由加了一个prefx=&gt;admin，当我没有登录访问其它auth中间件的路由，都将跳转到/login下，&lt;/span&gt;&lt;br/&gt;&lt;span style=&quot;color: rgb(99, 107, 111); font-family: &quot;Helvetica Neue&quot;, NotoSansHans-Regular, AvenirNext-Regular, arial, &quot;Hiragino Sans GB&quot;, &quot;Microsoft Yahei&quot;, &quot;Hiragino Sans GB&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; font-variant-numeric: normal; font-variant-east-asian: normal; line-height: 30px; widows: 1; background-color: rgb(255, 255, 255);&quot;&gt;而我想实现得是自动跳转到/admin/login下，请大神指点。&lt;/span&gt;&lt;/p&gt;</p></div>
 									</div>
 								  
 								</div>
 								<div class="row">
 									<div class="col-md-12">
 										<div class="tagtime">
-											<span class="date">{{$v->created_at}}</span>
+											<span class="date">2018-11-20 16:43:20</span>
 											<span class="times">[<a href="http://www.chinaz.com/news/en/">外闻</a>]</span>
 											<span class="tags">
 												<a target="_blank" href="/tags/wangshangzahuodian.shtml">网上杂货店</a>
@@ -267,9 +262,39 @@
 									</div>
 								</div>
 							</li>
-							@endforeach
-							<div>
-							{!! $mtent->render() !!}
+														<li class="clearfix">
+								<div class="row">
+									<div class="col-md-12">
+										<h3>
+										<button class="btn btn-primary" title="点赞量" type="button">
+										  <span class="badge">0</span>
+										</button>
+										第二次</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12" style="margin:5px 0px;">
+										<div class="con_text"><img class="f-fl" width="150" height="115" src="" alt=""></div>
+										<div class="con_text" style="width:596px; height:108px;"><p class="gray-8 SimSun">&lt;p&gt;写回答,必填提问&lt;/p&gt;</p></div>
+									</div>
+								  
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="tagtime">
+											<span class="date">2018-11-19 19:53:53</span>
+											<span class="times">[<a href="http://www.chinaz.com/news/en/">外闻</a>]</span>
+											<span class="tags">
+												<a target="_blank" href="/tags/wangshangzahuodian.shtml">网上杂货店</a>
+												<a target="_blank" href="/tags/woerma.shtml">沃尔玛</a>
+												<a target="_blank" href="/tags/yamaxun.shtml">亚马逊</a>
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+														<div>
+							<ul class="pagination"><li><a href="http://www.bh.com/explore?page=1" rel="prev">&laquo;</a></li> <li><a href="http://www.bh.com/explore?page=1">1</a></li><li class="active"><span>2</span></li><li><a href="http://www.bh.com/explore?page=3">3</a></li><li><a href="http://www.bh.com/explore?page=4">4</a></li> <li><a href="http://www.bh.com/explore?page=3" rel="next">&raquo;</a></li></ul>
 							</div>
 						</ul>
 					</div>
@@ -293,11 +318,13 @@
 		  	<span style="float:right;">更多推荐 »</span>
 		  </a>
 		  	</div>
-		  	@foreach($topicr as $k => $v)
-		  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;" class="f-fl" width="150" height="115" src="/uploads/1447135897105.png" alt="">&nbsp;<span style="color:blue;">{{ $v->tname }}</span><span style="float:right;color:#999999;">{{$v->taid}}&nbsp;人关注</span></a>
+		  			  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;" class="f-fl" width="150" height="115" src="/uploads/1447135897105.png" alt="">&nbsp;<span style="color:blue;">历史</span><span style="float:right;color:#999999;">2&nbsp;人关注</span></a>
 		  </div>
-		  	@endforeach
-		</div>
+		  			  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;" class="f-fl" width="150" height="115" src="/uploads/1447135897105.png" alt="">&nbsp;<span style="color:blue;">军事</span><span style="float:right;color:#999999;">1&nbsp;人关注</span></a>
+		  </div>
+		  			  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;" class="f-fl" width="150" height="115" src="/uploads/1447135897105.png" alt="">&nbsp;<span style="color:blue;">科学</span><span style="float:right;color:#999999;">1&nbsp;人关注</span></a>
+		  </div>
+		  			</div>
 	</div>
 		<!-- 个人收藏 结束 -->
 	
@@ -311,7 +338,7 @@
 <script type="text/javascript">
 function funagree(rid,agree){
 		var agreej = agree+1;
-		$.post('/reply/replyagree',{'_token':'{{csrf_token()}}','rid':rid,'agree':agree},function(msg){
+		$.post('/reply/replyagree',{'_token':'GEPZJlXeaN7FE0OurQn1miixUt9qngkcSpLb6sNq','rid':rid,'agree':agree},function(msg){
 			if(msg == '1'){
 				agreej = agree-1;
 				$('.agran'+rid).html('<a href="javascript:;" onclick="funagree('+rid+','+agreej+')" class="agran">'+(agree-1)+'</a>');

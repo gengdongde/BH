@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
+use Redis;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Reply;
@@ -24,25 +24,45 @@ class ReplyController extends Controller
         $this->middleware('home');
     }
     
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    
 
     /**
-     * Show the form for creating a new resource.
+     * ajax 回答赞功能
      *
-     * @return \Illuminate\Http\Response
+     * @return html string
      */
-    public function create()
-    {
-        //
+    public function replyagree(Request $request)
+    {   //获取用户id
+        $uid = session('uid');
+        //获取reply 的id
+        $rid = $request->input('rid'); 
+        //判断radis中是否有数据
+        if(Redis::exists('replyagree'.$rid)){
+            $res = Redis::get('replyagree'.$rid); //获取数据
+            $data = unserialize($res); //转数组
+            foreach ($data as $k => $v) {
+                //如果已经赞过了就 不存入id了
+                if($v == $uid){
+                    unset($data[$k]);
+                    Redis::setex('replyagree'.$rid,3600,serialize($data));
+                    echo 1;
+                    die;
+                }
+            }
+            $data[] = $uid;
+            Redis::setex('replyagree'.$rid,3600,serialize($data));
+            echo 2;
+            die;
+        }else{
+            $data[] = $uid;
+            Redis::setex('replyagree'.$rid,3600,serialize($data));
+            echo 2;
+            die;
+        }
+       
+
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -52,6 +72,7 @@ class ReplyController extends Controller
      */
     public function store(Request $request)
     {
+
          // 验证
          $this->validate($request, [
             'content' => 'required|min:4|max:10000'
@@ -88,6 +109,7 @@ class ReplyController extends Controller
             DB::rollBack();
             return back()->with('error','回答失败');
         }
+
     }
 
     /**
