@@ -33,6 +33,18 @@ class Problem extends Model
     }
 
 
+    /**
+     * 关联 ProblemReport 一对多
+     *
+     * @return 关联对象
+     */
+    public function problemreport()
+    {
+        return $this->hasMany('App\Models\ProblemReport','pid','id');
+       
+    }
+
+
 
 
 

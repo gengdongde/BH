@@ -147,7 +147,7 @@
 				    						<div class="form-group" style="margin-top: 20px;">
 												<label for="uname" class="col-md-2 control-label">用户名</label>
 												<div class="col-md-10">
-													<input type="text" name="uname" class="form-control" id="uname" value="{{ $user->uname or '' }}">
+													<input type="text" name="uname" class="form-control" id="uname" value="{{ $user->uname }}">
 												</div>
 											</div>
 											<div class="form-group col-md-12 text-center">
@@ -161,13 +161,13 @@
 											<div class="form-group" style="margin-top: 20px;">
 												<label for="signature" class="col-md-2 control-label">一句话介绍自己</label>
 												<div class="col-md-10">
-													<input type="text" class="form-control" name="signature" id="signature" value="{{ $user->signature or '' }}">
+													<input type="text" class="form-control" name="signature" id="signature" value="{{ $user->signature }}">
 												</div>
 											</div>
 											<div class="form-group" style="margin-top: 20px;">
 												<label for="addr" class="col-md-2 control-label">地址</label>
 												<div class="col-md-10">
-													<input type="text" class="form-control" name="addr" id="addr" value="{{ $user->addr or '' }}">
+													<input type="text" class="form-control" name="addr" id="addr" value="{{ $user->addr }}">
 												</div>
 											</div>
 											<div class="form-group">

@@ -27,8 +27,7 @@
 	</script>
 	<style>
 		body{
-			/*margin:0px;
-			padding:0px;*/
+			
 			padding-top:60px;
 		}
 		#bgad {
@@ -99,14 +98,13 @@
 		  <div class="container">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
-		      
-		      <a class="navbar-brand" href="#">B乎</a>
+		      <a class="navbar-brand" href="/home/index">B乎</a>
 		    </div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li><a href="#">首页</a></li>
+		        <li><a href="/home/index">首页</a></li>
 		        <li><a href="/explore">发现</a></li>
 		        <li><a href="/topic">话题</a></li> 
 		      </ul>
@@ -124,8 +122,8 @@
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> </a>
 		          <ul class="dropdown-menu">
 		            <li><a href="/home/user">我的主页</a></li>
-		            <li><a href="#">设置</a></li>
-		            <li><a href="#">退出</a></li>
+		            <li><a href="/home/user/set">设置</a></li>
+		            <li><a href="/home/login/logout">退出</a></li>
 		          </ul>
 		        </li>
 		      </ul>
@@ -134,6 +132,122 @@
 		</nav>	
 	</div>
 	<!-- header 结束 -->
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title text-info" id="myModalLabel">我要提问</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form action="/home/problem" method="post" id="MyProblem" enctype="multipart/form-data">
+        		{{ csrf_field() }}
+	        	<div class="row">
+				  <div class="col-xs-2">
+				    <img src=""  class=" img-responsive" onerror="this.src='/uploads/1447135897105.png'">
+				  </div>
+				  <div class="col-xs-10">
+				    <input type="text" id="pname" name="pname" class="form-control" maxlength='20' minlength='4' placeholder="最多20个字">
+				    <span></span>
+				  </div>
+				</div>
+				<div class="row">
+					<br>
+				  <div class="col-xs-12">
+				    <script id="ueditor" name="content" type="text/plain" class="center-block"></script>
+				  </div>
+				</div>
+				<div class="row">
+				  <div class="col-xs-4">
+				    	<label>
+					    	<select name="tid" id="tid" class="text-info input-sm">
+					    		<option value="">-选择话题-</option>
+					    		<option value="1">历史</option>
+					    		<option value="2">物理</option>
+					    		<option value="3">互联网</option>
+					    	</select>
+					  	</label>
+				  </div>
+				  
+				 
+				</div>
+				<div class="row">
+				  <div class="col-xs-4 text-info">
+				    	<label>
+					    	<input type="checkbox" name="che" value="1">匿名提问
+					  	</label>
+				  </div>
+				  
+				  <div class="col-xs-2 col-md-offset-6">
+				    	<button type="submit" class="btn btn-info">提交</button>
+				  </div>
+				</div>
+	        </form>
+	        
+	      </div>
+      	<!-- 配置文件 -->
+	    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+	    <!-- 编辑器源码文件 -->
+	    <script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+	    <!-- 实例化编辑器 -->
+	    <script type="text/javascript">
+	        var editor = UE.getEditor('ueditor',{
+	        	toolbars: [
+				      ['bold', 'italic', 'underline', 'blockquote', 'pasteplain', '|','map','insertvideo','simpleupload', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc'],
+				]
+	        });  
+	    </script>
+	    </div>
+	  </div>
+	</div>
+<!-- 提问模态框 结束 -->
+
+<!-- 模态框验证 -->
+	<script type="text/javascript">
+		var Ispname,Iscontent,Istid = false;
+		
+		// 判断提问问题 
+		$('#pname').blur(function(){
+			// 获取数据
+			var pname = $('#pname').val();
+			var p_sub = pname.substr(pname.length-1,1);
+			
+			// 正则
+			var preg = /(\?|？){1}/;
+			var pre = /^([\u4e00-\u9fa5]|[\w]){4,20}/;
+			$('#pname+span').html(" ")
+
+			// 判断
+			if(pre.test(pname)){
+				
+				if(preg.test(p_sub)){
+					Ispname = true;
+				}else{
+					$('#pname+span').html("<font style='color:red;font-size:12px;'>以?结尾</font>")
+				}
+			}else{
+				$('#pname+span').html("<font style='color:red;font-size:12px;'>最少四个字最多20个字</font>")
+			}
+		});
+
+		// 判断话题
+		$('#tid').blur(function(){
+			
+			var sel = $('#tid option:selected').val();
+			if(sel){
+				Istid = true;
+			}
+		});
+		
+		// 提交
+		$('#MyProblem').submit(function(){	
+			if(Ispname && Istid){
+				return true;
+			}
+        	return false;
+        });
+	</script>
 	@section('content')
 
 

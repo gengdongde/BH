@@ -12,6 +12,17 @@ use DB;
 
 class ExploreController extends Controller
 {
+
+    
+    /**
+     * 验证是否登录
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware('home');
+    }
+    
     /**
      * 发现页面.
      *

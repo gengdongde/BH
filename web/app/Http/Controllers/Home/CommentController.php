@@ -10,6 +10,16 @@ use DB;
 
 class CommentController extends Controller
 {
+
+     /**
+     * 验证是否登录
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware('home');
+    }
+    
     /**
      * ajax评论.
      *

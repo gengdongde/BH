@@ -9,6 +9,19 @@ use App\Http\Controllers\Controller;
 
 class SearchController extends Controller
 {
+
+
+
+    
+    /**
+     * 验证是否登录
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware('home');
+    }
+    
     /**
      * 搜索.
      *

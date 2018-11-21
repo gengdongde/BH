@@ -30,7 +30,7 @@
 	                                </div>
 	                                <div class="form-group">
 	                                    <label for="url">网址</label>
-	                                    <input class="form-control" id="url" type="text" name="url" value="">
+	                                    <input class="form-control" id="url" type="text" name="url" value="http://">
 	                                </div>
 	                                <div class="form-group">
                                         <label for="logo">LOGO</label>

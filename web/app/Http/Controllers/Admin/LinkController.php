@@ -170,10 +170,10 @@ class LinkController extends Controller
         
         // 判断
         if($res){
-            echo 'success';
+           return redirect('/admin/link')->with('success','删除成功');
         }else{
-            echo 'error';
+           return back()->with('error','删除失败');
         }
-        exit;
+       
     }
 }

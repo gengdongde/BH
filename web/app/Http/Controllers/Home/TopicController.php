@@ -16,6 +16,18 @@ use Redis;
 
 class TopicController extends Controller
 {
+
+
+    
+    /**
+     * 验证是否登录
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware('home');
+    }
+    
     /**
      * 话题页
      *
@@ -180,9 +192,11 @@ class TopicController extends Controller
         if(!$problem){
             return $problem;
         }
-            foreach ($problem as $k => $v) {
-                if($v->reply = Reply::orderBy('agree','desc')->where('pid',$v->id)->first()){
-                                    // dd($v->reply);
+
+        
+        foreach ($problem as $k => $v) {
+            if($v->reply = Reply::orderBy('agree','desc')->where('pid',$v->id)->first()){
+
                 //查看Redis是否有数据
                 if(Redis::exists('replyagree'.$v->reply->id))
                 {
@@ -198,7 +212,11 @@ class TopicController extends Controller
             }
 
             }
-            return $problem;
+            
+            
+            
+        }
+        return $problem;
     }
 
     /**

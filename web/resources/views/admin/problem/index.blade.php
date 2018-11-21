@@ -33,8 +33,10 @@
 			                                    	<td class="col-sm-2">问题</td>
 			                                    	<td class="col-sm-2">问题描述</td>
 			                                    	<td>点击量</td>
+			                                    	<td>回答量</td>
 			                                    	<td>是否合法</td>
 			                                    	<td>发布时间</td>
+			                                    	<td>回答</td>
 			                                    	<td>操作</td>
 			                                    </tr>
 			                                </thead>
@@ -48,6 +50,7 @@
 			                              				<td>{{ $v->pname }}</td>
 			                              				<td>{{ $v->describe }}</td>
 			                              				<td>{{ $v->clicks }}</td>
+			                              				<td>{{ $v->rep }}</td>
 			                              				<td>
 
 			                              					@if($v->report == 0)
@@ -64,7 +67,8 @@
 
 			                              				</td>
 			                              				<td>{{ $v->created_at }}</td>
-			                              				<td>
+			                              				<td><a href="/admin/reply/ck/{{ $v->id }}" class="btn btn-primary ">查看问题回答</a></td>
+			                              				<td>	
 			                              					<!-- <form action="/admin/problem/{{$v->id}}" method="post" >
 																{{ csrf_field() }}
 																{{ method_field('DELETE') }}

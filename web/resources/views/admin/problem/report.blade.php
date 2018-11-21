@@ -30,28 +30,25 @@
 			                                    	<td>用户名</td>
 			                                    	<td>用户ID</td>
 			                                    	<td>问题</td>
-			                                    	<td>问题描述</td>
-			                                    	<td>点击量</td>
-			                                    	<td>是否合法</td>
-			                                    	<td>发布时间</td>
+			                                    	<td>举报用户</td>
+			                                    	<td>举报用户ID</td>
+			                                    	<td>举报内容</td>
+			                                    	<td>举报时间</td>
 			                                    	<td>操作</td>
 			                                    </tr>
 			                                </thead>
 			                              	<tbody>
-			                              		@foreach($data as $k=>$v)
+			                              		@foreach($report as $k=>$v)
 			                              			<tr class="text-center">
 			                              				<td>{{ $v->id }}</td>
-			                              				<td>{{ $v->problemtopic()->find($v->tid)->tname }}</td>
-			                              				<td>{{ $v->userdetail()->where('uid',$v->uid)->first()->uname }}</td>
-			                              				<td>{{ $v->uid }}</td>
-			                              				<td>{{ $v->pname }}</td>
-			                              				<td>{{ $v->describe }}</td>
-			                              				<td>{{ $v->clicks }}</td>
+			                              				<td>{{ $v->pro->problemtopic()->find($v->pro->tid)->tname }}</td>
+			                              				<td>{{ $v->pro->userdetail()->where('uid',$v->pro->uid)->first()->uname }}</td>
+			                              				<td>{{ $v->pro->uid }}</td>
+			                              				<td>{{ $v->pro->pname }}</td>
+			                              				<td>{{ $v->rep_user->uname }}</td>
+			                              				<td>{{ $v->rep_user->uid }}</td>
 			                              				<td>
-
-			                              					@if($v->report == 0)
-															正常
-															@elseif($v->report == 1)
+															@if($v->report == 1)
 															低质问题
 															@elseif($v->report == 2)
 															垃圾广告
@@ -69,6 +66,7 @@
 																{{ method_field('DELETE') }}
 																<button class="btn btn-danger btn-sm">删除</button>
 															</form> -->
+															<a href="/admin/problem/hf/{{ $v->id }}/{{ $v->pid }}" class="btn btn-primary btn-sm">恢复</a>
 															<a href="javascript:;" class="btn btn-danger btn-sm" onclick="func(this,{{ $v->id }})">删除</a>
 			                              				</td>
 			                              			</tr>
@@ -76,7 +74,7 @@
 			                              	</tbody>
 			                            </table>
 			                            <div class="text-center">
-			                            	{!! $data->appends($request)->render() !!}
+			                            	
 			                            </div>
 			                        </div>
 			                    </div>
