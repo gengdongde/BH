@@ -189,7 +189,7 @@ class LoginController extends Controller
         $mobile_code = $str_code;
         //短信接口地址
        $target = "http://106.ihuyi.com/webservice/sms.php?method=Submit";
-       $target .= "&format=json&account=C03771182&password=96e543932285367549b62f24542585ca&mobile=".$mobile."&content=".rawurlencode("您的验证码是：".$mobile_code."。请不要把验证码泄露给其他人。");
+       $target .= "&format=json&account=C60839166&password=0d191a2d5179bbda4a8f8b8e242ca449&mobile=".$mobile."&content=".rawurlencode("您的验证码是：".$mobile_code."。请不要把验证码泄露给其他人。");
        //初始化
         $curl = curl_init();
         //设置抓取的url

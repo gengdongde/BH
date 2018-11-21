@@ -20,7 +20,7 @@ class LoginController extends Controller
     {
         return view('admin.login.login');
     }
- // APIID：C60839166    APIKEY：0d191a2d5179bbda4a8f8b8e242ca449
+ 
     /**
      * 后台登录验证
      *
