@@ -143,7 +143,7 @@ body{
 					@foreach($problem as $k=>$v)
 					<div class="row">
 						<!-- 问题 -->
-						<div class="col-xs-12 col-md-12" style="margin-top: 5px;"><b><a href="" style="color:blue;">{{$v->pname}}</a></b></div>
+						<div class="col-xs-12 col-md-12" style="margin-top: 5px;"><b><a href="/home/problem/{{$v->id}}" style="color:blue;">{{$v->pname}}</a></b></div>
 						<!-- 回答 -->
 						@if($v->reply != null)
 						<div class="col-xs-12 col-md-12" style="margin-top:8px;">
@@ -157,7 +157,7 @@ body{
 										<p style="line-height: 21px;" class="con{{$v->reply->id}}">{{mb_substr($v->reply->reply_content['content'],0,120)}}<a href="javascript:;" style="color:blue;" onclick='contents("1","{{$v->reply->reply_content["content"]}}","{{mb_substr($v->reply->reply_content["content"],0,120)}}",{{$v->reply->id}})'>显示全部</a></p>
 										<p style="margin:5px 0px;" class="hotopic"> 
 											<a href="javascript:;" onclick="comments(this,{{$v->reply->id}});"><span class="glyphicon glyphicon-comment"></span>{{$v->reply->comment}}条评论</a>  
-											<a href="#">• 举报</a>
+											<a href="#" data-toggle="modal" data-target="#rep_report">• 举报</a>
 										</p>
 								</div>
 							</div>
@@ -194,6 +194,44 @@ body{
 						</div>
 						@endif						
 					</div>
+					<!-- Modal -->
+					<div class="modal fade" id="rep_report" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title text-info" id="myModalLabel">我要举报</h4>
+					      </div>
+					      <div class="modal-body">
+					      		<form action="/topic/report" method="post">
+				      				{{ csrf_field() }}
+					      			<input type="hidden" name="id" value="{{$v->reply->id}}">
+					      			 <div class="radio">
+					      			 	
+									    <label>
+									      <input type="radio" name="report" value="1">低质问题 
+									    </label>
+									    <label>
+									      <input type="radio" name="report" checked value="2">垃圾广告 
+									    </label>
+									    <label>
+									      <input type="radio" name="report" value="3">要害信息 
+									    </label>
+									    <label>
+									      <input type="radio" name="report" value="4">涉嫌侵权 
+									    </label>
+									  </div>
+									  <button type="submit" class="btn btn-default">提交</button>
+				      				
+					      		</form>
+					        
+					        
+					      </div>
+				      	
+					    </div>
+					  </div>
+					</div>
+				<!-- 提问模态框 结束 -->
 					@endforeach
 					@endif
 				</div>
@@ -219,7 +257,7 @@ body{
 		  </a>
 		  	</div>
 		  	@foreach($topicgs as $k=>$v)
-		  <div ><a href="/topic/{{$v->id}}/hot"  class="list-group-item" style="width:296px;display: inline-block;"><img style="width:40px;height:40px;border-radius:4px;" class="f-fl"src="/uploads/1447135897105.png" alt="">&nbsp;<span style="color:blue;"><b>{{$v->tname}}</b></span></a><div class="ufi{{$v->id}}" style="display:inline;"><a href="javascript:;" onclick="utopic(this,'1',{{$v->id}})" style="color:blue;"><span style="color:#ddd;" class="glyphicon glyphicon-plus ops" aria-hidden="true"></span>关注</a></div>
+		  <div ><a href="/topic/{{$v->id}}/hot"  class="list-group-item" style="width:296px;display: inline-block;"><img style="width:40px;height:40px;border-radius:4px;" class="f-fl"src="" alt="">&nbsp;<span style="color:blue;"><b>{{$v->tname}}</b></span></a><div class="ufi{{$v->id}}" style="display:inline;"><a href="javascript:;" onclick="utopic(this,'1',{{$v->id}})" style="color:blue;"><span style="color:#ddd;" class="glyphicon glyphicon-plus ops" aria-hidden="true"></span>关注</a></div>
 		  </div>
 		  	@endforeach
 		</div>
@@ -228,24 +266,34 @@ body{
 </div>
 @endsection
 <script type="text/javascript" src="/static/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+@if(session('success'))
+<script type="text/javascript">alert("举报成功")</script>
+@elseif(session('success'))
+<script type="text/javascript">alert("举报失败")</script>
+@endif
 <script type="text/javascript">
 	function utopic(obj,typ,tid){
 		$.post('/topic/utopic',{'_token':'{{csrf_token()}}','typ':typ,'tid':tid},function(msg){
 				$('.ufi'+tid).html("<a href='javascript:;' style='color:blue;'>已关注</a>");
 		},'html');
 	}
-
+	var isClick = true;
 	function funagree(rid,agree){
+		if(isClick){
+			isClick = false;
 		var agreej = agree+1;
-		$.post('/reply/replyagree',{'_token':'{{csrf_token()}}','rid':rid,'agree':agree},function(msg){
+		$.post('/reply/replyagree',{'_token':'{{csrf_token()}}','rid':rid},function(msg){
 			if(msg == '1'){
-				agreej = agree-1;
-				$('.agran'+rid).html('<a href="javascript:;" onclick="funagree('+rid+','+agreej+')" class="agran">'+(agree-1)+'</a>');
+				$('.agran'+rid).html('<a href="javascript:;" onclick="funagree('+rid+','+(agree-1)+')" class="agran">'+(agree-1)+'</a>');
 			}else{
-				agreej = agree+1;
-				$('.agran'+rid).html('<a href="javascript:;" onclick="funagree('+rid+','+agreej+')" class="agran">'+(agree+1)+'</a>');
+				$('.agran'+rid).html('<a href="javascript:;" onclick="funagree('+rid+','+(agree+1)+')" class="agran">'+(agree+1)+'</a>');
 			}
+			//定时器
+			setTimeout(function() {
+				isClick = true;
+			}, 1000);//一秒内不能重复点击
 		},'html');
+		}
 	}
 	function comments(obj,tid)
 	{

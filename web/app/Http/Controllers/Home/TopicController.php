@@ -193,9 +193,11 @@ class TopicController extends Controller
         if(!$problem){
             return $problem;
         }
+
         
         foreach ($problem as $k => $v) {
-            if($v->reply = Reply::orderBy('agree','desc')->where('pid',$v->id)->first()){
+            if($v->reply = Reply::orderBy('agree','desc')->where('report','0')->where('pid',$v->id)->first()){
+
                 //查看Redis是否有数据
                 if(Redis::exists('replyagree'.$v->reply->id))
                 {
@@ -209,21 +211,29 @@ class TopicController extends Controller
             }else{
                 $v->reply = null;
             }
-            
-        }
-        return $problem;
-    }
 
+            }
+            
+            return $problem;
+        }
+        
     /**
-     * Update the specified resource in storage.
+     * 回答举报管理.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  回答id  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function report(Request $request)
+    {   
+        $id = $request->input('id');
+        $report = $request->input('report');
+        $res = reply::where('id',$id)->update(['report'=>$report]);
+         
+        if($res){
+            return back()->with('success',true);
+        }else{
+            return back()->with('error',true);
+        }
     }
 
     /**

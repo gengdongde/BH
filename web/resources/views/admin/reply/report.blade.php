@@ -24,7 +24,7 @@
                                     </div>
                                     <div id="collapse{{ $v->id }}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                                         <div class="panel-body">
-                                            回答的内容:{{$v->reply_content->content}}
+                                            回答的内容:{!! $v->reply_content->content !!}
                                         </div>
                                         <div class="panel-body">
                                             举报原因:
