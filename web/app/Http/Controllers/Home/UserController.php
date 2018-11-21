@@ -72,6 +72,7 @@ class UserController extends Controller
 
         // 关注用户
         $con_user = UserConcern::where('uid',$uid)->select(DB::raw('cid'))->get();
+        $con = [];
         foreach($con_user as $k=>$v){
             $con[] = User::find($v->cid)->userinfo($v->cid)->first();
             
