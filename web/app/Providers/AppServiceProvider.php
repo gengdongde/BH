@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
             $tc = Topic::get();
             $topic = [];
             foreach($tc as $k => $v){
+                if(!empty($v->topic_details->timg)){
+                    $v->timg = $v->topic_details->timg;
+                }
                 foreach ($utc as $kk => $vv) {
                     if($v->id == $vv->tid){
                         $v['taid'] = $vv->taid;

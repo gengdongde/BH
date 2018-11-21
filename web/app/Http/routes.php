@@ -244,6 +244,8 @@ Route::get('/topics/{id?}','Home\TopicController@topics');
 Route::get('/topic/{id}/{type}','Home\TopicController@hot');
 //关注
 Route::post('/topic/utopic','Home\TopicController@utopic');
+//回答举报
+Route::post('/topic/report','Home\TopicController@report');
 //搜索页
 Route::get('/search','Home\SearchController@search');
 //问答赞同

@@ -137,7 +137,7 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li><a href="#">首页</a></li>
+		        <li><a href="/">首页</a></li>
 		        <li><a href="/explore">发现</a></li>
 		        <li><a href="/topic">话题</a></li> 
 		      </ul>
@@ -147,16 +147,16 @@
 		        </div>
 		      </form>
 		      <ul class="nav navbar-nav">
-		      	<li><button class="btn btn-success" style="margin-top: 9px;background-color:#e4c52c;">提问</button></li>
+		      	<li><button class="btn btn-success" style="margin-top: 9px;background-color:#e4c52c;" data-toggle="modal" data-target="#myModal">提问</button></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="#"> <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> </a></li>
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> </a>
 		          <ul class="dropdown-menu">
-		            <li><a href="#">我的主页</a></li>
-		            <li><a href="#">设置</a></li>
-		            <li><a href="#">退出</a></li>
+		            <li><a href="/home/user">我的主页</a></li>
+		            <li><a href="/home/user/set">设置</a></li>
+		            <li><a href="/home/login/logout">退出</a></li>
 		          </ul>
 		        </li>
 		      </ul>
@@ -164,7 +164,122 @@
 		  </div><!-- /.container-fluid -->
 		</nav>	
 	</div>
+<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title text-info" id="myModalLabel">我要提问</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form action="/home/problem" method="post" id="MyProblem" enctype="multipart/form-data">
+        		<input type="hidden" name="_token" value="fWGMLFO05BV4rUNahk2ibOyDcSJTdycuYebcCPRo">
+	        	<div class="row">
+				  <div class="col-xs-2">
+				    <img src=""  class=" img-responsive" onerror="this.src='/uploads/1447135897105.png'">
+				  </div>
+				  <div class="col-xs-10">
+				    <input type="text" id="pname" name="pname" class="form-control" maxlength='20' minlength='4' placeholder="最多20个字">
+				    <span></span>
+				  </div>
+				</div>
+				<div class="row">
+					<br>
+				  <div class="col-xs-12">
+				    <script id="ueditor" name="content" type="text/plain" class="center-block"></script>
+				  </div>
+				</div>
+				<div class="row">
+				  <div class="col-xs-4">
+				    	<label>
+					    	<select name="tid" id="tid" class="text-info input-sm">
+					    		<option value="">-选择话题-</option>
+					    		<option value="1">历史</option>
+					    		<option value="2">物理</option>
+					    		<option value="3">互联网</option>
+					    	</select>
+					  	</label>
+				  </div>
+				  
+				 
+				</div>
+				<div class="row">
+				  <div class="col-xs-4 text-info">
+				    	<label>
+					    	<input type="checkbox" name="che" value="1">匿名提问
+					  	</label>
+				  </div>
+				  
+				  <div class="col-xs-2 col-md-offset-6">
+				    	<button type="submit" class="btn btn-info">提交</button>
+				  </div>
+				</div>
+	        </form>
+	        
+	      </div>
+      	<!-- 配置文件 -->
+	    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+	    <!-- 编辑器源码文件 -->
+	    <script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+	    <!-- 实例化编辑器 -->
+	    <script type="text/javascript">
+	        var editor = UE.getEditor('ueditor',{
+	        	toolbars: [
+				      ['bold', 'italic', 'underline', 'blockquote', 'pasteplain', '|','map','insertvideo','simpleupload', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc'],
+				]
+	        });  
+	    </script>
+	    </div>
+	  </div>
+	</div>
+<!-- 提问模态框 结束 -->
 
+<!-- 模态框验证 -->
+	<script type="text/javascript">
+		var Ispname,Iscontent,Istid = false;
+		
+		// 判断提问问题 
+		$('#pname').blur(function(){
+			// 获取数据
+			var pname = $('#pname').val();
+			var p_sub = pname.substr(pname.length-1,1);
+			
+			// 正则
+			var preg = /(\?|？){1}/;
+			var pre = /^([\u4e00-\u9fa5]|[\w]){4,20}/;
+			$('#pname+span').html(" ")
+
+			// 判断
+			if(pre.test(pname)){
+				
+				if(preg.test(p_sub)){
+					Ispname = true;
+				}else{
+					$('#pname+span').html("<font style='color:red;font-size:12px;'>以?结尾</font>")
+				}
+			}else{
+				$('#pname+span').html("<font style='color:red;font-size:12px;'>最少四个字最多20个字</font>")
+			}
+		});
+
+		// 判断话题
+		$('#tid').blur(function(){
+			
+			var sel = $('#tid option:selected').val();
+			if(sel){
+				Istid = true;
+			}
+		});
+		
+		// 提交
+		$('#MyProblem').submit(function(){	
+			if(Ispname && Istid){
+				return true;
+			}
+        	return false;
+        });
+	</script>
 
 <div class="container content">
 	<div class="row">
@@ -176,13 +291,14 @@
 		  <div class="panel-heading"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;编辑推荐<span style="float:right;"><a>更多推荐 »</a></span></div>
 		  <div class="panel-body">
 		    <p>fdgsdfs</p>
+		    <p>sssssss</p>
 		  </div>
 		  <!-- List group -->
 		  <ul class="list-group">
-		  			    <li class="list-group-item listbj" style="border-top: 1px solid #eee;"><a href="" style="color:blue;">lkljsa</a><span style="float:right;color:#999999;">问答</span></li>
-		    		    <li class="list-group-item listbj" style="border-top: 1px solid #eee;"><a href="" style="color:blue;">表空间</a><span style="float:right;color:#999999;">问答</span></li>
-		    		    <li class="list-group-item listbj" style="border-top: 1px solid #eee;"><a href="" style="color:blue;">离开家阿拉山口好看江苏省科技大厦</a><span style="float:right;color:#999999;">问答</span></li>
-		    		    <li class="list-group-item listbj" style="border-top: 1px solid #eee;"><a href="" style="color:blue;">按时发撒阿萨德</a><span style="float:right;color:#999999;">问答</span></li>
+		  			    <li class="list-group-item listbj" style="border-top: 1px solid #eee;"><a href="/home/problem/5" style="color:blue;">离开家阿拉山口好看江苏省科技大厦</a><span style="float:right;color:#999999;">问答</span></li>
+		    		    <li class="list-group-item listbj" style="border-top: 1px solid #eee;"><a href="/home/problem/8" style="color:blue;">lkljsa</a><span style="float:right;color:#999999;">问答</span></li>
+		    		    <li class="list-group-item listbj" style="border-top: 1px solid #eee;"><a href="/home/problem/6" style="color:blue;">表空间</a><span style="float:right;color:#999999;">问答</span></li>
+		    		    <li class="list-group-item listbj" style="border-top: 1px solid #eee;"><a href="/home/problem/9" style="color:blue;">按时发撒阿萨德</a><span style="float:right;color:#999999;">问答</span></li>
 		    		  </ul>
 		</div>
 
@@ -199,6 +315,37 @@
 					<div class="topicsImgTxtBar aTabMain">
 						<!-- 推荐 开始 -->
 								<ul class="imgTxtBar clearfix imgTxtBar-b aTabActive"  style="display: block;">
+														<li class="clearfix">
+								<div class="row">
+									<div class="col-md-12">
+										<h3>
+										<button class="btn btn-primary" title="点赞量" type="button">
+										  <span class="badge"><div class="agran24"><a href="javascript:;" onclick="funagree(24,0)" class="agran">0</a></div></span>
+										</button>
+										攀岩的高度</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12" style="margin:5px 0px;">
+										<div class="con_text"><img class="f-fl" width="150" height="115" src="/uploads/1447135897105.png" alt=""></div>
+										<div class="con_text" style="width:596px; height:108px;"><p class="gray-8 SimSun"><p>那时的看见爱上<video class="edui-upload-video  vjs-default-skin video-js" controls="" preload="none" width="420" height="280" src="/ueditor/php/upload/video/20181121/1542770827.wmv" data-setup="{}"></video></p></p></div>
+									</div>
+								  
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="tagtime">
+											<span class="date">2018-11-21 11:27:14</span>
+											<span class="times">[<a href="http://www.chinaz.com/news/en/">外闻</a>]</span>
+											<span class="tags">
+												<a target="_blank" href="/tags/wangshangzahuodian.shtml">网上杂货店</a>
+												<a target="_blank" href="/tags/woerma.shtml">沃尔玛</a>
+												<a target="_blank" href="/tags/yamaxun.shtml">亚马逊</a>
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
 							
 							
 						</ul>
@@ -290,13 +437,13 @@
 		  	<span style="float:right;">更多推荐 »</span>
 		  </a>
 		  	</div>
-		  			  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;" class="f-fl" width="150" height="115" src="/uploads/1447135897105.png" alt="">&nbsp;<span style="color:blue;">攀岩</span><span style="float:right;color:#999999;">3&nbsp;人关注</span></a>
+		  			  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;" class="f-fl" width="150" height="115" src="/uploads/20181109/201811092218268987.png" alt="">&nbsp;<span style="color:blue;">攀岩</span><span style="float:right;color:#999999;">2&nbsp;人关注</span></a>
 		  </div>
-		  			  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;" class="f-fl" width="150" height="115" src="/uploads/1447135897105.png" alt="">&nbsp;<span style="color:blue;">小说</span><span style="float:right;color:#999999;">6&nbsp;人关注</span></a>
+		  			  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;" class="f-fl" width="150" height="115" src="" alt="">&nbsp;<span style="color:blue;">小说</span><span style="float:right;color:#999999;">5&nbsp;人关注</span></a>
 		  </div>
-		  			  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;" class="f-fl" width="150" height="115" src="/uploads/1447135897105.png" alt="">&nbsp;<span style="color:blue;">爬楼</span><span style="float:right;color:#999999;">4&nbsp;人关注</span></a>
+		  			  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;" class="f-fl" width="150" height="115" src="" alt="">&nbsp;<span style="color:blue;">爬楼</span><span style="float:right;color:#999999;">3&nbsp;人关注</span></a>
 		  </div>
-		  			  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;" class="f-fl" width="150" height="115" src="/uploads/1447135897105.png" alt="">&nbsp;<span style="color:blue;">xxx</span><span style="float:right;color:#999999;">3&nbsp;人关注</span></a>
+		  			  <div style="border-bottom: 1px solid #eee;"><a href="#"  class="list-group-item"><img style="width:40px;height:40px;" class="f-fl" width="150" height="115" src="" alt="">&nbsp;<span style="color:blue;">xxx</span><span style="float:right;color:#999999;">3&nbsp;人关注</span></a>
 		  </div>
 		  			</div>
 	</div>
@@ -312,7 +459,7 @@
 <script type="text/javascript">
 function funagree(rid,agree){
 		var agreej = agree+1;
-		$.post('/reply/replyagree',{'_token':'JiTHgu2eyHPyhBDPInR1LoV9IlpKS5d7tq6jnw1m','rid':rid,'agree':agree},function(msg){
+		$.post('/reply/replyagree',{'_token':'fWGMLFO05BV4rUNahk2ibOyDcSJTdycuYebcCPRo','rid':rid,'agree':agree},function(msg){
 			if(msg == '1'){
 				agreej = agree-1;
 				$('.agran'+rid).html('<a href="javascript:;" onclick="funagree('+rid+','+agreej+')" class="agran">'+(agree-1)+'</a>');
