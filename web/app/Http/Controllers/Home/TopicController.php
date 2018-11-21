@@ -181,7 +181,8 @@ class TopicController extends Controller
             return $problem;
         }
             foreach ($problem as $k => $v) {
-                $v->reply = Reply::orderBy('agree','desc')->where('pid',$v->id)->first();
+                if($v->reply = Reply::orderBy('agree','desc')->where('pid',$v->id)->first()){
+                                    // dd($v->reply);
                 //查看Redis是否有数据
                 if(Redis::exists('replyagree'.$v->reply->id))
                 {
@@ -192,6 +193,10 @@ class TopicController extends Controller
                 }
                 $v->reply->comment = Comment::groupBy('rid')->select('*',DB::raw('count(rid) as raid'))->orderBy('raid','desc')->where('rid',$v->reply->id)->value('raid');
                 $v->reply->user = UserDetail::where('uid',$v->reply->uid)->first();
+            }else{
+                $v->reply = null;
+            }
+
             }
             return $problem;
     }

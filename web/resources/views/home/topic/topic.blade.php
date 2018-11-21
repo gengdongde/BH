@@ -145,6 +145,7 @@ body{
 						<!-- 问题 -->
 						<div class="col-xs-12 col-md-12" style="margin-top: 5px;"><b><a href="" style="color:blue;">{{$v->pname}}</a></b></div>
 						<!-- 回答 -->
+						@if($v->reply != null)
 						<div class="col-xs-12 col-md-12" style="margin-top:8px;">
 							<div class="row">
 								<div class="ol-xs-1 col-md-1" style="width: 5.333333%;">
@@ -190,7 +191,8 @@ body{
 									<input type="submit" onclick="tjcom({{$v->reply->id}});" class="btn btn-success" value="评论">
 								</div>
 							</div>
-						</div>						
+						</div>
+						@endif						
 					</div>
 					@endforeach
 					@endif
