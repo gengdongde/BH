@@ -55,6 +55,7 @@ class TopicController extends Controller
             }
         }
         //查询其他话题
+        $tido = [];
         $topicgs = DB::table('user_topic')->where('uid',$uid)->groupBy('tid')->get(); 
         foreach ($topicgs as $k => $v) {
             $tido[] = $v->tid;
@@ -208,8 +209,6 @@ class TopicController extends Controller
             }else{
                 $v->reply = null;
             }
-            
-            
             
         }
         return $problem;
