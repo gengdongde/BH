@@ -153,7 +153,7 @@ body{
 									<a href="javascript:;" onclick="funagree({{$v->reply->id}},{{$v->reply->agree}})" class="agran">{{$v->reply->agree}}</a></div>
 								</div>
 								<div class="ol-xs-11 col-md-11 tops" style="margin-left: 20px;">
-									<p><b>{{$v->reply->user->uname}}</b><span style="color:#999;">&nbsp;{{$v->reply->user->signature}}</span></p>
+									<p><b>{{$v->reply->user->uname}}</b><span style="color:#999;">&nbsp;{!! $v->reply->user->signature !!}</span></p>
 										<p style="line-height: 21px;" class="con{{$v->reply->id}}">{{mb_substr($v->reply->reply_content['content'],0,120)}}<a href="javascript:;" style="color:blue;" onclick='contents("1","{{$v->reply->reply_content["content"]}}","{{mb_substr($v->reply->reply_content["content"],0,120)}}",{{$v->reply->id}})'>显示全部</a></p>
 										<p style="margin:5px 0px;" class="hotopic"> 
 											<a href="javascript:;" onclick="comments(this,{{$v->reply->id}});"><span class="glyphicon glyphicon-comment"></span>{{$v->reply->comment}}条评论</a>  

@@ -233,14 +233,14 @@
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<span><font style="font-size: 16px;">{{ $user->signature or '' }}</font></span>
+												<span><font style="font-size: 16px;">{!! $user->signature !!}</font></span>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<span><font style="font-size: 20px;">{{ $v->reply_content($v->id)->first()->content }}</font></span>
+										<span><font style="font-size: 20px;">{!! $v->reply_content($v->id)->first()->content !!}</font></span>
 									</div>
 								</div>
 								<div class="row">
@@ -285,7 +285,7 @@
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<span><font style="font-size: 16px;">{{ $v->signature or '' }}</font></span>
+												<span><font style="font-size: 16px;">{!! $v->signature !!}}</font></span>
 											</div>
 										</div>
 									</div>

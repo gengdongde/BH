@@ -51,7 +51,18 @@ class ShieldController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $user = new UserShield;
+        // 接收数据
+        // 判断
+        $user->uid = session('uid');
+        $user->sid = $request->input('sid');
+        $res = $user->save();
+        if($res){
+            echo 'success';exit;
+        }else{
+            echo 'error';exit;
+        }
     }
 
     /**

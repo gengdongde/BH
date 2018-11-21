@@ -171,7 +171,7 @@
 			<div class="col-md-4">
 				<table class="table text-center">
 					<tr>
-						<td>点击量</td>
+						<td>被浏览数量</td>
 						<td>回答数量</td>
 					</tr>
 					<tr>
@@ -297,22 +297,23 @@
 					  <!-- Default panel contents -->
 						<div class="panel-heading">关于作者</div>
 						<table class="table text-center">
-							<tr>
-								<div class="row">
-									<div class="col-md-2">
-										<img src="{{ $user->face }}" alt="..." class="" height="40" width="40" onerror="this.src='/uploads/moren.jpg'" style="border:1px solid #fff;border-radius: 4px;">
-									</div>
-									<div class="col-md-8">
-										<div class="row">
-											<div class="col-md-12">
-												<span><font style="font-size: 16px;font-weight:bold;line-height: 40px;">{{ $user->uname }}</font></span>
+							<a href="/home/user/{{ $user->uid }}">
+								<tr>
+									<div class="row">
+										<div class="col-md-2">
+											<img src="{{ $user->face }}" alt="..." class="" height="40" width="40" onerror="this.src='/uploads/moren.jpg'" style="border:1px solid #fff;border-radius: 4px;">
+										</div>
+										<div class="col-md-8">
+											<div class="row">
+												<div class="col-md-12">
+													<span><font style="font-size: 16px;font-weight:bold;line-height: 40px;">{{ $user->uname }}</font></span>
+												</div>
 											</div>
 										</div>
-										
 									</div>
-								</div>
-								
-							</tr>
+								</tr>
+							</a>
+							
 							<tr>
 								<td>回答</td>
 								<td>关注者</td>
@@ -321,6 +322,7 @@
 								<td>{{ $user_rep }}</td>
 								<td>{{ $user_con }}</td>
 							</tr>
+							@if(session('uid') != $user->uid)
 							<tr>
 								<td>
 									@if( empty($cuser->cid) )
@@ -330,7 +332,11 @@
 									@endif
 
 								</td>
+								<td>
+									<button class="btn btn-danger" id="shield" onclick="shield({{  $user->uid  }})" >屏蔽用户</button>
+								</td>
 							</tr>
+							@endif
 						</table>
 					</div>
 			    </div>
@@ -393,7 +399,6 @@
 		        }
 			});
 			$.post('/home/concern',{'cid':id},function(msg){
-				console.log(msg);
 				if(msg == 'success'){
 					layer.msg('关注成功');
 					$('#concern').parent().html("<button class='btn btn-info' id='del_con' onclick='del_con({{  $user->uid  }})' >取消关注</button>");
@@ -416,9 +421,25 @@
 				if(msg == 'success'){
 					layer.msg('已取消关注');
 					$('#del_con').parent().html("<button class='btn btn-info' id='concern' onclick='concern({{  $user->uid  }})' >关注</button>");
-					
-					
-					
+				}else{
+					layer.msg('操作失败');
+				}
+			},'html');
+		}
+
+		// 屏蔽用户
+		function shield(id){
+			$.ajaxSetup({
+		        headers: {
+		            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		        }
+			});
+			$.post('/home/shield',{'sid':id},function(msg){
+				console.log(msg);
+				if(msg == 'success'){
+					layer.msg('已屏蔽');
+					$('#shield').css('display','none');
+
 				}else{
 					layer.msg('操作失败');
 				}

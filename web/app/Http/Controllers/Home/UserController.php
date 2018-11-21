@@ -52,7 +52,7 @@ class UserController extends Controller
             $v->reply = $v->reply($v->id)->select(DB::raw('count(*) as rep',$v->id))->first()->rep;
         }
         
-        // dd($user_pro);
+        
         // 用户回答
         $user_rep = Reply::where('uid',$uid)->orderBy('created_at','desc')->get();
         $rep_num = 0;
@@ -118,7 +118,54 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        // 用户信息
+        $user = User::find($id)->userinfo($id)->first();
+        // 用户提问
+        $user_pro = Problem::where('uid',$id)->orderBy('created_at','desc')->get();
+        $pro_num = 0;
+
+        foreach($user_pro as $k=>$v){
+            $pro_num +=1;
+            // 问题回答数量
+            $v->reply = $v->reply($v->id)->select(DB::raw('count(*) as rep',$v->id))->first()->rep;
+        }
+        
+        
+        // 用户回答
+        $user_rep = Reply::where('uid',$id)->orderBy('created_at','desc')->get();
+        $rep_num = 0;
+        foreach($user_rep as $k=>$v){
+            $rep_num +=1;
+
+        }
+
+        $u = User::find($id);
+        // 用户关注话题
+        $tops = $u->usertopic()->orderBy('created_at','desc')->get();
+        $top_num = 0;
+        foreach($tops as $k=>$v){
+            $top_num +=1;
+
+        }
+
+        // 关注用户
+        $con_user = UserConcern::where('uid',$id)->select(DB::raw('cid'))->get();
+        $con = [];
+        foreach($con_user as $k=>$v){
+            $con[] = User::find($v->cid)->userinfo($v->cid)->first();
+            
+        }
+        $con_num = count($con);
+      
+        // 加载模板
+        return view('home.user.info',['user'=>$user,'uid'=>$id,
+            'user_pro'=>$user_pro,'pro_num'=>$pro_num,
+            'user_rep'=>$user_rep,'rep_num'=>$rep_num,
+            'top_num'=>$top_num,'tops'=>$tops,
+            'con_num'=>$con_num ,'con'=>$con,
+
+        ]);
+
     }
 
     /**

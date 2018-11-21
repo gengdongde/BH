@@ -11,6 +11,7 @@ use App\Models\UserDetail;
 use App\Models\UserConcern;
 use App\Models\User;
 use App\Models\Link;
+use App\Models\Topic;
 use DB;
 
 class IndexController extends Controller
@@ -35,7 +36,7 @@ class IndexController extends Controller
     public function index()
     {
         // 问题
-        $problem = Problem::orderBy('created_at','desc')->get();
+        $problem = Problem::where('uid','!=',session('uid'))->orderBy('created_at','desc')->get();
         
         foreach($problem as $k=>$v){
             $v->rep = $v->reply($v->id)->orderBy('created_at','desc')->first();
@@ -48,6 +49,7 @@ class IndexController extends Controller
         
         // 关注用户
         $con_user = UserConcern::where('uid',$uid)->select(DB::raw('cid'))->get();
+       
         if($con_user->first()){
             foreach($con_user as $k=>$v){
                 $con_ids[] = User::find($v->cid)->userinfo($v->cid)->first()->uid; 
@@ -74,10 +76,13 @@ class IndexController extends Controller
 
         // 友情链接
         $links = Link::where('status','2')->get();
-        // dd($links);
+        
+        // 话题分类
+        $topics = Topic::select('*',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->get();
+        
        
         //加载模板
-        return view('home.index.index',['problem'=>$problem,'con_pro'=>$con_pro,'hot_pro'=>$hot_pro,'links'=>$links]);
+        return view('home.index.index',['problem'=>$problem,'con_pro'=>$con_pro,'hot_pro'=>$hot_pro,'links'=>$links,'topics'=>$topics]);
     }
 
     /**

@@ -52,6 +52,7 @@ class StoreUserRequest extends Request
             'reupwd.required'=>'确认密码必填',
             'reupwd.same'=>'两次密码不一致',
             'uname.required'=>'用户名必填',
+            'uname.unique'=>'用户名已存在',
             'sex.required'=>'性别必填',
         ];
     }

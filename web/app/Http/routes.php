@@ -158,6 +158,8 @@ Route::post('/home/user/setphone','Home\UserController@setphone');
 // 前台设置绑定邮箱
 Route::post('/home/user/setemail','Home\UserController@setemail');
 
+// 前台屏蔽用户
+Route::resource('/home/shield','Home\ShieldController');
 // 前台设置 取消屏蔽
 Route::get('home/shield/delete/{id}','Home\ShieldController@delete');
 
